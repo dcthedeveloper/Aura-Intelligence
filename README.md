@@ -1,93 +1,206 @@
-Aura Intelligence: The Olfactory Storyteller & Curator
+🌸 Aura Intelligence
+The Olfactory Storyteller & Curator
 
-Executive Summary
+Aura Intelligence is a sophisticated, AI-powered web application designed for the niche fragrance market. It provides two powerful modes: a Storyteller for crafting deep, narrative-driven product descriptions, and a Curator chatbot for fragrance discovery using live web data.
 
-Aura Intelligence is a sophisticated, AI-powered web application designed for the niche fragrance market. It solves the problem of generic, time-consuming product descriptions by providing two distinct, powerful modes: a Storyteller for crafting deep, narrative-driven content for a specific fragrance, and a Curator chatbot for broader discovery, comparison, and market research using live web data. Built with Python/Flask and the Groq API, it serves as a strategic tool for brand owners, e-commerce managers, and content creators to translate olfactory notes into compelling narratives that drive sales.
+Built with Python/Flask and the Groq API, it serves as a strategic tool for brand owners, e-commerce managers, and content creators to translate olfactory notes into compelling narratives that drive sales.
+✨ Core Features
+🖋️ Storyteller Mode
+A guided, 4-step experience for crafting sophisticated fragrance descriptions.
 
-Core Features
-Aura Intelligence operates in two distinct, powerful modes:
+Dynamic Creative Brief: Adapts prompts based on whether you're describing a new creation or existing fragrance
 
-1. Storyteller Mode
-A guided, multi-step experience for crafting a deep, narrative-driven description for a single fragrance.
+Strategic Inputs: Define wearer persona, narrative scene, brand voice, tone, and competitor differentiation
 
-Dynamic Creative Brief: The intelligent form adapts its language and prompts based on whether you are describing a new creation or re-interpreting an existing fragrance.
+5 Tone Options: Poetic, Modern, Minimalist, Mysterious, Playful
 
-Strategic Inputs: Go beyond simple keywords. Define the wearer's persona, the narrative scene, the brand's voice, and even provide competitor text for strategic differentiation.
+Elegant Output: Beautifully formatted cards with smooth animations
 
-Elegant Output: The final story is presented in beautifully formatted, individual cards, creating a sophisticated, editorial-style reading experience.
+One-Click Copy: Export descriptions instantly
 
-2. Curator Mode (Chatbot)
-A conversational AI expert for broader fragrance discovery, comparison, and strategy.
+🔍 Curator Mode (Chatbot)
+A conversational AI expert for fragrance discovery and curation.
 
-Live Web Search: Powered by a specialized model, the Curator can access up-to-date information on fragrances, prices, and reviews from across the internet.
+Live Web Search: Real-time access to fragrance data, pricing, and reviews via Groq's compound model
 
-Expert Capabilities: Ask it to compare two well-known fragrances, build a curated collection for your shop, or discover hidden gems for a specific season or mood.
+Expert Capabilities: Compare fragrances, build curated collections, discover seasonal recommendations
 
-Conversational Interface: An intuitive chat interface with suggestion chips to guide your discovery process.
+Conversational Interface: Intuitive chat with suggestion chips
 
-Tech Stack
-Backend: Python with the Flask web framework.
+Streaming Responses: See answers generate in real-time
 
-AI Engine: Connected to the high-speed Groq API.
+🛠️ Tech Stack
+| Component | Technology | |-----------|------------| | Backend | Python 3.7+ with Flask | | AI Engine | Groq API | | Storyteller Model | llama-3.1-8b-instant | | Curator Model | groq/compound (with web search) | | Frontend | HTML5, TailwindCSS, Vanilla JavaScript | | Markdown Rendering | Marked.js | | Environment | python-dotenv |
+🚀 Setup and Installation
+Prerequisites
+Python 3.7+ installed
 
-Storyteller: llama-3.1-8b-instant for creative text generation.
+Groq API key (get free at console.groq.com)
 
-Curator: groq/compound for conversational AI with built-in web search.
+Installation Steps
+Clone the repository
 
-Frontend: HTML5 with TailwindCSS for a responsive, luxury-inspired design.
+git clone [https://github.com/yourusername/aura-intelligence.git](https://github.com/yourusername/aura-intelligence.git)
+cd aura-intelligence
 
-Core Libraries: python-dotenv for environment management, groq for API communication.
+Create virtual environment
 
-Setup and Installation
-Follow these steps to get Aura Intelligence running on your local machine.
-
-1. Prerequisites
-Python 3.7+ installed on your system.
-
-A Groq API key. You can get a free key from console.groq.com.
-
-2. Clone or Download the Repository
-Get the project files onto your computer. This includes app.py, requirements.txt, and the templates folder containing index.html.
-
-3. Navigate to the Project Directory
-Open your terminal or command prompt and use the cd command to go into the project folder.
-
-cd path/to/your/Aura-Intelligence-App
-
-4. Create and Activate a Virtual Environment
-It's best practice to create an isolated environment for the project.
-
-# Create the environment
 python3 -m venv venv
 
-# Activate the environment (macOS/Linux)
+Activate (macOS/Linux)
+
 source venv/bin/activate
 
-# Or on Windows
-# venv\Scripts\activate
+Activate (Windows)
 
-5. Install Dependencies
-Install all the required Python libraries using pip.
+venv\Scripts\activate
+
+Install dependencies
 
 pip install -r requirements.txt
 
-6. Set Up Your API Key
-Create a file named .env in the root of your project folder. Add your Groq API key to this file.
+Set up environment variables
+Create a .env file in the root directory:
 
-GROQ_API_KEY="your_actual_groq_api_key_goes_here"
+GROQ_API_KEY=your_actual_groq_api_key_here
 
-7. Run the Application
-Start the Flask development server.
+Run the application
 
 python app.py
 
-The application will be running at http://12.0.0.1:5001. You can now open this address in your web browser.
+Open in browser
+Navigate to http://127.0.0.1:5001
 
-Future Enhancements
-This project serves as a powerful foundation. Future iterations could include:
+📁 Project Structure
+aura-intelligence/
+├── app.py             # Flask backend with Groq integration
+├── requirements.txt   # Python dependencies
+├── .env               # Environment variables (create this)
+├── templates/
+│   └── index.html   # Frontend application
+└── README.md
 
-Interactive Sensory Profile: Allow users to click on generated notes to see where they appear in the story.
+🎯 Usage
+Storyteller Mode
+Select "Storyteller" from the mode toggle
 
-Visual Generation: Incorporate AI-powered image generation to create mood boards or visual representations of the fragrance's "evoked color palette."
+Choose between "Existing Fragrance" or "New Creation"
 
-Saved Collections: A user account system to save and manage generated stories and curated collections.
+Fill in the 4-step form:
+
+The Fragrance: Name and notes
+
+The Aura: Vibe and target audience
+
+The Narrative: Storytelling angle and tone
+
+The Edge: Competitor text and SEO keywords
+
+Click "Craft Story" to generate sophisticated marketing copy
+
+Use "Copy" to export the results
+
+Curator Mode
+Select "Curator" from the mode toggle
+
+Ask questions like:
+
+"What are the best summer fragrances for 2025?"
+
+"Compare Creed Aventus and Dior Sauvage"
+
+"Create a 5-piece luxury collection under $500"
+
+Use suggestion chips for quick queries
+
+Get real-time responses with web-sourced data
+
+🎨 Key Design Principles
+Luxury Aesthetic: Cream backgrounds, Playfair Display typography, gold accents
+
+Progressive Disclosure: Clean 4-step form prevents overwhelming users
+
+Micro-interactions: Smooth animations and transitions throughout
+
+Mobile Responsive: Optimized for all screen sizes
+
+Zero Learning Curve: Intuitive interface with helpful placeholders
+
+🔑 Environment Variables
+| Variable | Description | Required | |----------|-------------|----------| | GROQ_API_KEY | Your Groq API key for AI model access | Yes |
+🚦 API Endpoints
+POST /generate
+Generates fragrance descriptions using Storyteller mode.
+
+Parameters (form data):
+
+product_name: Fragrance name
+
+key_notes: Olfactory notes
+
+vibe_keywords: Desired vibe
+
+target_audience: Wearer persona
+
+storytelling_angle: Narrative scene
+
+tone: Writing style
+
+brand_voice: Brand voice examples (optional)
+
+competitor_text: Competitor description (optional)
+
+seo_keywords: SEO keywords (optional)
+
+Returns: Server-Sent Events stream of generated text
+
+POST /chat
+Handles Curator chatbot queries with web search.
+
+Parameters (JSON):
+
+message: User's question or request
+
+Returns: Server-Sent Events stream of AI response
+🌟 Features Roadmap
+[ ] User authentication and saved projects
+
+[ ] Export to PDF/DOCX
+
+[ ] Multi-language support
+
+[ ] Fragrance note autocomplete
+
+[ ] A/B testing multiple descriptions
+
+[ ] Analytics dashboard
+
+[ ] Shopify/WooCommerce integration
+
+🤝 Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+Fork the repository
+
+Create your feature branch (git checkout -b feature/AmazingFeature)
+
+Commit your changes (git commit -m 'Add some AmazingFeature')
+
+Push to the branch (git push origin feature/AmazingFeature)
+
+Open a Pull Request
+
+📄 License
+This project is licensed under the MIT License - see the LICENSE file for details.
+🙏 Acknowledgments
+Built with Groq for ultra-fast AI inference
+
+UI design inspired by luxury niche fragrance houses (Byredo, Le Labo, Diptyque)
+
+Powered by Meta's Llama 3.1 models
+
+
+Project Link: https://https://github.com/dcthedeveloper/Aura-Intelligence
+<div align="center">
+<strong>Crafted with ❤️ for the olfactory world</strong>
+</div>
