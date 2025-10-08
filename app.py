@@ -31,7 +31,7 @@ def get_accurate_notes(fragrance_name):
         chat_completion = client.chat.completions.create(
             model="groq/compound",
             messages=[
-                {"role": "system", "content": "You are a fragrance database expert. Your sole purpose is to return the exact top, heart, and base notes for a given fragrance. List them clearly and concisely. Do not add any extra commentary."},
+                {"role": "system", "content": "You are a fragrance database expert. Your sole purpose is to return the exact top, heart, and base notes for a given fragrance. You are robust to minor user spelling errors. Return only the notes clearly and concisely."},
                 {"role": "user", "content": f"What are the exact notes for the fragrance '{fragrance_name}'?"}
             ],
             temperature=0,
@@ -51,7 +51,7 @@ def generate():
     # Extract form data
     use_case = request.form.get('use_case', 'existing')
     product_name = request.form.get('product_name', 'Unnamed Fragrance')
-    key_notes_input = request.form.get('key_notes', '') # Get user input
+    key_notes_input = request.form.get('key_notes', '') 
     vibe_keywords = request.form.get('vibe_keywords', 'Elegant and mysterious')
     target_audience = request.form.get('target_audience', 'A discerning individual')
     storytelling_angle = request.form.get('storytelling_angle', 'An elegant evening')
@@ -60,29 +60,27 @@ def generate():
     seo_keywords = request.form.get('seo_keywords', '')
     tone = request.form.get('tone', 'Poetic & Evocative')
 
-    # --- NEW TWO-STEP NOTE LOGIC ---
     final_key_notes = key_notes_input
     if use_case == 'existing' and not key_notes_input:
-        # If it's a known fragrance and user didn't provide notes, research them.
         final_key_notes = get_accurate_notes(product_name)
     elif not key_notes_input:
         final_key_notes = "Not specified"
-    # --- END NEW LOGIC ---
 
     system_prompt = f"""
 # ROLE & EXPERTISE
-You are "Aura," an elite AI-powered Niche Fragrance Copywriter and Olfactory Storyteller. You are an expert in translating scents into identities.
+You are "Aura," an elite AI-powered Niche Fragrance Copywriter. Your expertise combines the art of a master perfumer with the skill of a direct-response copywriter.
 
-# CRITICAL INSTRUCTION
-You have been provided with the definitive olfactory notes for this fragrance. You MUST use these notes as the single source of truth for the olfactory journey. Your credibility depends on accurately describing these specific notes.
+# CRITICAL INSTRUCTIONS
+1.  **Note Accuracy:** You have been provided with the definitive olfactory notes. You MUST use these as the single source of truth for the olfactory journey.
+2.  **Name Correction (IMPORTANT):** The user may have misspelled the fragrance name. Based on the notes and your internal knowledge, you MUST use the correct, properly capitalized name (e.g., "Initio Side Effect," not "initio side effct") in the final story. Your professionalism depends on this.
 
 # CORE OBJECTIVE
-Generate a psychologically resonant, emotionally evocative, and commercially effective multi-part story for a niche fragrance based on the provided inputs.
+Generate a psychologically resonant, multi-part story for a niche fragrance based on the provided inputs.
 
 # INPUT VARIABLES
-- Fragrance Name: {product_name}
+- User-provided Fragrance Name: {product_name}
 - Use Case: {"Describing a new creation" if use_case == "new" else "Re-interpreting an existing fragrance"}
-- Olfactory Notes: {final_key_notes}
+- Olfactory Notes (Source of Truth): {final_key_notes}
 - Desired Vibe: {vibe_keywords}
 - Wearer's Persona: {target_audience}
 - Narrative Scene: {storytelling_angle}
@@ -92,15 +90,14 @@ Generate a psychologically resonant, emotionally evocative, and commercially eff
 - WRITING STYLE / TONE: {tone}
 
 # MANDATORY OUTPUT STRUCTURE
-You MUST generate the output in clean Markdown. The response must be broken into several distinct sections, with each section starting with '###' followed by a title. Adhere strictly to this format. Example sections include: '### The Hook', '### The Olfactory Journey', '### Who You Become', '### Wear It When'. DO NOT use bolding or asterisks on the '###' titles.
+You MUST generate the output in clean Markdown, broken into sections starting with '###'. Example sections: '### The Hook', '### The Olfactory Journey', '### Who You Become'.
 """
     user_prompt = "Craft the olfactory story."
     
     def stream():
         try:
-            # This is the 'Writer' step, now using the correct model
             stream_response = client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
+                model="llama-3.1-70b-versatile",
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt}
@@ -133,7 +130,7 @@ def chat():
         return jsonify({"error": "No message provided."}), 400
 
     chat_system_prompt = """
-You are "Aura Curator," a sophisticated fragrance expert and curator with deep knowledge of niche perfumery. Your capabilities include searching the web for current fragrance information, discovering scents, creating curated collections, and comparing fragrance profiles. Always provide specific names, houses, and key notes, and explain your reasoning. Your tone is refined, knowledgeable, and conversational.
+You are "Aura Curator," a sophisticated fragrance expert and curator with deep knowledge of niche perfumery. Your capabilities include searching the web for current fragrance information, discovering scents, creating curated collections, and comparing fragrance profiles. You are robust to user spelling errors. Always provide specific names, houses, and key notes, and explain your reasoning. Your tone is refined, knowledgeable, and conversational.
 """
     
     def stream():
