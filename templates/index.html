@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Intelligence - Fragrance Description Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap');
+        
+        :root {
+            --cream: #F5F1E8;
+            --dark: #1a1a1a;
+            --light-gray: #dcd6c8;
+            --gold: #B7904C;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--cream);
+            color: var(--dark);
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.08em;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 48rem;
+            margin: 0 auto;
+        }
+        
+        .form-section { 
+            display: none;
+            animation: fadeInUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        .form-section.active { 
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInCard {
+            from { opacity: 0; transform: translateY(35px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        #chat-wrapper {
+            animation: fadeInUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        
+        .chat-history {
+            height: 60vh;
+            overflow-y: auto;
+            padding: 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 0.5rem;
+            background-color: rgba(255,255,255,0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-bubble {
+            max-width: 80%;
+            padding: 0.75rem 1.25rem;
+            border-radius: 1.25rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .chat-bubble.user {
+            background-color: var(--dark);
+            color: white;
+            border-bottom-right-radius: 0.25rem;
+            align-self: flex-end;
+        }
+        .chat-bubble.ai {
+            background-color: #EAE2D6;
+            color: var(--dark);
+            border-bottom-left-radius: 0.25rem;
+            align-self: flex-start;
+        }
+        .chat-bubble.ai strong { color: var(--dark); }
+        .chat-bubble.ai a { color: #8a6c37; text-decoration: underline; }
+
+        .suggestion-chip {
+            border: 1.5px solid var(--light-gray);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+        .suggestion-chip:hover {
+            background-color: #EAE2D6;
+            border-color: #c9c1b3;
+        }
+        
+        .mode-toggle-group button {
+            border: 1.5px solid #d5cfc3;
+            color: #7a7a7a;
+            padding: 0.6rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .mode-toggle-group button.active {
+            background-color: var(--dark);
+            color: white;
+            border-color: var(--dark);
+        }
+        .mode-toggle-group button:first-child { border-radius: 9999px 0 0 9999px; }
+        .mode-toggle-group button:last-child { border-radius: 0 9999px 9999px 0; }
+
+        .radio-group label {
+            border: 1.5px solid var(--light-gray);
+            padding: 0.75rem 1.25rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        .radio-group input[type="radio"] {
+            display: none;
+        }
+        .radio-group input[type="radio"]:checked + label {
+            background-color: var(--dark);
+            color: white;
+            border-color: var(--dark);
+        }
+
+        select.input-field {
+            padding-right: 2.5rem;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .input-field { background-color: transparent; border: none; border-bottom: 1.5px solid var(--light-gray); border-radius: 0; padding: 0.875rem 0.5rem; font-size: 0.95rem; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); color: var(--dark); }
+        .input-field::placeholder { color: #a8a8a8; font-weight: 400; }
+        .input-field:focus { border-color: var(--gold); box-shadow: 0 2px 0 0 rgba(183, 144, 76, 0.2); outline: none; transform: translateY(-2px); background-color: rgba(245, 241, 232, 0.3); }
+        .btn { transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94); border: 1px solid transparent; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.03em; border-radius: 9999px; position: relative; overflow: hidden; }
+        .btn-gold { background-color: var(--dark); color: white; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12); }
+        .btn-gold:hover:not(:disabled) { background-color: #2d2d2d; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18); }
+        .btn-outline { background-color: transparent; color: var(--dark); border-color: #d5cfc3; }
+        .btn-outline:hover:not(:disabled) { background-color: #f1ece2; border-color: #b8b2a6; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06); }
+        .progress-bar-container { width: 100%; background-color: #e8e2d6; border-radius: 9999px; height: 2px; margin-bottom: 2.5rem; overflow: hidden; }
+        .progress-bar-fill { transition: width 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); background: linear-gradient(90deg, var(--dark) 0%, #404040 100%); height: 100%; }
+        .output-card { background: linear-gradient(135deg, #FAF6F0 0%, #F8F4ED 100%); border: 1px solid #E5DED0; border-radius: 0.75rem; padding: 2rem; margin-bottom: 1.75rem; transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94); animation: slideInCard 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; opacity: 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03); }
+        .output-card:nth-child(1) { animation-delay: 0.15s; } .output-card:nth-child(2) { animation-delay: 0.25s; } .output-card:nth-child(3) { animation-delay: 0.35s; } .output-card:nth-child(4) { animation-delay: 0.45s; } .output-card:nth-child(5) { animation-delay: 0.55s; }
+        .prose-custom h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.75rem; } .prose-custom p { line-height: 1.8; margin-bottom: 0.875rem; }
+        .results-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid #e8e2d6; }
+        .results-header h2 { font-size: 2rem; } .results-actions { display: flex; gap: 0.75rem; }
+        @keyframes spin { to { transform: rotate(360deg); } } .animate-spin { animation: spin 1.2s linear infinite; }
+    </style>
+</head>
+<body class="flex flex-col items-center min-h-screen p-4 md:p-8">
+
+    <div class="main-container">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-semibold">Aura Intelligence</h1>
+            <p class="text-lg text-gray-600 mt-2" style="letter-spacing: 0.05em;">Your Olfactory Storyteller & Curator</p>
+        </header>
+
+        <div class="flex justify-center mb-8">
+            <div class="mode-toggle-group inline-flex" role="group">
+                <button type="button" id="mode-storyteller" class="active">Storyteller</button>
+                <button type="button" id="mode-curator">Curator</button>
+            </div>
+        </div>
+
+        <div id="storyteller-wrapper">
+            <form id="generator-form">
+                <div class="progress-bar-container"><div id="progress-bar" class="progress-bar-fill" style="width: 0%"></div></div>
+                <div id="step-1" class="form-section active">
+                    <h2 class="text-2xl font-semibold mb-1">The Fragrance <span class="text-base text-gray-500 font-medium">(1 of 4)</span></h2>
+                    <p id="step-1-desc" class="text-sm text-gray-500 mb-6">First, what are you describing today?</p>
+                    <div class="radio-group flex items-center space-x-4 mb-6">
+                        <input type="radio" id="use-case-existing" name="use_case" value="existing" checked><label for="use-case-existing">An Existing Fragrance</label>
+                        <input type="radio" id="use-case-new" name="use_case" value="new"><label for="use-case-new">A New Creation</label>
+                    </div>
+                    <div class="grid grid-cols-1 gap-6">
+                        <input type="text" id="product_name" name="product_name" class="w-full input-field" placeholder="Fragrance Name (e.g., Creed Virgin Island Water)">
+                        <textarea id="key_notes" name="key_notes" rows="4" class="w-full input-field" placeholder="Key Olfactory Notes (Top, Heart, Base)"></textarea>
+                    </div>
+                </div>
+                <div id="step-2" class="form-section">
+                    <h2 class="text-2xl font-semibold mb-1">The Aura <span class="text-base text-gray-500 font-medium">(2 of 4)</span></h2>
+                    <p id="step-2-desc" class="text-sm text-gray-500 mb-6">Define the fragrance's soul.</p>
+                    <div class="grid grid-cols-1 gap-6">
+                       <input type="text" id="vibe_keywords" name="vibe_keywords" class="w-full input-field" placeholder="Desired Vibe (e.g., Tropical luxury)">
+                       <input type="text" id="target_audience" name="target_audience" class="w-full input-field" placeholder="Wearer's Persona (e.g., World traveler)">
+                    </div>
+                </div>
+                <div id="step-3" class="form-section">
+                     <h2 class="text-2xl font-semibold mb-1">The Narrative <span class="text-base text-gray-500 font-medium">(3 of 4)</span></h2>
+                     <p id="step-3-desc" class="text-sm text-gray-500 mb-6">Craft the olfactory journey.</p>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8">
+                        <input type="text" id="storytelling_angle" name="storytelling_angle" class="w-full input-field" placeholder="Narrative Scene (e.g., A sunset sail)">
+                        <div>
+                            <select id="tone" name="tone" class="w-full input-field" style="padding-top: 0.875rem; padding-bottom: 0.875rem;">
+                                <option>Poetic & Evocative</option> <option>Modern & Direct</option> <option>Minimalist & Clean</option> <option>Mysterious & Dark</option> <option>Playful & Energetic</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2"><textarea id="brand_voice" name="brand_voice" rows="4" class="w-full input-field" placeholder="Your Brand's Voice (Optional)"></textarea></div>
+                     </div>
+                </div>
+                <div id="step-4" class="form-section">
+                     <h2 class="text-2xl font-semibold mb-1">The Edge <span class="text-base text-gray-500 font-medium">(4 of 4)</span></h2>
+                     <p id="step-4-desc" class="text-sm text-gray-500 mb-6">Provide strategic inputs.</p>
+                     <div class="grid grid-cols-1 gap-6">
+                        <textarea id="competitor_text" name="competitor_text" rows="4" class="w-full input-field" placeholder="Competitor's Story (Optional)"></textarea>
+                        <input type="text" id="seo_keywords" name="seo_keywords" class="w-full input-field" placeholder="Target SEO Keywords (Optional)">
+                     </div>
+                </div>
+                <div class="mt-10 flex justify-between items-center">
+                    <button type="button" id="prev-btn" class="btn btn-outline py-2.5 px-7 rounded-full" disabled>Previous</button>
+                    <button type="button" id="next-btn" class="btn btn-gold py-2.5 px-7 rounded-full">Next</button>
+                    <button type="submit" id="generate-btn" class="hidden btn btn-gold font-bold py-2.5 px-7 rounded-full inline-flex items-center">
+                        <svg id="spinner" class="animate-spin -ml-1 mr-2 h-5 w-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                        <span id="generate-btn-text">Craft Story</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div id="curator-wrapper" class="hidden">
+            <div id="chat-history" class="chat-history space-y-6 mb-4">
+                <div class="flex justify-start">
+                    <div class="chat-bubble ai">
+                        <p class="font-semibold mb-2">Welcome to the Curator.</p>
+                        <p>How may I assist your olfactory journey today? Ask me to find fragrances, compare scents, or create a collection for a specific mood.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-2 mb-4">
+                <button class="suggestion-chip">Compare Creed Aventus and Dior Sauvage</button>
+                <button class="suggestion-chip">Best summer fragrances for 2025</button>
+                <button class="suggestion-chip">Create a fall collection for my shop</button>
+            </div>
+            <form id="chat-form" class="mt-4">
+                <div class="flex items-center border-t border-gray-200 pt-4">
+                    <textarea id="chat-input" class="w-full input-field" placeholder="Ask the Curator..." rows="1" style="resize:none;"></textarea>
+                    <button type="submit" id="chat-send-btn" class="btn btn-gold py-2.5 px-6 rounded-full ml-4">Send</button>
+                </div>
+            </form>
+        </div>
+        
+        <div id="output-container" class="hidden">
+             <div class="results-header">
+                 <h2 class="text-3xl font-semibold">Your Olfactory Story</h2>
+                 <div class="results-actions">
+                    <button id="copy-btn" class="btn btn-outline py-2 px-5 rounded-full inline-flex items-center text-sm">
+                       <span id="copy-btn-icon">
+                            <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                       </span>
+                       <span id="copy-btn-text">Copy</span>
+                   </button>
+                    <button id="start-over-btn" class="btn btn-gold py-2 px-5 rounded-full text-sm">Start Over</button>
+                </div>
+            </div>
+            <div id="output-content" class="prose-custom max-w-none space-y-6"></div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modeStorytellerBtn = document.getElementById('mode-storyteller');
+            const modeCuratorBtn = document.getElementById('mode-curator');
+            const storytellerWrapper = document.getElementById('storyteller-wrapper');
+            const curatorWrapper = document.getElementById('curator-wrapper');
+            const form = document.getElementById('generator-form');
+            const sections = document.querySelectorAll('.form-section');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const generateBtn = document.getElementById('generate-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const outputContainer = document.getElementById('output-container');
+            const outputContentDiv = document.getElementById('output-content');
+            const copyBtn = document.getElementById('copy-btn');
+            const copyBtnText = document.getElementById('copy-btn-text');
+            const copyBtnIcon = document.getElementById('copy-btn-icon');
+            const spinner = document.getElementById('spinner');
+            const generateBtnText = document.getElementById('generate-btn-text');
+            const startOverBtn = document.getElementById('start-over-btn');
+            const chatHistory = document.getElementById('chat-history');
+            const chatForm = document.getElementById('chat-form');
+            const chatInput = document.getElementById('chat-input');
+            
+            let currentStep = 1;
+            const totalSteps = sections.length;
+
+            const switchMode = (mode) => {
+                if (mode === 'storyteller') {
+                    curatorWrapper.style.display = 'none';
+                    storytellerWrapper.style.display = 'block';
+                    outputContainer.classList.add('hidden');
+                    modeCuratorBtn.classList.remove('active');
+                    modeStorytellerBtn.classList.add('active');
+                } else {
+                    storytellerWrapper.style.display = 'none';
+                    outputContainer.classList.add('hidden');
+                    curatorWrapper.style.display = 'block';
+                    modeStorytellerBtn.classList.remove('active');
+                    modeCuratorBtn.classList.add('active');
+                }
+            };
+            modeStorytellerBtn.addEventListener('click', () => switchMode('storyteller'));
+            modeCuratorBtn.addEventListener('click', () => switchMode('curator'));
+
+            const updateButtonsAndProgress = () => {
+                const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                sections.forEach((section, index) => {
+                    section.classList.toggle('active', index + 1 === currentStep);
+                });
+                prevBtn.disabled = currentStep === 1;
+                nextBtn.classList.toggle('hidden', currentStep === totalSteps);
+                generateBtn.classList.toggle('hidden', currentStep !== totalSteps);
+                generateBtn.classList.toggle('inline-flex', currentStep === totalSteps);
+            };
+
+            nextBtn.addEventListener('click', () => { if (currentStep < totalSteps) { currentStep++; updateButtonsAndProgress(); }});
+            prevBtn.addEventListener('click', () => { if (currentStep > 1) { currentStep--; updateButtonsAndProgress(); }});
+            
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                spinner.classList.remove('hidden');
+                generateBtnText.textContent = 'Crafting...';
+                generateBtn.disabled = true;
+                
+                storytellerWrapper.style.opacity = '0';
+                setTimeout(() => {
+                    storytellerWrapper.style.display = 'none';
+                    outputContainer.classList.remove('hidden');
+                    setTimeout(() => outputContainer.style.opacity = '1', 50);
+                }, 700);
+
+                outputContentDiv.innerHTML = '<div class="output-card"><p class="text-gray-500 animate-pulse">Aura is consulting the muses...</p></div>';
+                
+                try {
+                    const response = await fetch('/generate', { method: 'POST', body: new FormData(form) });
+                    if (!response.ok) throw new Error(`Server error: ${response.status}`);
+                    
+                    const reader = response.body.getReader();
+                    const decoder = new TextDecoder();
+                    let fullResponse = '';
+                    while (true) {
+                        const { done, value } = await reader.read();
+                        if (done) break;
+                        fullResponse += decoder.decode(value, { stream: true });
+                    }
+                    
+                    const contentSections = fullResponse.split('###').filter(s => s.trim() !== '');
+                    let htmlContent = '';
+                    if (contentSections.length > 0) {
+                        contentSections.forEach(section => {
+                            const lines = section.trim().split('\n');
+                            const title = lines.shift().trim().replace(/\*\*/g, '');
+                            const content = lines.join('\n').trim();
+                            htmlContent += `<div class="output-card"><h3>${title}</h3><div class="prose-custom">${marked.parse(content)}</div></div>`;
+                        });
+                        outputContentDiv.innerHTML = htmlContent;
+                    } else {
+                        outputContentDiv.innerHTML = `<div class="output-card"><div class="prose-custom">${marked.parse(fullResponse)}</div></div>`;
+                    }
+                } catch (error) {
+                    console.error('Fetch Error:', error);
+                    outputContentDiv.innerHTML = `<div class="output-card"><h3>Error</h3><p class="text-red-700"><strong>An error occurred.</strong> Please check your connection and try again.</p></div>`;
+                } finally {
+                    spinner.classList.add('hidden');
+                    generateBtnText.textContent = 'Craft Story';
+                    generateBtn.disabled = false;
+                }
+            });
+
+            startOverBtn.addEventListener('click', () => {
+                outputContainer.style.opacity = '0';
+                setTimeout(() => {
+                    outputContainer.classList.add('hidden');
+                    storytellerWrapper.style.display = 'block';
+                    setTimeout(() => storytellerWrapper.style.opacity = '1', 50);
+                    form.reset();
+                    currentStep = 1;
+                    updateButtonsAndProgress();
+                }, 700);
+            });
+            
+            copyBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(outputContentDiv.innerText).then(() => {
+                    copyBtn.classList.add('copy-success');
+                    copyBtnText.textContent = 'Copied!';
+                    copyBtnIcon.innerHTML = `<svg class="w-4 h-4 mr-1.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+                    setTimeout(() => { 
+                        copyBtn.classList.remove('copy-success');
+                        copyBtnText.textContent = 'Copy'; 
+                        copyBtnIcon.innerHTML = `<svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>`;
+                    }, 2500);
+                });
+            });
+
+            // FIXED CHAT LOGIC
+            function appendMessage(content, role, isLoading = false) {
+                const messageWrapper = document.createElement('div');
+                messageWrapper.className = `flex ${role === 'user' ? 'justify-end' : 'justify-start'}`;
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `chat-bubble ${role}`;
+                messageDiv.innerHTML = isLoading ? '<div class="animate-pulse">Searching...</div>' : marked.parse(content);
+                messageWrapper.appendChild(messageDiv);
+                chatHistory.appendChild(messageWrapper);
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+                return messageDiv;
+            }
+
+            async function submitChatMessage(message) {
+                if (!message.trim()) return;
+
+                appendMessage(message, 'user');
+                const aiMsgDiv = appendMessage('', 'ai', true);
+                
+                try {
+                    const response = await fetch('/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: message })
+                    });
+                    if (!response.ok) throw new Error('Network response was not ok.');
+                    
+                    const reader = response.body.getReader();
+                    const decoder = new TextDecoder();
+                    let fullResponse = '';
+                    while (true) {
+                        const { done, value } = await reader.read();
+                        if (done) break;
+                        fullResponse += decoder.decode(value, { stream: true });
+                        aiMsgDiv.innerHTML = marked.parse(fullResponse);
+                        chatHistory.scrollTop = chatHistory.scrollHeight;
+                    }
+                } catch (error) {
+                    aiMsgDiv.innerHTML = "My apologies, I'm having trouble connecting.";
+                    console.error('Chat error:', error);
+                }
+            }
+
+            chatForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const userInput = chatInput.value.trim();
+                chatInput.value = '';
+                chatInput.style.height = 'auto';
+                await submitChatMessage(userInput);
+            });
+
+            document.querySelectorAll('.suggestion-chip').forEach(chip => {
+                chip.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const message = chip.textContent.trim();
+                    await submitChatMessage(message);
+                });
+            });
+
+            chatInput.addEventListener('input', () => {
+                chatInput.style.height = 'auto';
+                chatInput.style.height = (chatInput.scrollHeight) + 'px';
+            });
+
+            updateButtonsAndProgress();
+        });
+    </script>
+</body>
+</html>
+
