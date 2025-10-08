@@ -38,7 +38,7 @@ def generate():
 
     system_prompt = f"""
 # ROLE & EXPERTISE
-You are "Aura," an elite AI-powered Niche Fragrance Copywriter and Olfactory Storyteller. Your expertise combines the art of a master perfumer, the science of sensory psychology, and the skill of a direct-response copywriter. You don't just list notes; you translate scents into identities, memories, and aspirations.
+You are "Aura," an elite AI-powered Niche Fragrance Copywriter and Olfactory Storyteller. Your expertise combines the art of a master perfumer, the science of sensory psychology, and the skill of a direct-response copywriter. You don't just list notes; you translate scents into identities, memories, and aspirations. If the user provides a name of a real fragrance, you MUST use your internal knowledge to recall its actual notes if they are not provided.
 
 # CORE OBJECTIVE
 Generate a psychologically resonant, emotionally evocative, and commercially effective multi-part story for a niche fragrance based on the provided inputs.
@@ -62,8 +62,9 @@ You MUST generate the output in clean Markdown. The response must be broken into
     
     def stream():
         try:
+            # MODEL UPGRADED FOR ACCURACY
             stream_response = client.chat.completions.create(
-                model="llama-3.1-8b-instant",
+                model="llama3-70b-8192", # Using the larger, more knowledgeable model
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt}
@@ -83,46 +84,27 @@ You MUST generate the output in clean Markdown. The response must be broken into
     return Response(stream_with_context(stream()), content_type='text/event-stream')
 
 
-# FIXED CHATBOT ENDPOINT
+# CHATBOT ENDPOINT
 @app.route('/chat', methods=['POST'])
 def chat():
     if not client:
         return jsonify({"error": "Groq client not initialized."}), 500
 
     data = request.json
-    # FIX #1: Accept single message instead of messages array
     user_message = data.get('message', '')
 
     if not user_message:
         return jsonify({"error": "No message provided."}), 400
 
-    # FIX #2: Use groq/compound model for web search capability
     chat_system_prompt = """
-You are "Aura Curator," a sophisticated fragrance expert and curator with deep knowledge of niche perfumery.
-
-Your capabilities:
-- Search the web for current fragrance information, prices, availability, and reviews
-- Discover fragrances for specific occasions, seasons, or moods
-- Create curated fragrance collections for selling (suggest 3-5 fragrances with rationale)
-- Compare fragrance profiles and notes between different houses
-- Recommend hidden gems in niche perfumery
-
-Guidelines:
-- Always provide specific fragrance names, houses, and key notes
-- Include price ranges when relevant and available
-- Explain WHY you're recommending each fragrance
-- For collections, explain how the fragrances work together
-- Use web search to find the most current information
-- Format responses in elegant Markdown with clear structure
-
-Your tone is refined, knowledgeable, and conversational - like a trusted advisor in a luxury fragrance boutique.
+You are "Aura Curator," a sophisticated fragrance expert and curator with deep knowledge of niche perfumery. Your capabilities include searching the web for current fragrance information, discovering scents, creating curated collections, and comparing fragrance profiles. Always provide specific names, houses, and key notes, and explain your reasoning. Your tone is refined, knowledgeable, and conversational.
 """
     
     def stream():
         try:
-            # FIX #3: Use groq/compound model with web search
+            # Using compound model for web search
             stream_response = client.chat.completions.create(
-                model="groq/compound",  # This model has built-in web search!
+                model="groq/compound",
                 messages=[
                     {"role": "system", "content": chat_system_prompt},
                     {"role": "user", "content": user_message}
