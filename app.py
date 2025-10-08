@@ -96,8 +96,9 @@ You MUST generate the output in clean Markdown, broken into sections starting wi
     
     def stream():
         try:
+            # DEFINITIVE FIX: Using the correct llama-3.3-70b-versatile model
             stream_response = client.chat.completions.create(
-                model="llama-3.1-70b-versatile",
+                model="llama-3.3-70b-versatile",
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt}
