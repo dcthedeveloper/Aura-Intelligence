@@ -62,9 +62,9 @@ You MUST generate the output in clean Markdown. The response must be broken into
     
     def stream():
         try:
-            # MODEL UPGRADED FOR ACCURACY
+            # MODEL UPGRADED TO THE LATEST VERSION
             stream_response = client.chat.completions.create(
-                model="llama3-70b-8192", # Using the larger, more knowledgeable model
+                model="llama-3.1-70b-versatile", # Using the new, recommended large model
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt}
@@ -126,3 +126,4 @@ You are "Aura Curator," a sophisticated fragrance expert and curator with deep k
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
+
