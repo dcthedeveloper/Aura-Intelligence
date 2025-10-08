@@ -34,6 +34,10 @@
             margin: 0 auto;
         }
         
+        textarea.input-field {
+            resize: none;
+        }
+        
         .form-section { 
             display: none;
             animation: fadeInUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
@@ -44,11 +48,6 @@
 
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(25px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes slideInCard {
-            from { opacity: 0; transform: translateY(35px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
@@ -249,7 +248,7 @@
             </div>
             <form id="chat-form" class="mt-4">
                 <div class="flex items-center border-t border-gray-200 pt-4">
-                    <textarea id="chat-input" class="w-full input-field" placeholder="Ask the Curator..." rows="1" style="resize:none;"></textarea>
+                    <textarea id="chat-input" class="w-full input-field" placeholder="Ask the Curator..." rows="1"></textarea>
                     <button type="submit" id="chat-send-btn" class="btn btn-gold py-2.5 px-6 rounded-full ml-4">Send</button>
                 </div>
             </form>
@@ -274,6 +273,9 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // All JS logic is consolidated here for simplicity
+            
+            // DOM Elements
             const modeStorytellerBtn = document.getElementById('mode-storyteller');
             const modeCuratorBtn = document.getElementById('mode-curator');
             const storytellerWrapper = document.getElementById('storyteller-wrapper');
@@ -299,6 +301,7 @@
             let currentStep = 1;
             const totalSteps = sections.length;
 
+            // --- Mode Toggling ---
             const switchMode = (mode) => {
                 if (mode === 'storyteller') {
                     curatorWrapper.style.display = 'none';
@@ -317,6 +320,7 @@
             modeStorytellerBtn.addEventListener('click', () => switchMode('storyteller'));
             modeCuratorBtn.addEventListener('click', () => switchMode('curator'));
 
+            // --- Storyteller Form Logic ---
             const updateButtonsAndProgress = () => {
                 const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
                 progressBar.style.width = `${progressPercentage}%`;
@@ -326,7 +330,6 @@
                 prevBtn.disabled = currentStep === 1;
                 nextBtn.classList.toggle('hidden', currentStep === totalSteps);
                 generateBtn.classList.toggle('hidden', currentStep !== totalSteps);
-                generateBtn.classList.toggle('inline-flex', currentStep === totalSteps);
             };
 
             nextBtn.addEventListener('click', () => { if (currentStep < totalSteps) { currentStep++; updateButtonsAndProgress(); }});
@@ -408,10 +411,10 @@
                 });
             });
 
-            // FIXED CHAT LOGIC
+            // --- Curator Chat Logic ---
             function appendMessage(content, role, isLoading = false) {
                 const messageWrapper = document.createElement('div');
-                messageWrapper.className = `flex ${role === 'user' ? 'justify-end' : 'justify-start'}`;
+                messageWrapper.className = `flex ${role === 'user' ? 'justify-end' : 'justify-start'} mb-4`;
                 const messageDiv = document.createElement('div');
                 messageDiv.className = `chat-bubble ${role}`;
                 messageDiv.innerHTML = isLoading ? '<div class="animate-pulse">Searching...</div>' : marked.parse(content);
@@ -478,4 +481,5 @@
     </script>
 </body>
 </html>
+
 
