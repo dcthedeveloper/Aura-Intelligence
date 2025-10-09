@@ -9,6 +9,47 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
         
+        /* Seasonal Theme Variables */
+        :root {
+            --primary: #d97706;
+            --primary-dark: #b45309;
+            --primary-darker: #92400e;
+            --primary-light: #fbbf24;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Spring Theme */
+        [data-theme="spring"] {
+            --primary: #86EFAC;
+            --primary-dark: #4ADE80;
+            --primary-darker: #22C55E;
+            --primary-light: #BBF7D0;
+        }
+        
+        /* Summer Theme */
+        [data-theme="summer"] {
+            --primary: #67E8F9;
+            --primary-dark: #22D3EE;
+            --primary-darker: #06B6D4;
+            --primary-light: #A5F3FC;
+        }
+        
+        /* Fall Theme (Default) */
+        [data-theme="fall"] {
+            --primary: #d97706;
+            --primary-dark: #b45309;
+            --primary-darker: #92400e;
+            --primary-light: #fbbf24;
+        }
+        
+        /* Winter Theme */
+        [data-theme="winter"] {
+            --primary: #A78BFA;
+            --primary-dark: #8B5CF6;
+            --primary-darker: #7C3AED;
+            --primary-light: #C4B5FD;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
         }
@@ -17,11 +58,23 @@
             font-family: 'Cormorant Garamond', serif;
         }
         
+        /* Dynamic gradient using CSS variables */
         .gradient-text {
-            background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            transition: all 0.3s ease;
+        }
+        
+        /* Dynamic button */
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(to right, var(--primary-dark), var(--primary-darker));
         }
         
         .hero-gradient {
@@ -29,7 +82,8 @@
         }
         
         .gold-border {
-            border-color: #d97706;
+            border-color: var(--primary);
+            transition: border-color 0.3s ease;
         }
         
         .hover-lift {
@@ -40,9 +94,47 @@
             transform: translateY(-4px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
+        
+        /* Season Selector Buttons */
+        .season-btn {
+            padding: 0.375rem 0.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+            opacity: 0.5;
+            font-size: 1.125rem;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+        }
+        
+        .season-btn:hover {
+            opacity: 0.8;
+            transform: scale(1.1);
+        }
+        
+        .season-btn.active {
+            opacity: 1;
+            background: rgba(var(--primary-rgb), 0.1);
+        }
+        
+        .season-btn[data-season="spring"]:hover {
+            background: rgba(134, 239, 172, 0.2);
+        }
+        
+        .season-btn[data-season="summer"]:hover {
+            background: rgba(103, 232, 249, 0.2);
+        }
+        
+        .season-btn[data-season="fall"]:hover {
+            background: rgba(217, 119, 6, 0.2);
+        }
+        
+        .season-btn[data-season="winter"]:hover {
+            background: rgba(167, 139, 250, 0.2);
+        }
     </style>
 </head>
-<body class="bg-stone-50 text-stone-900">
+<body class="bg-stone-50 text-stone-900" data-theme="fall">
 
     <!-- Navigation -->
     <nav class="bg-white border-b border-stone-200 sticky top-0 z-50">
@@ -56,7 +148,16 @@
                     <a href="/use-cases" class="text-stone-600 hover:text-stone-900 transition">Use Cases</a>
                     <a href="/features" class="text-stone-600 hover:text-stone-900 transition">Features</a>
                     <a href="/pricing" class="text-stone-600 hover:text-stone-900 transition">Pricing</a>
-                    <a href="/app" class="bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-lg hover:from-amber-700 hover:to-amber-800 transition">
+                    
+                    <!-- Seasonal Theme Selector -->
+                    <div class="flex items-center gap-1 px-3 py-1.5 bg-stone-100 rounded-full">
+                        <button class="season-btn" data-season="spring" title="Spring Vibes">🌸</button>
+                        <button class="season-btn" data-season="summer" title="Summer Vibes">☀️</button>
+                        <button class="season-btn active" data-season="fall" title="Fall Vibes">🍂</button>
+                        <button class="season-btn" data-season="winter" title="Winter Vibes">❄️</button>
+                    </div>
+                    
+                    <a href="/app" class="btn-primary text-white px-6 py-2 rounded-lg transition">
                         Launch App
                     </a>
                 </div>
@@ -511,6 +612,37 @@
     </footer>
 
     <script>
+        // Seasonal Theme Switcher
+        const seasonButtons = document.querySelectorAll('.season-btn');
+        const body = document.body;
+        
+        // Load saved theme from localStorage
+        const savedTheme = localStorage.getItem('auraTheme') || 'fall';
+        setTheme(savedTheme);
+        
+        // Add click handlers to season buttons
+        seasonButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const season = btn.dataset.season;
+                setTheme(season);
+                localStorage.setItem('auraTheme', season);
+            });
+        });
+        
+        function setTheme(season) {
+            // Update body data-theme attribute
+            body.setAttribute('data-theme', season);
+            
+            // Update active button state
+            seasonButtons.forEach(btn => {
+                if (btn.dataset.season === season) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+        
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
