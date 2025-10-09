@@ -32,8 +32,7 @@ def app_tool():
 
 @app.route('/how-it-works')
 def how_it_works():
-    # Placeholder - will create this page next
-    return "<h1>How It Works - Coming Soon</h1><a href='/'>Back to Home</a>"
+    return render_template('how_it_works.html')
 
 @app.route('/use-cases')
 def use_cases():
