@@ -154,20 +154,30 @@ python app.py
 http://127.0.0.1:5000
 ```
 
+The app will open to the landing page. Navigate to `/app` to access the Story Builder tool.
+
 ---
 
 ## 📁 Project Structure
 
 ```
 Aura-Intelligence/
-├── app.py                  # Flask backend with all routes and logic
-├── requirements.txt        # Python dependencies
-├── .env                    # Environment variables (create this)
-├── .env.example           # Template for environment variables
-├── .gitignore             # Git ignore rules (protects .env)
+├── app.py                     # Flask backend (588 lines)
+├── requirements.txt           # Python dependencies
+├── .env                       # Environment variables (create this)
+├── .env.example              # Template for environment variables
+├── .gitignore                # Git ignore rules (protects .env)
 ├── templates/
-│   └── index.html         # Single-page application frontend
-└── README.md              # This file
+│   ├── app.html              # Story Builder tool (1,813 lines)
+│   ├── home.html             # Landing page (559 lines)
+│   ├── how_it_works.html     # How It Works page (547 lines)
+│   ├── use_cases.html        # Use Cases page (703 lines)
+│   └── features.html         # Features page (675 lines)
+├── LICENSE                   # MIT License
+├── PROJECT_WRITEUP.md        # Technical documentation
+└── README.md                 # This file
+
+Total: ~5,900 lines of production code
 ```
 
 ---
