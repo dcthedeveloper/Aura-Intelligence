@@ -226,10 +226,10 @@ Total: ~5,900 lines of production code
 ## 🎨 Design Philosophy
 
 **Luxury Aesthetic**  
-- Cream (#F5F1E8) backgrounds inspired by premium packaging
+- Cream (#F8F6F3) backgrounds inspired by premium packaging
 - Playfair Display serif typography for elegance
-- Gold (#B7904C) accent colors
-- Paper texture overlay for tactile feel
+- Champagne (#C9B896) accent colors for minimal luxury
+- Minimalist design matching niche fragrance brands (Byredo, Kilian, Nishane)
 
 **User Experience**  
 - **Progressive Disclosure**: 4-step form prevents overwhelm
