@@ -9,6 +9,47 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
         
+        /* Seasonal Theme Variables */
+        :root {
+            --primary: #d97706;
+            --primary-dark: #b45309;
+            --primary-darker: #92400e;
+            --primary-light: #fbbf24;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Spring Theme */
+        [data-theme="spring"] {
+            --primary: #86EFAC;
+            --primary-dark: #4ADE80;
+            --primary-darker: #22C55E;
+            --primary-light: #BBF7D0;
+        }
+        
+        /* Summer Theme */
+        [data-theme="summer"] {
+            --primary: #67E8F9;
+            --primary-dark: #22D3EE;
+            --primary-darker: #06B6D4;
+            --primary-light: #A5F3FC;
+        }
+        
+        /* Fall Theme (Default) */
+        [data-theme="fall"] {
+            --primary: #d97706;
+            --primary-dark: #b45309;
+            --primary-darker: #92400e;
+            --primary-light: #fbbf24;
+        }
+        
+        /* Winter Theme */
+        [data-theme="winter"] {
+            --primary: #A78BFA;
+            --primary-dark: #8B5CF6;
+            --primary-darker: #7C3AED;
+            --primary-light: #C4B5FD;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
         }
@@ -18,10 +59,11 @@
         }
         
         .gradient-text {
-            background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            transition: all 0.3s ease;
         }
         
         .hero-gradient {
@@ -29,7 +71,7 @@
         }
         
         .step-number {
-            background: linear-gradient(135deg, #d97706, #b45309);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             width: 4rem;
             height: 4rem;
             display: flex;
@@ -40,6 +82,7 @@
             font-size: 1.5rem;
             font-weight: 700;
             box-shadow: 0 10px 25px rgba(217, 119, 6, 0.3);
+            transition: all 0.3s ease;
         }
         
         .step-card {
@@ -60,7 +103,7 @@
         }
     </style>
 </head>
-<body class="bg-stone-50 text-stone-900">
+<body class="bg-stone-50" data-theme="fall">
 
     <!-- Navigation -->
     <nav class="bg-white border-b border-stone-200 sticky top-0 z-50">
@@ -512,6 +555,10 @@
     </footer>
 
     <script>
+        // Seasonal Theme Loader - sync with selected theme from home page
+        const savedTheme = localStorage.getItem('auraTheme') || 'fall';
+        document.body.setAttribute('data-theme', savedTheme);
+
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
