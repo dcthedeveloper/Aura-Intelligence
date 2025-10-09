@@ -11,18 +11,18 @@
         
         :root {
             /* Updated Color System - Warm Amber Gold Theme */
-            --primary-gold: #d97706;        /* Amber-600 - Primary brand color */
-            --primary-gold-dark: #b45309;   /* Amber-700 - Hover states */
-            --primary-gold-darker: #92400e; /* Amber-800 - Active states */
-            --gold-light: #fbbf24;          /* Amber-400 - Accents */
+            --primary: #C9B896;        /* Amber-600 - Primary brand color */
+            --primary-dark: #B5A585;   /* Amber-700 - Hover states */
+            --primary-darker: #A18F71; /* Amber-800 - Active states */
+            --accent-light: #E8E0D5;          /* Amber-400 - Accents */
             
-            --stone-50: #fafaf9;            /* Background */
-            --stone-100: #f5f5f4;           /* Cards, elevated surfaces */
-            --stone-200: #e7e5e4;           /* Borders, dividers */
+            --stone-50: #FEFEFE;            /* Background */
+            --stone-100: #F8F8F7;           /* Cards, elevated surfaces */
+            --stone-200: #E8E8E6;           /* Borders, dividers */
             --stone-300: #d6d3d1;           /* Disabled states */
-            --stone-600: #78716c;           /* Secondary text */
-            --stone-800: #292524;           /* Body text */
-            --stone-900: #1c1917;           /* Headings, primary text */
+            --stone-600: #6B6B6B;           /* Secondary text */
+            --stone-800: #1A1A1A;           /* Body text */
+            --stone-900: #1A1A1A;           /* Headings, primary text */
             
             --success: #16a34a;             /* Green-600 - Success states */
             --error: #dc2626;               /* Red-600 - Errors */
@@ -32,7 +32,7 @@
             --cream: #fafaf9;
             --dark: #1c1917;
             --light-gray: #e7e5e4;
-            --gold: #d97706;
+            --gold: #C9B896;
         }
 
         body { 
@@ -43,7 +43,7 @@
 
         /* Gradient text utility - matches landing page */
         .gradient-text {
-            background: linear-gradient(to right, var(--primary-gold), var(--primary-gold-dark));
+            background: linear-gradient(to right, var(--primary), var(--primary-gold-dark));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -102,7 +102,7 @@
             margin-bottom: 1rem;
         }
         .chat-bubble.user {
-            background: linear-gradient(to right, var(--primary-gold), var(--primary-gold-dark));
+            background: linear-gradient(to right, var(--primary), var(--primary-gold-dark));
             color: white;
             border-bottom-right-radius: 0.25rem;
             align-self: flex-end;
@@ -117,10 +117,10 @@
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
         .chat-bubble.ai strong { 
-            color: var(--primary-gold); 
+            color: var(--primary); 
         }
         .chat-bubble.ai a { 
-            color: var(--primary-gold); 
+            color: var(--primary); 
             text-decoration: underline; 
         }
         .chat-bubble.ai a:hover {
@@ -140,7 +140,7 @@
         }
         .suggestion-chip:hover {
             background-color: rgba(217, 119, 6, 0.1);
-            border-color: var(--primary-gold);
+            border-color: var(--primary);
             color: var(--primary-gold-dark);
             transform: translateY(-2px);
             box-shadow: 0 2px 8px rgba(217, 119, 6, 0.15);
@@ -161,9 +161,9 @@
             color: var(--stone-800);
         }
         .mode-toggle-group button.active {
-            background: linear-gradient(to right, var(--primary-gold), var(--primary-gold-dark));
+            background: linear-gradient(to right, var(--primary), var(--primary-gold-dark));
             color: white;
-            border-color: var(--primary-gold);
+            border-color: var(--primary);
             box-shadow: 0 2px 8px rgba(217, 119, 6, 0.2);
         }
         .mode-toggle-group button:first-child { border-radius: 9999px 0 0 9999px; }
@@ -180,16 +180,16 @@
             background-color: white;
         }
         .radio-group label:hover {
-            border-color: var(--primary-gold);
+            border-color: var(--primary);
             background-color: rgba(217, 119, 6, 0.05);
         }
         .radio-group input[type="radio"] {
             display: none;
         }
         .radio-group input[type="radio"]:checked + label {
-            background: linear-gradient(to right, var(--primary-gold), var(--primary-gold-dark));
+            background: linear-gradient(to right, var(--primary), var(--primary-gold-dark));
             color: white;
-            border-color: var(--primary-gold);
+            border-color: var(--primary);
             box-shadow: 0 2px 8px rgba(217, 119, 6, 0.2);
         }
 
@@ -220,7 +220,7 @@
             font-weight: 400; 
         }
         .input-field:focus { 
-            border-color: var(--primary-gold); 
+            border-color: var(--primary); 
             box-shadow: 0 2px 0 0 rgba(217, 119, 6, 0.2); 
             outline: none; 
             transform: translateY(-2px); 
@@ -244,7 +244,7 @@
         
         /* Primary gold button */
         .btn-gold { 
-            background: linear-gradient(to right, var(--primary-gold), var(--primary-gold-dark)); 
+            background: linear-gradient(to right, var(--primary), var(--primary-gold-dark)); 
             color: white; 
             box-shadow: 0 3px 10px rgba(217, 119, 6, 0.2); 
         }
@@ -271,8 +271,8 @@
         }
         .btn-outline:hover:not(:disabled) { 
             background-color: var(--stone-100); 
-            border-color: var(--primary-gold); 
-            color: var(--primary-gold); 
+            border-color: var(--primary); 
+            color: var(--primary); 
         }
         
         /* Secondary dark button */
@@ -297,24 +297,24 @@
         @keyframes spin { to { transform: rotate(360deg); } } .animate-spin { animation: spin 1.2s linear infinite; }
     </style>
 </head>
-<body class="bg-stone-50">
+<body class="bg-white">
 
     <!-- Navigation (same as home.html) -->
-    <nav class="bg-white border-b border-stone-200 sticky top-0 z-50">
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex justify-between items-center h-10">
                 <a href="/" class="text-2xl font-serif font-bold">
                     <span style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Aura</span> Intelligence
                 </a>
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="/how-it-works" class="text-stone-600 hover:text-stone-900 transition">How It Works</a>
-                    <a href="/use-cases" class="text-stone-600 hover:text-stone-900 transition">Use Cases</a>
-                    <a href="/features" class="text-stone-600 hover:text-stone-900 transition">Features</a>
-                    <a href="/pricing" class="text-stone-600 hover:text-stone-900 transition">Pricing</a>
-                    <a href="/" class="text-stone-600 hover:text-stone-900 transition">← Back to Home</a>
+                    <a href="/how-it-works" class="text-gray-600 hover:text-gray-900 transition">How It Works</a>
+                    <a href="/use-cases" class="text-gray-600 hover:text-gray-900 transition">Use Cases</a>
+                    <a href="/features" class="text-gray-600 hover:text-gray-900 transition">Features</a>
+                    <a href="/pricing" class="text-gray-600 hover:text-gray-900 transition">Pricing</a>
+                    <a href="/" class="text-gray-600 hover:text-gray-900 transition">← Back to Home</a>
                 </div>
                 <!-- Mobile menu button -->
-                <button id="mobile-menu-btn" class="md:hidden text-stone-900">
+                <button id="mobile-menu-btn" class="md:hidden text-gray-900">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -322,11 +322,11 @@
             </div>
             <!-- Mobile menu -->
             <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2 space-y-2">
-                <a href="/how-it-works" class="block text-stone-600 hover:text-stone-900 py-2">How It Works</a>
-                <a href="/use-cases" class="block text-stone-600 hover:text-stone-900 py-2">Use Cases</a>
-                <a href="/features" class="block text-stone-600 hover:text-stone-900 py-2">Features</a>
-                <a href="/pricing" class="block text-stone-600 hover:text-stone-900 py-2">Pricing</a>
-                <a href="/" class="block text-stone-600 hover:text-stone-900 py-2">← Back to Home</a>
+                <a href="/how-it-works" class="block text-gray-600 hover:text-gray-900 py-2">How It Works</a>
+                <a href="/use-cases" class="block text-gray-600 hover:text-gray-900 py-2">Use Cases</a>
+                <a href="/features" class="block text-gray-600 hover:text-gray-900 py-2">Features</a>
+                <a href="/pricing" class="block text-gray-600 hover:text-gray-900 py-2">Pricing</a>
+                <a href="/" class="block text-gray-600 hover:text-gray-900 py-2">← Back to Home</a>
             </div>
         </div>
     </nav>
@@ -336,7 +336,7 @@
     <div class="main-container">
         <header class="text-center mb-10">
             <h1 class="text-4xl md:text-5xl font-semibold">
-                <span class="gradient-text">Aura</span> Intelligence
+                <span style="background: linear-gradient(135deg, #C9B896 0%, #B5A585 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Aura</span> Intelligence
             </h1>
             <p class="text-lg mt-2" style="letter-spacing: 0.05em; color: #78716c;">Your Olfactory Storyteller & Curator</p>
         </header>
