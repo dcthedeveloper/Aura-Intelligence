@@ -18,9 +18,8 @@
 
         body { 
             font-family: 'Inter', sans-serif; 
-            background-color: var(--cream);
+            background-color: #fafaf9;
             color: var(--dark);
-            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
         }
 
         h1, h2, h3, h4 {
@@ -148,8 +147,8 @@
         .input-field::placeholder { color: #a8a8a8; font-weight: 400; }
         .input-field:focus { border-color: var(--gold); box-shadow: 0 2px 0 0 rgba(183, 144, 76, 0.2); outline: none; transform: translateY(-2px); background-color: rgba(245, 241, 232, 0.3); }
         .btn { transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94); border: 1px solid transparent; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.03em; border-radius: 9999px; position: relative; overflow: hidden; }
-        .btn-gold { background-color: var(--dark); color: white; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12); }
-        .btn-gold:hover:not(:disabled) { background-color: #2d2d2d; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18); }
+        .btn-gold { background: linear-gradient(to right, #d97706, #b45309); color: white; box-shadow: 0 3px 10px rgba(217, 119, 6, 0.2); }
+        .btn-gold:hover:not(:disabled) { background: linear-gradient(to right, #b45309, #92400e); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(217, 119, 6, 0.3); }
         .btn-outline { background-color: transparent; color: var(--dark); border-color: #d5cfc3; }
         .btn-outline:hover:not(:disabled) { background-color: #f1ece2; border-color: #b8b2a6; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06); }
         .progress-bar-container { width: 100%; background-color: #e8e2d6; border-radius: 9999px; height: 2px; margin-bottom: 2.5rem; overflow: hidden; }
@@ -161,7 +160,41 @@
         @keyframes spin { to { transform: rotate(360deg); } } .animate-spin { animation: spin 1.2s linear infinite; }
     </style>
 </head>
-<body class="flex flex-col items-center min-h-screen p-4 md:p-8">
+<body class="bg-stone-50">
+
+    <!-- Navigation (same as home.html) -->
+    <nav class="bg-white border-b border-stone-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/" class="text-2xl font-serif font-bold">
+                    <span style="background: linear-gradient(135deg, #B7904C 0%, #D4AF37 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Aura</span> Intelligence
+                </a>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="/how-it-works" class="text-stone-600 hover:text-stone-900 transition">How It Works</a>
+                    <a href="/use-cases" class="text-stone-600 hover:text-stone-900 transition">Use Cases</a>
+                    <a href="/features" class="text-stone-600 hover:text-stone-900 transition">Features</a>
+                    <a href="/pricing" class="text-stone-600 hover:text-stone-900 transition">Pricing</a>
+                    <a href="/" class="text-stone-600 hover:text-stone-900 transition">← Back to Home</a>
+                </div>
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="md:hidden text-stone-900">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2 space-y-2">
+                <a href="/how-it-works" class="block text-stone-600 hover:text-stone-900 py-2">How It Works</a>
+                <a href="/use-cases" class="block text-stone-600 hover:text-stone-900 py-2">Use Cases</a>
+                <a href="/features" class="block text-stone-600 hover:text-stone-900 py-2">Features</a>
+                <a href="/pricing" class="block text-stone-600 hover:text-stone-900 py-2">Pricing</a>
+                <a href="/" class="block text-stone-600 hover:text-stone-900 py-2">← Back to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex flex-col items-center min-h-screen p-4 md:p-8">
 
     <div class="main-container">
         <header class="text-center mb-10">
@@ -1584,6 +1617,16 @@
         }
 
         updateFormUI(); // Initial call
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
     });
     </script>
 </body>
