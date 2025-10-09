@@ -3,6 +3,8 @@
 **Date:** October 9, 2025  
 **Assignment:** Module 06 - Generative AI Web Application
 
+> **Running the Application:** This app requires a Groq API key (free tier available at [console.groq.com](https://console.groq.com)). Complete setup instructions are in the README.md file.
+
 ---
 
 ## LLM Approach Selection
