@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Use Cases - Aura Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #d97706, #b45309);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="bg-stone-50">
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-stone-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="/" class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-amber-600 to-amber-700 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">A</span>
+                    </div>
+                    <span class="text-xl font-semibold text-stone-900">Aura Intelligence</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/how-it-works" class="text-stone-600 hover:text-amber-600 transition">How It Works</a>
+                    <a href="/use-cases" class="text-amber-600 font-medium">Use Cases</a>
+                    <a href="/features" class="text-stone-600 hover:text-amber-600 transition">Features</a>
+                    <a href="/pricing" class="text-stone-600 hover:text-amber-600 transition">Pricing</a>
+                    <a href="/app" class="bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-lg hover:from-amber-700 hover:to-amber-800 transition">
+                        Launch App
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-stone-600 hover:text-amber-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <a href="/how-it-works" class="block py-2 text-stone-600 hover:text-amber-600">How It Works</a>
+                <a href="/use-cases" class="block py-2 text-amber-600 font-medium">Use Cases</a>
+                <a href="/features" class="block py-2 text-stone-600 hover:text-amber-600">Features</a>
+                <a href="/pricing" class="block py-2 text-stone-600 hover:text-amber-600">Pricing</a>
+                <a href="/app" class="block mt-2 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-lg text-center">
+                    Launch App
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-block px-4 py-2 bg-amber-50 text-amber-700 rounded-full text-sm font-medium mb-6">
+                Who It's Built For
+            </div>
+            <h1 class="text-5xl md:text-6xl font-serif font-bold text-stone-900 mb-6">
+                Built for Every Stage of Your
+                <span class="gradient-text block mt-2">Fragrance Journey</span>
+            </h1>
+            <p class="text-xl text-stone-600 max-w-3xl mx-auto">
+                Whether you're launching your first scent or scaling a global brand, Aura Intelligence adapts to your storytelling needs.
+            </p>
+        </div>
+    </section>
+
+    <!-- Use Cases Grid -->
+    <section class="py-16 bg-stone-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Use Case 1: eCommerce Brands -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden mb-12">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="p-8 md:p-12">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-amber-600 to-amber-700 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-serif font-bold text-stone-900">eCommerce & Online Stores</h3>
+                        </div>
+                        <p class="text-stone-600 mb-6 text-lg">
+                            Transform product listings into immersive experiences that drive conversions and reduce returns.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-stone-900">Instant Product Descriptions</p>
+                                    <p class="text-stone-600">Generate SEO-optimized listings in 30 seconds</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-stone-900">A/B Test Copy Variations</p>
+                                    <p class="text-stone-600">Create multiple versions to test what converts</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-stone-900">Multi-Length Options</p>
+                                    <p class="text-stone-600">Short (product cards), Medium (listing pages), Long (brand stories)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 p-4 bg-amber-50 rounded-lg">
+                            <p class="text-sm text-amber-900 italic">
+                                "We increased click-through rates by 34% after switching to Aura-generated descriptions. Customers finally understand what they're buying."
+                            </p>
+                            <p class="text-sm text-amber-700 mt-2 font-medium">— Sarah Chen, Founder @ Moonlit Apothecary</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-amber-50 to-stone-100 p-8 md:p-12 h-full flex items-center justify-center">
+                        <div class="bg-white rounded-lg shadow-lg p-6 max-w-md">
+                            <div class="text-xs text-stone-500 mb-2">PRODUCT LISTING</div>
+                            <h4 class="font-serif text-xl font-bold text-stone-900 mb-3">Midnight Garden Eau de Parfum</h4>
+                            <p class="text-stone-700 text-sm leading-relaxed mb-4">
+                                A mysterious nocturnal composition that captures the essence of a moonlit Persian garden. Delicate jasmine sambac unfolds against a backdrop of golden saffron, while creamy sandalwood and warm amber create an intoxicating trail that lingers like a whispered secret.
+                            </p>
+                            <div class="flex items-center justify-between pt-4 border-t border-stone-200">
+                                <span class="text-2xl font-bold text-stone-900">$185</span>
+                                <button class="bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-lg text-sm font-medium">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Use Case 2: Indie Perfumers -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden mb-12">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="bg-gradient-to-br from-amber-50 to-stone-100 p-8 md:p-12 h-full flex items-center justify-center order-2 md:order-1">
+                        <div class="space-y-4 max-w-md">
+                            <div class="bg-white rounded-lg shadow-md p-5">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                    <span class="text-xs text-stone-500">CURATOR CHAT ACTIVE</span>
+                                </div>
+                                <p class="text-sm text-stone-700 mb-3">"How do I describe oud to customers who've never smelled it?"</p>
+                                <div class="bg-stone-50 rounded p-3 text-xs text-stone-600 leading-relaxed">
+                                    <strong>Aura Curator:</strong> Try comparing it to aged leather, dark woods, or even fine wine. Use sensory bridges like "earthy richness" or "warm, resinous depth" to help them visualize the scent...
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg shadow-md p-5">
+                                <div class="text-xs text-stone-500 mb-2">SUGGESTED STORYTELLING ANGLES</div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-1.5 h-1.5 bg-amber-600 rounded-full"></div>
+                                        <span class="text-sm text-stone-700">Heritage & Cultural Roots</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-1.5 h-1.5 bg-amber-600 rounded-full"></div>
+                                        <span class="text-sm text-stone-700">Artisan Craftsmanship Journey</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-1.5 h-1.5 bg-amber-600 rounded-full"></div>
+                                        <span class="text-sm text-stone-700">Rare Ingredient Sourcing</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-8 md:p-12 order-1 md:order-2">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-amber-600 to-amber-700 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-serif font-bold text-stone-900">Indie Perfumers & Artisans</h3>
+                        </div>
+                        <p class="text-stone-600 mb-6 text-lg">
+                            Focus on your craft while Aura Intelligence helps you articulate your artistic vision to the world.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-stone-900">Curator Chat for Guidance</p>
+                                    <p class="text-stone-600">Ask questions about notes, accords, or storytelling techniques</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-stone-900">Brand Story Development</p>
+                                    <p class="text-stone-600">Articulate your unique creative philosophy and origin story</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-stone-900">Collection Launch Support</p>
+                                    <p class="text-stone-600">Create cohesive narratives across entire fragrance lines</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 p-4 bg-amber-50 rounded-lg">
+                            <p class="text-sm text-amber-900 italic">
+                                "As a solo perfumer, I don't have a copywriter. Aura helps me translate my olfactory vision into words customers connect with."
+                            </p>
+                            <p class="text-sm text-amber-700 mt-2 font-medium">— Marcus Reid, Artisan Perfumer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Use Case 3: Social Media Creators -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden mb-12">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="p-8 md:p-12">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-amber-600 to-amber-700 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-serif font-bold text-stone-900">Social Media & Influencers</h3>
+                        </div>
+                        <p class="text-stone-600 mb-6 text-lg">
+                            Create scroll-stopping content that educates followers and drives affiliate sales.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-stone-900">Instagram Captions</p>
+                                    <p class="text-stone-600">Generate engaging captions with storytelling hooks and hashtags</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-stone-900">TikTok Scripts</p>
+                                    <p class="text-stone-600">Short-form video scripts with trending hooks and calls-to-action</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-stone-900">Review Templates</p>
+                                    <p class="text-stone-600">Structured format for fragrance reviews with note breakdowns</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 p-4 bg-amber-50 rounded-lg">
+                            <p class="text-sm text-amber-900 italic">
+                                "I went from 20 minutes per post to 2 minutes. My engagement is up because I can finally focus on creating content, not writing it."
+                            </p>
+                            <p class="text-sm text-amber-700 mt-2 font-medium">— @ScentedStories, 47K Followers</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-amber-50 to-stone-100 p-8 md:p-12 h-full flex items-center justify-center">
+                        <div class="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
+                            <div class="flex items-center space-x-2 mb-4">
+                                <div class="w-8 h-8 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full"></div>
+                                <span class="font-bold text-stone-900">@fragrance_daily</span>
+                            </div>
+                            <div class="bg-stone-100 rounded-lg h-64 mb-4 flex items-center justify-center">
+                                <svg class="w-16 h-16 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <p class="text-stone-800 text-sm mb-3">
+                                <strong>Midnight Garden</strong> is giving mysterious Persian nights 🌙✨ The jasmine-saffron combo is EVERYTHING. If you love <em>Amouage Gold</em> but want something unique, this is it.
+                            </p>
+                            <div class="flex items-center justify-between text-xs text-stone-500">
+                                <span>❤️ 1,247 likes</span>
+                                <span>💬 89 comments</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Use Case 4: Luxury Brands -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden mb-12">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="bg-gradient-to-br from-amber-50 to-stone-100 p-8 md:p-12 h-full flex items-center justify-center order-2 md:order-1">
+                        <div class="space-y-4 max-w-md">
+                            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-amber-600">
+                                <div class="text-xs text-stone-500 mb-2">BRAND CONSISTENCY CHECK</div>
+                                <div class="space-y-3 text-sm">
+                                    <div class="flex items-center space-x-2">
+                                        <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                        </svg>
+                                        <span class="text-stone-700">Tone: Sophisticated & Timeless</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                        </svg>
+                                        <span class="text-stone-700">Voice: Authoritative yet Warm</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                        </svg>
+                                        <span class="text-stone-700">Heritage References: Present</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg shadow-md p-6">
+                                <div class="text-xs text-stone-500 mb-2">MULTILINGUAL READY</div>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-6 h-4 bg-blue-500 rounded-sm"></div>
+                                        <span class="text-stone-700">English (Primary)</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-6 h-4 bg-red-500 rounded-sm"></div>
+                                        <span class="text-stone-700">French (Adapt)</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-6 h-4 bg-green-500 rounded-sm"></div>
+                                        <span class="text-stone-700">Arabic (Localize)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-8 md:p-12 order-1 md:order-2">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-amber-600 to-amber-700 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-serif font-bold text-stone-900">Luxury Brands & Maisons</h3>
+                        </div>
+                        <p class="text-stone-600 mb-6 text-lg">
+                            Maintain brand heritage and prestige across every touchpoint, from boutiques to global campaigns.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-stone-900">Brand Voice Consistency</p>
+                                    <p class="text-stone-600">Train Aura on your brand guidelines for on-brand copy every time</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-stone-900">Heritage Storytelling</p>
+                                    <p class="text-stone-600">Weave brand history and craftsmanship into product narratives</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-stone-900">Global Market Adaptation</p>
+                                    <p class="text-stone-600">Adapt messaging for cultural nuances without losing brand essence</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 p-4 bg-amber-50 rounded-lg">
+                            <p class="text-sm text-amber-900 italic">
+                                "Our marketing team uses Aura to maintain consistency across 40+ markets. It understands luxury positioning better than any tool we've tried."
+                            </p>
+                            <p class="text-sm text-amber-700 mt-2 font-medium">— Brand Director, International House (NDA)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Use Case 5: Email Marketing -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden mb-12">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="p-8 md:p-12">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-amber-600 to-amber-700 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-serif font-bold text-stone-900">Email Campaigns & Newsletters</h3>
+                        </div>
+                        <p class="text-stone-600 mb-6 text-lg">
+                            Drive opens, clicks, and conversions with compelling email copy that tells a story.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-stone-900">Product Launch Emails</p>
+                                    <p class="text-stone-600">Create anticipation with teasers, reveals, and exclusive access</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-stone-900">Subject Line Variations</p>
+                                    <p class="text-stone-600">A/B test different hooks to maximize open rates</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-stone-900">Seasonal Campaigns</p>
+                                    <p class="text-stone-600">Holiday gift guides, summer collections, Valentine's Day</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 p-4 bg-amber-50 rounded-lg">
+                            <p class="text-sm text-amber-900 italic">
+                                "Our Black Friday email generated $47K in sales. The story-first approach made people feel something, not just buy something."
+                            </p>
+                            <p class="text-sm text-amber-700 mt-2 font-medium">— E-commerce Manager, Niche Fragrance Retailer</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-amber-50 to-stone-100 p-8 md:p-12 h-full flex items-center justify-center">
+                        <div class="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
+                            <div class="border-b border-stone-200 pb-4 mb-4">
+                                <div class="text-xs text-stone-500 mb-1">FROM: hello@midnightgarden.com</div>
+                                <div class="text-sm font-bold text-stone-900 mb-2">✨ A Secret Garden Awaits You</div>
+                                <div class="text-xs text-stone-600">Early Access: New Midnight Collection</div>
+                            </div>
+                            <div class="text-sm text-stone-700 leading-relaxed space-y-3">
+                                <p>Hi Emma,</p>
+                                <p>
+                                    When the moon rises over Persian gardens, jasmine blooms in the darkness. We've captured that fleeting moment in our newest creation.
+                                </p>
+                                <p class="font-medium">
+                                    <strong>Midnight Garden Eau de Parfum</strong> — launching Friday, but you get first access.
+                                </p>
+                                <div class="bg-amber-50 border border-amber-200 rounded p-3 text-center">
+                                    <button class="bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-lg text-sm font-medium w-full">
+                                        Shop Now (24hr Early Access)
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Use Case 6: Content Writers & Agencies -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="bg-gradient-to-br from-amber-50 to-stone-100 p-8 md:p-12 h-full flex items-center justify-center order-2 md:order-1">
+                        <div class="max-w-md">
+                            <div class="bg-white rounded-lg shadow-md p-6 mb-4">
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="text-xs text-stone-500">CLIENT DELIVERABLE</span>
+                                    <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">APPROVED</span>
+                                </div>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between">
+                                        <span class="text-stone-700">Product Descriptions (x15)</span>
+                                        <span class="text-amber-600 font-medium">✓</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-stone-700">Brand Story (Long-form)</span>
+                                        <span class="text-amber-600 font-medium">✓</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-stone-700">Social Media Copy (x30)</span>
+                                        <span class="text-amber-600 font-medium">✓</span>
+                                    </div>
+                                </div>
+                                <div class="mt-4 pt-4 border-t border-stone-200">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm text-stone-600">Time Saved:</span>
+                                        <span class="text-lg font-bold text-amber-600">18.5 hours</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg shadow-md p-4">
+                                <div class="text-xs text-stone-500 mb-2">BILLABLE EFFICIENCY</div>
+                                <div class="flex items-end space-x-2">
+                                    <div class="text-3xl font-bold text-amber-600">3.2x</div>
+                                    <div class="text-sm text-stone-600 mb-1">faster turnaround</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-8 md:p-12 order-1 md:order-2">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-amber-600 to-amber-700 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-serif font-bold text-stone-900">Writers & Agencies</h3>
+                        </div>
+                        <p class="text-stone-600 mb-6 text-lg">
+                            Take on more clients and deliver faster without sacrificing quality or burning out.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-stone-900">First Draft Generation</p>
+                                    <p class="text-stone-600">Generate initial copy in seconds, spend time refining and personalizing</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-stone-900">Bulk Operations</p>
+                                    <p class="text-stone-600">Process entire catalogs or collections in one session</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-stone-900">Research Assistant</p>
+                                    <p class="text-stone-600">Use Curator Chat to quickly understand fragrance families and notes</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 p-4 bg-amber-50 rounded-lg">
+                            <p class="text-sm text-amber-900 italic">
+                                "We went from 2-3 fragrance clients to 8. Aura handles the heavy lifting so our team can focus on strategy and client relationships."
+                            </p>
+                            <p class="text-sm text-amber-700 mt-2 font-medium">— Creative Director, Boutique Marketing Agency</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-br from-amber-600 to-amber-700">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
+                Ready to Tell Your Story?
+            </h2>
+            <p class="text-xl text-amber-50 mb-8">
+                Join hundreds of fragrance professionals who trust Aura Intelligence for their storytelling needs.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/app" class="bg-white text-amber-700 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-amber-50 transition">
+                    Start Writing for Free
+                </a>
+                <a href="/pricing" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/10 transition">
+                    View Pricing
+                </a>
+            </div>
+            <p class="text-amber-100 text-sm mt-6">
+                No credit card required • Unlimited stories • 30-second generation
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-300 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-br from-amber-600 to-amber-700 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold">A</span>
+                        </div>
+                        <span class="text-white font-semibold">Aura Intelligence</span>
+                    </div>
+                    <p class="text-sm text-stone-400">
+                        AI-powered storytelling for the fragrance industry.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Product</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/how-it-works" class="hover:text-amber-400 transition">How It Works</a></li>
+                        <li><a href="/use-cases" class="hover:text-amber-400 transition">Use Cases</a></li>
+                        <li><a href="/features" class="hover:text-amber-400 transition">Features</a></li>
+                        <li><a href="/pricing" class="hover:text-amber-400 transition">Pricing</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-amber-400 transition">Blog</a></li>
+                        <li><a href="#" class="hover:text-amber-400 transition">Help Center</a></li>
+                        <li><a href="#" class="hover:text-amber-400 transition">API Docs</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-amber-400 transition">About</a></li>
+                        <li><a href="#" class="hover:text-amber-400 transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-amber-400 transition">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-stone-800 pt-8 text-center text-sm text-stone-400">
+                <p>&copy; 2025 Aura Intelligence. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

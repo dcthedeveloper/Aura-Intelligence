@@ -36,13 +36,11 @@ def how_it_works():
 
 @app.route('/use-cases')
 def use_cases():
-    # Placeholder - will create this page next
-    return "<h1>Use Cases - Coming Soon</h1><a href='/'>Back to Home</a>"
+    return render_template('use_cases.html')
 
 @app.route('/features')
 def features():
-    # Placeholder - will create this page next
-    return "<h1>Features - Coming Soon</h1><a href='/'>Back to Home</a>"
+    return render_template('features.html')
 
 @app.route('/pricing')
 def pricing():
