@@ -9,107 +9,44 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap');
         
-        /* Seasonal Theme Variables */
         :root {
-            --primary: #d97706;
-            --primary-dark: #b45309;
-            --primary-darker: #92400e;
-            --primary-light: #fbbf24;
-            --primary-r: 217;
-            --primary-g: 119;
-            --primary-b: 6;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        /* Spring Theme */
-        [data-theme="spring"] {
-            --primary: #86EFAC;
-            --primary-dark: #4ADE80;
-            --primary-darker: #22C55E;
-            --primary-light: #BBF7D0;
-            --primary-r: 134;
-            --primary-g: 239;
-            --primary-b: 172;
-        }
-        
-        /* Summer Theme */
-        [data-theme="summer"] {
-            --primary: #67E8F9;
-            --primary-dark: #22D3EE;
-            --primary-darker: #06B6D4;
-            --primary-light: #A5F3FC;
-            --primary-r: 103;
-            --primary-g: 232;
-            --primary-b: 249;
-        }
-        
-        /* Fall Theme (Default) */
-        [data-theme="fall"] {
-            --primary: #d97706;
-            --primary-dark: #b45309;
-            --primary-darker: #92400e;
-            --primary-light: #fbbf24;
-            --primary-r: 217;
-            --primary-g: 119;
-            --primary-b: 6;
-        }
-        
-        /* Winter Theme */
-        [data-theme="winter"] {
-            --primary: #A78BFA;
-            --primary-dark: #8B5CF6;
-            --primary-darker: #7C3AED;
-            --primary-light: #C4B5FD;
-            --primary-r: 167;
-            --primary-g: 139;
-            --primary-b: 250;
-        }
-
-        /* Theme-Aware Utility Classes */
-        .bg-primary-light {
-            background-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.1);
-        }
-        .bg-primary-lighter {
-            background-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.05);
-        }
-        .text-primary {
-            color: var(--primary);
-        }
-        .text-primary-dark {
-            color: var(--primary-dark);
-        }
-        .text-primary-darker {
-            color: var(--primary-darker);
-        }
-        .border-primary {
-            border-color: var(--primary);
-        }
-        .hover\:text-primary:hover {
-            color: var(--primary);
-        }
-        .hover\:border-primary:hover {
-            border-color: var(--primary);
-        }
-        .bg-gradient-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-        }
-        .bg-gradient-primary-strong {
-            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            /* Updated Color System - Warm Amber Gold Theme */
+            --primary-gold: #d97706;        /* Amber-600 - Primary brand color */
+            --primary-gold-dark: #b45309;   /* Amber-700 - Hover states */
+            --primary-gold-darker: #92400e; /* Amber-800 - Active states */
+            --gold-light: #fbbf24;          /* Amber-400 - Accents */
+            
+            --stone-50: #fafaf9;            /* Background */
+            --stone-100: #f5f5f4;           /* Cards, elevated surfaces */
+            --stone-200: #e7e5e4;           /* Borders, dividers */
+            --stone-300: #d6d3d1;           /* Disabled states */
+            --stone-600: #78716c;           /* Secondary text */
+            --stone-800: #292524;           /* Body text */
+            --stone-900: #1c1917;           /* Headings, primary text */
+            
+            --success: #16a34a;             /* Green-600 - Success states */
+            --error: #dc2626;               /* Red-600 - Errors */
+            --warning: #ea580c;             /* Orange-600 - Warnings */
+            
+            /* Legacy variables for gradual migration */
+            --cream: #fafaf9;
+            --dark: #1c1917;
+            --light-gray: #e7e5e4;
+            --gold: #d97706;
         }
 
         body { 
             font-family: 'Inter', sans-serif; 
-            background-color: #fafaf9;
-            color: #292524;
+            background-color: var(--stone-50);
+            color: var(--stone-800);
         }
 
-        /* Gradient text utility - uses CSS variables for seasonal themes */
+        /* Gradient text utility - matches landing page */
         .gradient-text {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: linear-gradient(to right, var(--primary-gold), var(--primary-gold-dark));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            transition: all 0.3s ease;
         }
 
         h1, h2, h3, h4 {
@@ -165,11 +102,11 @@
             margin-bottom: 1rem;
         }
         .chat-bubble.user {
-            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            background: linear-gradient(to right, var(--primary-gold), var(--primary-gold-dark));
             color: white;
             border-bottom-right-radius: 0.25rem;
             align-self: flex-end;
-            box-shadow: 0 2px 8px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.2);
+            box-shadow: 0 2px 8px rgba(217, 119, 6, 0.2);
         }
         .chat-bubble.ai {
             background-color: white;
@@ -180,14 +117,14 @@
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
         .chat-bubble.ai strong { 
-            color: var(--primary); 
+            color: var(--primary-gold); 
         }
         .chat-bubble.ai a { 
-            color: var(--primary); 
+            color: var(--primary-gold); 
             text-decoration: underline; 
         }
         .chat-bubble.ai a:hover {
-            color: var(--primary-dark);
+            color: var(--primary-gold-dark);
         }
 
         /* Suggestion chips - Gold accent on hover */
@@ -202,11 +139,11 @@
             color: var(--stone-700);
         }
         .suggestion-chip:hover {
-            background-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.1);
-            border-color: var(--primary);
-            color: var(--primary-dark);
+            background-color: rgba(217, 119, 6, 0.1);
+            border-color: var(--primary-gold);
+            color: var(--primary-gold-dark);
             transform: translateY(-2px);
-            box-shadow: 0 2px 8px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.15);
+            box-shadow: 0 2px 8px rgba(217, 119, 6, 0.15);
         }
         
         /* Mode toggle - Enhanced active states */
@@ -224,10 +161,10 @@
             color: var(--stone-800);
         }
         .mode-toggle-group button.active {
-            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            background: linear-gradient(to right, var(--primary-gold), var(--primary-gold-dark));
             color: white;
-            border-color: var(--primary);
-            box-shadow: 0 2px 8px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.2);
+            border-color: var(--primary-gold);
+            box-shadow: 0 2px 8px rgba(217, 119, 6, 0.2);
         }
         .mode-toggle-group button:first-child { border-radius: 9999px 0 0 9999px; }
         .mode-toggle-group button:last-child { border-radius: 0 9999px 9999px 0; }
@@ -243,17 +180,17 @@
             background-color: white;
         }
         .radio-group label:hover {
-            border-color: var(--primary);
-            background-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.05);
+            border-color: var(--primary-gold);
+            background-color: rgba(217, 119, 6, 0.05);
         }
         .radio-group input[type="radio"] {
             display: none;
         }
         .radio-group input[type="radio"]:checked + label {
-            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            background: linear-gradient(to right, var(--primary-gold), var(--primary-gold-dark));
             color: white;
-            border-color: var(--primary);
-            box-shadow: 0 2px 8px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.2);
+            border-color: var(--primary-gold);
+            box-shadow: 0 2px 8px rgba(217, 119, 6, 0.2);
         }
 
         select.input-field {
@@ -283,8 +220,8 @@
             font-weight: 400; 
         }
         .input-field:focus { 
-            border-color: var(--primary); 
-            box-shadow: 0 2px 0 0 rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.2); 
+            border-color: var(--primary-gold); 
+            box-shadow: 0 2px 0 0 rgba(217, 119, 6, 0.2); 
             outline: none; 
             transform: translateY(-2px); 
             background-color: rgba(250, 250, 249, 0.8); 
@@ -307,18 +244,18 @@
         
         /* Primary gold button */
         .btn-gold { 
-            background: linear-gradient(to right, var(--primary), var(--primary-dark)); 
+            background: linear-gradient(to right, var(--primary-gold), var(--primary-gold-dark)); 
             color: white; 
-            box-shadow: 0 3px 10px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.2); 
+            box-shadow: 0 3px 10px rgba(217, 119, 6, 0.2); 
         }
         .btn-gold:hover:not(:disabled) { 
-            background: linear-gradient(to right, var(--primary-dark), var(--primary-darker)); 
+            background: linear-gradient(to right, var(--primary-gold-dark), var(--primary-gold-darker)); 
             transform: translateY(-3px); 
-            box-shadow: 0 10px 20px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.3); 
+            box-shadow: 0 10px 20px rgba(217, 119, 6, 0.3); 
         }
         .btn-gold:active:not(:disabled) { 
             transform: translateY(-1px); 
-            box-shadow: 0 5px 12px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.25); 
+            box-shadow: 0 5px 12px rgba(217, 119, 6, 0.25); 
         }
         .btn-gold:disabled { 
             opacity: 0.5; 
@@ -334,8 +271,8 @@
         }
         .btn-outline:hover:not(:disabled) { 
             background-color: var(--stone-100); 
-            border-color: var(--primary); 
-            color: var(--primary); 
+            border-color: var(--primary-gold); 
+            color: var(--primary-gold); 
         }
         
         /* Secondary dark button */
@@ -360,14 +297,14 @@
         @keyframes spin { to { transform: rotate(360deg); } } .animate-spin { animation: spin 1.2s linear infinite; }
     </style>
 </head>
-<body class="bg-stone-50" data-theme="fall">
+<body class="bg-stone-50">
 
     <!-- Navigation (same as home.html) -->
     <nav class="bg-white border-b border-stone-200 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex justify-between items-center h-10">
                 <a href="/" class="text-2xl font-serif font-bold">
-                    <span class="gradient-text">Aura</span> Intelligence
+                    <span style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Aura</span> Intelligence
                 </a>
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="/how-it-works" class="text-stone-600 hover:text-stone-900 transition">How It Works</a>
@@ -581,14 +518,6 @@
                 </div>
             </div>
             <div id="output-content" class="prose-custom max-w-none space-y-6"></div>
-            
-            <!-- AI Disclaimer -->
-            <div id="ai-disclaimer" class="hidden mt-6 p-4 bg-stone-100 border border-stone-300 rounded-lg text-xs text-stone-600">
-                <p class="flex items-start gap-2">
-                    <span class="text-base">ℹ️</span>
-                    <span><strong>AI-Generated Content Disclaimer:</strong> This content was generated by artificial intelligence and should be reviewed and edited before commercial use. While our AI creates high-quality marketing copy, human review ensures brand accuracy and compliance. Fragrance note information retrieved via web search may require verification.</span>
-                </p>
-            </div>
         </div>
         
         <!-- Saved Stories Modal -->
@@ -1111,9 +1040,6 @@
                     html = `<div class="output-card"><div class="prose-custom">${marked.parse(fullResponse)}</div></div>`;
                 }
                 outputContentDiv.innerHTML = html;
-                
-                // Show AI disclaimer
-                document.getElementById('ai-disclaimer').classList.remove('hidden');
 
             } catch (error) {
                 console.error('Generate Error:', error);
@@ -1830,10 +1756,6 @@
         }
 
         updateFormUI(); // Initial call
-
-        // Seasonal Theme Loader - sync with selected theme from home page
-        const savedTheme = localStorage.getItem('auraTheme') || 'fall';
-        document.body.setAttribute('data-theme', savedTheme);
 
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
