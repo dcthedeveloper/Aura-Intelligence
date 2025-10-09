@@ -313,7 +313,7 @@ Aura-Intelligence/
 - ✅ **SEO Analysis & Auto-Optimize**
 - ✅ **Output Length Control** (Product/Full/Short)
 - ✅ **Enhanced Tone Selection** (8 tones with previews)
-- ✅ **Curated Collections** (Top 10 Compliment Getters)
+- ✅ **Curated Collections** (Best Niche Fragrances - 21 premium scents)
 
 ### Phase 2 (Q1-Q2 2026) - Expansion
 - 🔲 User authentication & cloud storage
