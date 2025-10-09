@@ -23,8 +23,32 @@ except Exception as e:
     client = None
 
 @app.route('/')
-def index():
-    return render_template('index.html')
+def home():
+    return render_template('home.html')
+
+@app.route('/app')
+def app_tool():
+    return render_template('app.html')
+
+@app.route('/how-it-works')
+def how_it_works():
+    # Placeholder - will create this page next
+    return "<h1>How It Works - Coming Soon</h1><a href='/'>Back to Home</a>"
+
+@app.route('/use-cases')
+def use_cases():
+    # Placeholder - will create this page next
+    return "<h1>Use Cases - Coming Soon</h1><a href='/'>Back to Home</a>"
+
+@app.route('/features')
+def features():
+    # Placeholder - will create this page next
+    return "<h1>Features - Coming Soon</h1><a href='/'>Back to Home</a>"
+
+@app.route('/pricing')
+def pricing():
+    # Placeholder - will create this page next
+    return "<h1>Pricing - Coming Soon</h1><a href='/'>Back to Home</a>"
 
 def get_accurate_notes(fragrance_name):
     """
