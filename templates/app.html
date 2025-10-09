@@ -10,11 +10,11 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap');
         
         :root {
-            /* Updated Color System - Warm Amber Gold Theme */
-            --primary: #C9B896;        /* Amber-600 - Primary brand color */
-            --primary-dark: #B5A585;   /* Amber-700 - Hover states */
-            --primary-darker: #A18F71; /* Amber-800 - Active states */
-            --accent-light: #E8E0D5;          /* Amber-400 - Accents */
+            /* Minimal Luxury Champagne Palette */
+            --primary: #C9B896;        /* Champagne Gold - Primary brand color */
+            --primary-dark: #B5A585;   /* Darker Champagne - Hover states */
+            --primary-darker: #A18F71; /* Even Darker - Active states */
+            --accent-light: #E8E0D5;   /* Champagne Tint - Accents */
             
             --stone-50: #FEFEFE;            /* Background */
             --stone-100: #F8F8F7;           /* Cards, elevated surfaces */
@@ -43,7 +43,7 @@
 
         /* Gradient text utility - matches landing page */
         .gradient-text {
-            background: linear-gradient(to right, var(--primary), var(--primary-gold-dark));
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -102,7 +102,7 @@
             margin-bottom: 1rem;
         }
         .chat-bubble.user {
-            background: linear-gradient(to right, var(--primary), var(--primary-gold-dark));
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
             color: white;
             border-bottom-right-radius: 0.25rem;
             align-self: flex-end;
@@ -124,7 +124,7 @@
             text-decoration: underline; 
         }
         .chat-bubble.ai a:hover {
-            color: var(--primary-gold-dark);
+            color: var(--primary-dark);
         }
 
         /* Suggestion chips - Gold accent on hover */
@@ -141,7 +141,7 @@
         .suggestion-chip:hover {
             background-color: rgba(217, 119, 6, 0.1);
             border-color: var(--primary);
-            color: var(--primary-gold-dark);
+            color: var(--primary-dark);
             transform: translateY(-2px);
             box-shadow: 0 2px 8px rgba(217, 119, 6, 0.15);
         }
@@ -161,7 +161,7 @@
             color: var(--stone-800);
         }
         .mode-toggle-group button.active {
-            background: linear-gradient(to right, var(--primary), var(--primary-gold-dark));
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
             color: white;
             border-color: var(--primary);
             box-shadow: 0 2px 8px rgba(217, 119, 6, 0.2);
@@ -187,7 +187,7 @@
             display: none;
         }
         .radio-group input[type="radio"]:checked + label {
-            background: linear-gradient(to right, var(--primary), var(--primary-gold-dark));
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
             color: white;
             border-color: var(--primary);
             box-shadow: 0 2px 8px rgba(217, 119, 6, 0.2);
@@ -244,12 +244,12 @@
         
         /* Primary gold button */
         .btn-gold { 
-            background: linear-gradient(to right, var(--primary), var(--primary-gold-dark)); 
+            background: linear-gradient(to right, var(--primary), var(--primary-dark)); 
             color: white; 
             box-shadow: 0 3px 10px rgba(217, 119, 6, 0.2); 
         }
         .btn-gold:hover:not(:disabled) { 
-            background: linear-gradient(to right, var(--primary-gold-dark), var(--primary-gold-darker)); 
+            background: linear-gradient(to right, var(--primary-dark), var(--primary-darker)); 
             transform: translateY(-3px); 
             box-shadow: 0 10px 20px rgba(217, 119, 6, 0.3); 
         }
@@ -304,7 +304,7 @@
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex justify-between items-center h-10">
                 <a href="/" class="text-2xl font-serif font-bold">
-                    <span style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Aura</span> Intelligence
+                    <span style="background: linear-gradient(135deg, #C9B896 0%, #B5A585 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Aura</span> Intelligence
                 </a>
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="/how-it-works" class="text-gray-600 hover:text-gray-900 transition">How It Works</a>
@@ -1562,7 +1562,7 @@
                     }
                     
                     // Set score color based on value
-                    let scoreColor = '#d97706'; // gold (default)
+                    let scoreColor = '#C9B896'; // gold (default)
                     let scoreLabel = 'Good SEO Performance';
                     let scoreDesc = 'Your content is well-optimized for search engines';
                     
@@ -1571,7 +1571,7 @@
                         scoreLabel = 'Excellent SEO!';
                         scoreDesc = 'Outstanding optimization - ready to rank!';
                     } else if (score >= 75) {
-                        scoreColor = '#d97706'; // gold
+                        scoreColor = '#C9B896'; // gold
                         scoreLabel = 'Good SEO Performance';
                         scoreDesc = 'Well-optimized with room for improvement';
                     } else if (score >= 60) {
