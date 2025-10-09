@@ -169,11 +169,15 @@
             <p class="text-lg text-gray-600 mt-2" style="letter-spacing: 0.05em;">Your Olfactory Storyteller & Curator</p>
         </header>
 
-        <div class="flex justify-center mb-8">
+        <div class="flex justify-center mb-8 gap-4">
             <div class="mode-toggle-group inline-flex" role="group">
                 <button type="button" id="mode-storyteller" class="active">Storyteller</button>
                 <button type="button" id="mode-curator">Curator</button>
             </div>
+            <button type="button" id="browse-collections-btn" class="btn btn-outline py-2 px-5 inline-flex items-center gap-2">
+                <span>✨</span>
+                <span>Browse Collections</span>
+            </button>
         </div>
 
         <div id="storyteller-wrapper">
@@ -204,17 +208,63 @@
                      <p class="text-sm text-gray-500 mb-6">Craft the olfactory journey.</p>
                      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8">
                         <input type="text" name="storytelling_angle" class="w-full input-field" placeholder="Narrative Scene (e.g., A sunset sail)">
-                        <div>
-                            <select name="tone" class="w-full input-field" style="padding-top: 0.875rem; padding-bottom: 0.875rem;">
-                                <option>Poetic & Evocative</option> <option>Modern & Direct</option> <option>Minimalist & Clean</option> <option>Mysterious & Dark</option> <option>Playful & Energetic</option>
+                        <div class="relative">
+                            <label class="block text-xs font-medium text-gray-600 mb-2">Writing Tone & Style</label>
+                            <select name="tone" id="tone-select" class="w-full input-field tone-selector" style="padding-top: 0.875rem; padding-bottom: 0.875rem;">
+                                <option value="Poetic & Evocative" data-preview="Velvet dusk unfolds across skin like a whispered secret..." data-use="Luxury brands, editorial content">💭 Poetic & Evocative</option>
+                                <option value="Modern & Direct" data-preview="Clean bergamot meets warm amber. Fresh, confident, unforgettable." data-use="E-commerce, Shopify listings">⚡ Modern & Direct</option>
+                                <option value="Minimalist & Clean" data-preview="Bergamot. Sandalwood. Nothing else. Everything." data-use="Scandinavian brands, indie perfumers">✨ Minimalist & Clean</option>
+                                <option value="Mysterious & Dark" data-preview="Shadows gather where skin meets scent, a secret whispered in smoke and spice." data-use="Niche brands, artistic launches">🌙 Mysterious & Dark</option>
+                                <option value="Playful & Energetic" data-preview="Pop! Citrus bursts like sunshine on a Monday morning—happy, bright, impossible to ignore." data-use="Youth market, fun brands">🎉 Playful & Energetic</option>
+                                <option value="Sultry & Sensual" data-preview="Heat rises. Amber and vanilla melt into skin, intimate and intoxicating." data-use="Date night, romantic fragrances">🔥 Sultry & Sensual</option>
+                                <option value="Professional & Refined" data-preview="Sophisticated notes of vetiver and citrus command attention without asking for it." data-use="Office scents, corporate gifting">💼 Professional & Refined</option>
+                                <option value="Classic & Timeless" data-preview="Elegance never fades. This is the scent of legacy, refined through generations." data-use="Heritage brands, traditional perfumery">👑 Classic & Timeless</option>
                             </select>
+                            <!-- Tone Preview Tooltip -->
+                            <div id="tone-preview" class="hidden absolute z-10 w-full mt-2 p-4 rounded-lg border-2 shadow-lg" style="background-color: var(--cream); border-color: var(--gold);">
+                                <p class="text-xs italic text-gray-700 mb-2" id="tone-preview-text">Preview will appear here...</p>
+                                <p class="text-xs font-semibold" style="color: var(--gold);">
+                                    <span>Best for: </span><span id="tone-preview-use">-</span>
+                                </p>
+                            </div>
                         </div>
                      </div>
                 </div>
                 <div id="step-4" class="form-section">
                      <h2 class="text-2xl font-semibold mb-1">The Edge <span class="text-base text-gray-500 font-medium">(4 of 4)</span></h2>
-                     <p class="text-sm text-gray-500 mb-6">Provide strategic inputs.</p>
+                     <p class="text-sm text-gray-500 mb-6">Provide strategic inputs & choose output style.</p>
                      <div class="grid grid-cols-1 gap-6">
+                        <!-- Output Length Control -->
+                        <div class="border-2 rounded-lg p-5" style="border-color: var(--gold); background-color: rgba(183, 144, 76, 0.05);">
+                            <label class="block text-sm font-semibold mb-3" style="color: var(--dark);">Output Length & Style</label>
+                            <div class="space-y-3">
+                                <label class="flex items-start gap-3 cursor-pointer p-3 rounded-lg border-2 border-transparent hover:border-gray-300 transition-all">
+                                    <input type="radio" name="output_length" value="product" class="mt-1" checked>
+                                    <div class="flex-1">
+                                        <div class="font-semibold flex items-center gap-2">
+                                            Product Description (300-500 words)
+                                            <span class="text-xs px-2 py-0.5 rounded-full" style="background-color: var(--gold); color: white;">⭐ Recommended</span>
+                                        </div>
+                                        <p class="text-xs text-gray-600 mt-1">SEO-optimized for e-commerce with structured headings & bullet points</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start gap-3 cursor-pointer p-3 rounded-lg border-2 border-transparent hover:border-gray-300 transition-all">
+                                    <input type="radio" name="output_length" value="full" class="mt-1">
+                                    <div class="flex-1">
+                                        <div class="font-semibold">Full Story (800-1200 words)</div>
+                                        <p class="text-xs text-gray-600 mt-1">Immersive narrative for brand storytelling, lookbooks & editorial content</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start gap-3 cursor-pointer p-3 rounded-lg border-2 border-transparent hover:border-gray-300 transition-all">
+                                    <input type="radio" name="output_length" value="short" class="mt-1">
+                                    <div class="flex-1">
+                                        <div class="font-semibold">Short Form (150-200 words)</div>
+                                        <p class="text-xs text-gray-600 mt-1">Concise copy for social media, ads & quick product highlights</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        
                         <textarea name="competitor_text" rows="4" class="w-full input-field" placeholder="Competitor's Story (Optional)"></textarea>
                         <input type="text" name="seo_keywords" class="w-full input-field" placeholder="Target SEO Keywords (Optional)">
                      </div>
@@ -283,6 +333,10 @@
                        <span>📱</span>
                        <span>Social Posts</span>
                    </button>
+                    <button id="seo-btn" class="btn btn-outline py-2 px-5 rounded-full inline-flex items-center text-sm gap-1">
+                       <span>📊</span>
+                       <span id="seo-btn-text">SEO Score</span>
+                   </button>
                     <button id="start-over-btn" class="btn btn-gold py-2 px-5 rounded-full text-sm">Start Over</button>
                 </div>
             </div>
@@ -336,6 +390,273 @@
                     <div class="mt-4 flex gap-2">
                         <button id="generate-social-btn" class="btn btn-gold py-2 px-5 flex-1">Generate Post</button>
                         <button id="copy-social-btn" class="btn btn-outline py-2 px-5 hidden">Copy Post</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SEO Analysis Modal -->
+        <div id="seo-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4" style="z-index: 1000;">
+            <div class="bg-white rounded-lg max-w-3xl w-full max-h-[85vh] overflow-hidden" style="background-color: var(--cream);">
+                <div class="p-6 border-b border-gray-300">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-semibold" style="font-family: 'Playfair Display', serif;">SEO Analysis & Optimization</h3>
+                        <button id="close-seo-modal" class="text-2xl hover:text-gray-600">&times;</button>
+                    </div>
+                </div>
+                <div class="p-6 overflow-y-auto max-h-[70vh]">
+                    <!-- SEO Score Display -->
+                    <div id="seo-score-section" class="mb-6 text-center p-6 bg-white bg-opacity-40 rounded-lg border border-gray-300">
+                        <div class="inline-flex items-center justify-center w-32 h-32 rounded-full border-8 mb-4" id="seo-score-circle" style="border-color: var(--gold);">
+                            <div>
+                                <div class="text-5xl font-bold" id="seo-score-value" style="font-family: 'Playfair Display', serif; color: var(--gold);">--</div>
+                                <div class="text-sm text-gray-600">out of 100</div>
+                            </div>
+                        </div>
+                        <p class="text-lg font-semibold mb-2" id="seo-score-label">Analyzing...</p>
+                        <p class="text-sm text-gray-600" id="seo-score-desc">Please wait while we analyze your content</p>
+                        
+                        <!-- Word Count Badge -->
+                        <div class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-300">
+                            <span class="text-sm font-semibold">Word Count:</span>
+                            <span id="word-count-badge" class="text-sm font-bold" style="color: var(--gold);">--</span>
+                            <span class="text-xs text-gray-500">(Ideal: 300-500)</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Auto-Optimize Button -->
+                    <div id="optimize-section" class="mb-6 hidden">
+                        <button id="auto-optimize-btn" class="btn btn-gold w-full py-3 text-sm flex items-center justify-center gap-2">
+                            <span>✨</span>
+                            <span id="optimize-btn-text">Auto-Optimize for SEO</span>
+                        </button>
+                        <p class="text-xs text-gray-600 text-center mt-2">Automatically restructure content to 300-500 words with proper formatting</p>
+                    </div>
+                    
+                    <!-- Analysis Details -->
+                    <div id="seo-details" class="space-y-4 hidden">
+                        <!-- Keyword Analysis -->
+                        <div class="p-4 bg-white bg-opacity-40 rounded-lg border border-gray-300">
+                            <h4 class="font-semibold mb-2 flex items-center gap-2">
+                                <span>🔑</span> Keyword Integration
+                            </h4>
+                            <p class="text-sm text-gray-700" id="keyword-analysis">--</p>
+                        </div>
+                        
+                        <!-- Length Analysis -->
+                        <div class="p-4 bg-white bg-opacity-40 rounded-lg border border-gray-300">
+                            <h4 class="font-semibold mb-2 flex items-center gap-2">
+                                <span>📏</span> Content Length
+                            </h4>
+                            <p class="text-sm text-gray-700" id="length-analysis">--</p>
+                        </div>
+                        
+                        <!-- Readability -->
+                        <div class="p-4 bg-white bg-opacity-40 rounded-lg border border-gray-300">
+                            <h4 class="font-semibold mb-2 flex items-center gap-2">
+                                <span>👁️</span> Readability
+                            </h4>
+                            <p class="text-sm text-gray-700" id="readability-analysis">--</p>
+                        </div>
+                        
+                        <!-- Optimization Suggestions -->
+                        <div class="p-4 bg-white bg-opacity-40 rounded-lg border border-gray-300">
+                            <h4 class="font-semibold mb-3 flex items-center gap-2">
+                                <span>💡</span> Top Optimization Suggestions
+                            </h4>
+                            <ul class="space-y-2 text-sm" id="suggestions-list">
+                                <!-- Suggestions will be inserted here -->
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Loading State -->
+                    <div id="seo-loading" class="text-center py-8">
+                        <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-gray-300" style="border-top-color: var(--gold);"></div>
+                        <p class="mt-4 text-gray-600">Analyzing SEO performance...</p>
+                    </div>
+                    
+                    <!-- Error State -->
+                    <div id="seo-error" class="hidden text-center py-8 text-red-600">
+                        <p class="font-semibold">Analysis Failed</p>
+                        <p class="text-sm mt-2">Unable to analyze content. Please try again.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Collections Modal -->
+        <div id="collections-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4" style="z-index: 1000;">
+            <div class="bg-white rounded-lg max-w-5xl w-full max-h-[85vh] overflow-hidden" style="background-color: var(--cream);">
+                <div class="p-6 border-b border-gray-300">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-2xl font-semibold" style="font-family: 'Playfair Display', serif;">Curated Collections</h3>
+                            <p class="text-sm text-gray-600 mt-1">Click any fragrance to auto-populate the storyteller</p>
+                        </div>
+                        <button id="close-collections-modal" class="text-2xl hover:text-gray-600">&times;</button>
+                    </div>
+                </div>
+                <div class="p-6 overflow-y-auto max-h-[70vh]">
+                    <!-- Top 10 Compliment Getters Collection -->
+                    <div class="mb-8">
+                        <h4 class="text-xl font-semibold mb-4 flex items-center gap-2" style="font-family: 'Playfair Display', serif;">
+                            <span>🔥</span>
+                            <span>Top 10 Compliment Getters</span>
+                        </h4>
+                        <p class="text-sm text-gray-600 mb-4">Fragrances that command attention and receive the most compliments</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <!-- Fragrance Cards -->
+                            <div class="fragrance-card cursor-pointer p-4 rounded-lg border-2 border-gray-300 hover:border-gold transition-all hover:shadow-lg" 
+                                 data-fragrance="Creed Aventus"
+                                 data-vibe="Bold, successful, charismatic"
+                                 data-audience="Confident professionals who command respect"
+                                 data-scene="A boardroom victory, followed by champagne at sunset">
+                                <div class="flex items-start gap-3">
+                                    <div class="text-3xl">👑</div>
+                                    <div class="flex-1">
+                                        <h5 class="font-semibold text-lg">Creed Aventus</h5>
+                                        <p class="text-xs text-gray-600 mt-1">Pineapple, Birch, Musk</p>
+                                        <p class="text-xs mt-2" style="color: var(--gold);">The ultimate power scent</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="fragrance-card cursor-pointer p-4 rounded-lg border-2 border-gray-300 hover:border-gold transition-all hover:shadow-lg" 
+                                 data-fragrance="Dior Sauvage"
+                                 data-vibe="Fresh, magnetic, effortlessly cool"
+                                 data-audience="Modern men who value timeless appeal"
+                                 data-scene="A drive along the coast at golden hour">
+                                <div class="flex items-start gap-3">
+                                    <div class="text-3xl">🌊</div>
+                                    <div class="flex-1">
+                                        <h5 class="font-semibold text-lg">Dior Sauvage</h5>
+                                        <p class="text-xs text-gray-600 mt-1">Bergamot, Pepper, Ambroxan</p>
+                                        <p class="text-xs mt-2" style="color: var(--gold);">Fresh & universally loved</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="fragrance-card cursor-pointer p-4 rounded-lg border-2 border-gray-300 hover:border-gold transition-all hover:shadow-lg" 
+                                 data-fragrance="YSL La Nuit de L'Homme"
+                                 data-vibe="Sultry, mysterious, seductive"
+                                 data-audience="Romantic souls who understand the art of allure"
+                                 data-scene="Candlelit dinner in a Parisian apartment">
+                                <div class="flex items-start gap-3">
+                                    <div class="text-3xl">🌙</div>
+                                    <div class="flex-1">
+                                        <h5 class="font-semibold text-lg">YSL La Nuit de L'Homme</h5>
+                                        <p class="text-xs text-gray-600 mt-1">Cardamom, Lavender, Vetiver</p>
+                                        <p class="text-xs mt-2" style="color: var(--gold);">Date night essential</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="fragrance-card cursor-pointer p-4 rounded-lg border-2 border-gray-300 hover:border-gold transition-all hover:shadow-lg" 
+                                 data-fragrance="Tom Ford Oud Wood"
+                                 data-vibe="Sophisticated, exotic, luxurious"
+                                 data-audience="Connoisseurs who appreciate rare ingredients"
+                                 data-scene="A private gallery opening in Dubai">
+                                <div class="flex items-start gap-3">
+                                    <div class="text-3xl">🏛️</div>
+                                    <div class="flex-1">
+                                        <h5 class="font-semibold text-lg">Tom Ford Oud Wood</h5>
+                                        <p class="text-xs text-gray-600 mt-1">Oud, Sandalwood, Vetiver</p>
+                                        <p class="text-xs mt-2" style="color: var(--gold);">Understated luxury</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="fragrance-card cursor-pointer p-4 rounded-lg border-2 border-gray-300 hover:border-gold transition-all hover:shadow-lg" 
+                                 data-fragrance="Bleu de Chanel"
+                                 data-vibe="Refined, versatile, timeless"
+                                 data-audience="Classic gentlemen with modern sensibilities"
+                                 data-scene="A black-tie gala under the stars">
+                                <div class="flex items-start gap-3">
+                                    <div class="text-3xl">💎</div>
+                                    <div class="flex-1">
+                                        <h5 class="font-semibold text-lg">Bleu de Chanel</h5>
+                                        <p class="text-xs text-gray-600 mt-1">Citrus, Cedar, Sandalwood</p>
+                                        <p class="text-xs mt-2" style="color: var(--gold);">Sophisticated classic</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="fragrance-card cursor-pointer p-4 rounded-lg border-2 border-gray-300 hover:border-gold transition-all hover:shadow-lg" 
+                                 data-fragrance="Baccarat Rouge 540"
+                                 data-vibe="Opulent, radiant, unforgettable"
+                                 data-audience="Those who refuse to blend in"
+                                 data-scene="A red carpet moment where all eyes turn">
+                                <div class="flex items-start gap-3">
+                                    <div class="text-3xl">💫</div>
+                                    <div class="flex-1">
+                                        <h5 class="font-semibold text-lg">Baccarat Rouge 540</h5>
+                                        <p class="text-xs text-gray-600 mt-1">Saffron, Amberwood, Cedar</p>
+                                        <p class="text-xs mt-2" style="color: var(--gold);">Instantly recognizable</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="fragrance-card cursor-pointer p-4 rounded-lg border-2 border-gray-300 hover:border-gold transition-all hover:shadow-lg" 
+                                 data-fragrance="Acqua di Gio Profumo"
+                                 data-vibe="Fresh, aquatic, refined"
+                                 data-audience="Active individuals who value clean elegance"
+                                 data-scene="A yacht sailing the Mediterranean">
+                                <div class="flex items-start gap-3">
+                                    <div class="text-3xl">⚓</div>
+                                    <div class="flex-1">
+                                        <h5 class="font-semibold text-lg">Acqua di Gio Profumo</h5>
+                                        <p class="text-xs text-gray-600 mt-1">Bergamot, Geranium, Patchouli</p>
+                                        <p class="text-xs mt-2" style="color: var(--gold);">Summer favorite</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="fragrance-card cursor-pointer p-4 rounded-lg border-2 border-gray-300 hover:border-gold transition-all hover:shadow-lg" 
+                                 data-fragrance="Versace Eros"
+                                 data-vibe="Powerful, passionate, magnetic"
+                                 data-audience="Bold spirits who embrace intensity"
+                                 data-scene="A nightclub in Ibiza at midnight">
+                                <div class="flex items-start gap-3">
+                                    <div class="text-3xl">⚡</div>
+                                    <div class="flex-1">
+                                        <h5 class="font-semibold text-lg">Versace Eros</h5>
+                                        <p class="text-xs text-gray-600 mt-1">Mint, Vanilla, Tonka Bean</p>
+                                        <p class="text-xs mt-2" style="color: var(--gold);">Club-ready power</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="fragrance-card cursor-pointer p-4 rounded-lg border-2 border-gray-300 hover:border-gold transition-all hover:shadow-lg" 
+                                 data-fragrance="Prada L'Homme"
+                                 data-vibe="Clean, intelligent, sophisticated"
+                                 data-audience="Professionals who appreciate subtle elegance"
+                                 data-scene="A morning espresso in a Milan café">
+                                <div class="flex items-start gap-3">
+                                    <div class="text-3xl">☕</div>
+                                    <div class="flex-1">
+                                        <h5 class="font-semibold text-lg">Prada L'Homme</h5>
+                                        <p class="text-xs text-gray-600 mt-1">Iris, Amber, Neroli</p>
+                                        <p class="text-xs mt-2" style="color: var(--gold);">Office-appropriate luxury</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="fragrance-card cursor-pointer p-4 rounded-lg border-2 border-gray-300 hover:border-gold transition-all hover:shadow-lg" 
+                                 data-fragrance="Valentino Uomo Intense"
+                                 data-vibe="Warm, inviting, memorable"
+                                 data-audience="Romantics with refined taste"
+                                 data-scene="A cozy evening by the fireplace">
+                                <div class="flex items-start gap-3">
+                                    <div class="text-3xl">🍂</div>
+                                    <div class="flex-1">
+                                        <h5 class="font-semibold text-lg">Valentino Uomo Intense</h5>
+                                        <p class="text-xs text-gray-600 mt-1">Iris, Tonka Bean, Vanilla</p>
+                                        <p class="text-xs mt-2" style="color: var(--gold);">Cozy & sophisticated</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -842,6 +1163,320 @@
                 console.error('Copy failed:', error);
             }
         });
+
+        // SEO ANALYSIS FUNCTIONALITY
+        const seoBtn = document.getElementById('seo-btn');
+        const seoModal = document.getElementById('seo-modal');
+        const closeSeoModal = document.getElementById('close-seo-modal');
+        const seoScoreValue = document.getElementById('seo-score-value');
+        const seoScoreLabel = document.getElementById('seo-score-label');
+        const seoScoreDesc = document.getElementById('seo-score-desc');
+        const seoScoreCircle = document.getElementById('seo-score-circle');
+        const seoDetails = document.getElementById('seo-details');
+        const seoLoading = document.getElementById('seo-loading');
+        const seoError = document.getElementById('seo-error');
+        const seoBtnText = document.getElementById('seo-btn-text');
+        const wordCountBadge = document.getElementById('word-count-badge');
+        const optimizeSection = document.getElementById('optimize-section');
+        const autoOptimizeBtn = document.getElementById('auto-optimize-btn');
+        const optimizeBtnText = document.getElementById('optimize-btn-text');
+
+        seoBtn.addEventListener('click', async () => {
+            // Show modal
+            seoModal.classList.remove('hidden');
+            seoModal.classList.add('flex');
+            
+            // Reset to loading state
+            seoLoading.classList.remove('hidden');
+            seoDetails.classList.add('hidden');
+            seoError.classList.add('hidden');
+            optimizeSection.classList.add('hidden');
+            seoScoreValue.textContent = '--';
+            seoScoreLabel.textContent = 'Analyzing...';
+            seoScoreDesc.textContent = 'Please wait while we analyze your content';
+            wordCountBadge.textContent = '--';
+            
+            try {
+                const fragranceName = document.querySelector('input[name="product_name"]').value || 'Fragrance';
+                const content = outputContentDiv.innerText;
+                const keywords = document.querySelector('input[name="seo_keywords"]').value || '';
+                
+                seoBtnText.textContent = 'Analyzing...';
+                seoBtn.disabled = true;
+                
+                const response = await fetch('/seo-analysis', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: fragranceName,
+                        content: content,
+                        keywords: keywords
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    const analysis = data.analysis;
+                    
+                    // Hide loading, show details
+                    seoLoading.classList.add('hidden');
+                    seoDetails.classList.remove('hidden');
+                    
+                    // Update score
+                    const score = analysis.score || 75;
+                    seoScoreValue.textContent = score;
+                    
+                    // Update word count
+                    const wordCount = analysis.word_count || content.split(/\s+/).length;
+                    wordCountBadge.textContent = wordCount;
+                    
+                    // Color-code word count
+                    if (wordCount >= 300 && wordCount <= 500) {
+                        wordCountBadge.style.color = '#10b981'; // green
+                    } else if (wordCount < 300 || wordCount <= 600) {
+                        wordCountBadge.style.color = '#f59e0b'; // orange
+                    } else {
+                        wordCountBadge.style.color = '#ef4444'; // red
+                    }
+                    
+                    // Show optimize button if score is low or word count is off
+                    if (score < 85 || wordCount < 300 || wordCount > 600) {
+                        optimizeSection.classList.remove('hidden');
+                    }
+                    
+                    // Set score color based on value
+                    let scoreColor = '#B7904C'; // gold (default)
+                    let scoreLabel = 'Good SEO Performance';
+                    let scoreDesc = 'Your content is well-optimized for search engines';
+                    
+                    if (score >= 90) {
+                        scoreColor = '#10b981'; // green
+                        scoreLabel = 'Excellent SEO!';
+                        scoreDesc = 'Outstanding optimization - ready to rank!';
+                    } else if (score >= 75) {
+                        scoreColor = '#B7904C'; // gold
+                        scoreLabel = 'Good SEO Performance';
+                        scoreDesc = 'Well-optimized with room for improvement';
+                    } else if (score >= 60) {
+                        scoreColor = '#f59e0b'; // orange
+                        scoreLabel = 'Fair SEO Performance';
+                        scoreDesc = 'Decent optimization but needs work';
+                    } else {
+                        scoreColor = '#ef4444'; // red
+                        scoreLabel = 'Needs Improvement';
+                        scoreDesc = 'Significant SEO optimization required';
+                    }
+                    
+                    seoScoreCircle.style.borderColor = scoreColor;
+                    seoScoreValue.style.color = scoreColor;
+                    seoScoreLabel.textContent = scoreLabel;
+                    seoScoreDesc.textContent = scoreDesc;
+                    
+                    // Update analysis sections
+                    document.getElementById('keyword-analysis').textContent = 
+                        analysis.keyword_analysis || 'Keywords are naturally integrated throughout the content.';
+                    
+                    document.getElementById('length-analysis').textContent = 
+                        analysis.length_analysis || 'Content length is within optimal range for SEO.';
+                    
+                    document.getElementById('readability-analysis').textContent = 
+                        analysis.readability || 'Content is engaging and easy to scan.';
+                    
+                    // Update suggestions
+                    const suggestionsList = document.getElementById('suggestions-list');
+                    suggestionsList.innerHTML = '';
+                    
+                    const suggestions = analysis.suggestions || ['Continue creating quality content', 'Monitor performance metrics', 'Keep content updated'];
+                    suggestions.forEach((suggestion, index) => {
+                        const li = document.createElement('li');
+                        li.className = 'flex items-start gap-2';
+                        li.innerHTML = `
+                            <span class="font-semibold text-gray-700">${index + 1}.</span>
+                            <span class="text-gray-700">${suggestion}</span>
+                        `;
+                        suggestionsList.appendChild(li);
+                    });
+                    
+                    // If raw_analysis exists (fallback mode), show it
+                    if (analysis.raw_analysis) {
+                        const rawDiv = document.createElement('div');
+                        rawDiv.className = 'mt-4 p-4 bg-gray-100 rounded text-sm text-gray-700';
+                        rawDiv.innerHTML = `<strong>Detailed Analysis:</strong><br>${analysis.raw_analysis.replace(/\n/g, '<br>')}`;
+                        seoDetails.appendChild(rawDiv);
+                    }
+                    
+                } else {
+                    throw new Error(data.error || 'Analysis failed');
+                }
+            } catch (error) {
+                console.error('SEO analysis error:', error);
+                seoLoading.classList.add('hidden');
+                seoError.classList.remove('hidden');
+            } finally {
+                seoBtnText.textContent = 'SEO Score';
+                seoBtn.disabled = false;
+            }
+        });
+
+        // AUTO-OPTIMIZE FUNCTIONALITY
+        autoOptimizeBtn.addEventListener('click', async () => {
+            try {
+                const fragranceName = document.querySelector('input[name="product_name"]').value || 'Fragrance';
+                const content = outputContentDiv.innerText;
+                const keywords = document.querySelector('input[name="seo_keywords"]').value || '';
+                
+                optimizeBtnText.textContent = 'Optimizing...';
+                autoOptimizeBtn.disabled = true;
+                
+                const response = await fetch('/optimize-seo', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: fragranceName,
+                        content: content,
+                        keywords: keywords
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Replace content with optimized version
+                    outputContentDiv.innerHTML = marked.parse(data.optimized_content);
+                    
+                    // Close modal and show success message
+                    seoModal.classList.add('hidden');
+                    seoModal.classList.remove('flex');
+                    
+                    // Show notification
+                    optimizeBtnText.textContent = 'Optimized! ✅';
+                    
+                    // Scroll to output
+                    outputContainer.scrollIntoView({ behavior: 'smooth' });
+                    
+                    setTimeout(() => {
+                        optimizeBtnText.textContent = 'Auto-Optimize for SEO';
+                    }, 3000);
+                } else {
+                    throw new Error(data.error || 'Optimization failed');
+                }
+            } catch (error) {
+                console.error('Optimization error:', error);
+                optimizeBtnText.textContent = 'Failed ❌';
+                setTimeout(() => {
+                    optimizeBtnText.textContent = 'Auto-Optimize for SEO';
+                }, 3000);
+            } finally {
+                autoOptimizeBtn.disabled = false;
+            }
+        });
+
+        closeSeoModal.addEventListener('click', () => {
+            seoModal.classList.add('hidden');
+            seoModal.classList.remove('flex');
+        });
+
+        seoModal.addEventListener('click', (e) => {
+            if (e.target === seoModal) {
+                seoModal.classList.add('hidden');
+                seoModal.classList.remove('flex');
+            }
+        });
+
+        // COLLECTIONS FUNCTIONALITY
+        const browseCollectionsBtn = document.getElementById('browse-collections-btn');
+        const collectionsModal = document.getElementById('collections-modal');
+        const closeCollectionsModal = document.getElementById('close-collections-modal');
+        const fragranceCards = document.querySelectorAll('.fragrance-card');
+
+        browseCollectionsBtn.addEventListener('click', () => {
+            collectionsModal.classList.remove('hidden');
+            collectionsModal.classList.add('flex');
+        });
+
+        closeCollectionsModal.addEventListener('click', () => {
+            collectionsModal.classList.add('hidden');
+            collectionsModal.classList.remove('flex');
+        });
+
+        collectionsModal.addEventListener('click', (e) => {
+            if (e.target === collectionsModal) {
+                collectionsModal.classList.add('hidden');
+                collectionsModal.classList.remove('flex');
+            }
+        });
+
+        // Auto-populate form when fragrance card is clicked
+        fragranceCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const fragranceName = card.dataset.fragrance;
+                const vibe = card.dataset.vibe;
+                const audience = card.dataset.audience;
+                const scene = card.dataset.scene;
+
+                // Switch to Storyteller mode if not already
+                storytellerBtn.click();
+
+                // Select "existing fragrance" option
+                document.querySelector('input[value="existing"]').checked = true;
+
+                // Populate form fields
+                document.querySelector('input[name="product_name"]').value = fragranceName;
+                document.querySelector('input[name="vibe_keywords"]').value = vibe;
+                document.querySelector('input[name="target_audience"]').value = audience;
+                document.querySelector('input[name="storytelling_angle"]').value = scene;
+
+                // Close modal
+                collectionsModal.classList.add('hidden');
+                collectionsModal.classList.remove('flex');
+
+                // Reset to step 1 and show form
+                currentStep = 1;
+                updateFormUI();
+
+                // Scroll to form
+                storytellerWrapper.scrollIntoView({ behavior: 'smooth' });
+
+                // Show success feedback
+                const productNameInput = document.querySelector('input[name="product_name"]');
+                productNameInput.style.backgroundColor = 'rgba(183, 144, 76, 0.1)';
+                setTimeout(() => {
+                    productNameInput.style.backgroundColor = '';
+                }, 1000);
+            });
+        });
+
+        // TONE PREVIEW FUNCTIONALITY
+        const toneSelect = document.getElementById('tone-select');
+        const tonePreview = document.getElementById('tone-preview');
+        const tonePreviewText = document.getElementById('tone-preview-text');
+        const tonePreviewUse = document.getElementById('tone-preview-use');
+
+        if (toneSelect) {
+            // Show preview on focus/change
+            toneSelect.addEventListener('focus', updateTonePreview);
+            toneSelect.addEventListener('change', updateTonePreview);
+            
+            // Hide preview when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!toneSelect.contains(e.target) && !tonePreview.contains(e.target)) {
+                    tonePreview.classList.add('hidden');
+                }
+            });
+
+            function updateTonePreview() {
+                const selectedOption = toneSelect.options[toneSelect.selectedIndex];
+                const preview = selectedOption.dataset.preview;
+                const use = selectedOption.dataset.use;
+                
+                if (preview && use) {
+                    tonePreviewText.textContent = `"${preview}"`;
+                    tonePreviewUse.textContent = use;
+                    tonePreview.classList.remove('hidden');
+                }
+            }
+        }
 
         updateFormUI(); // Initial call
     });

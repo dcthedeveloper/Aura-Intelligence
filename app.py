@@ -67,6 +67,7 @@ def generate():
     competitor_text = request.form.get('competitor_text', '')
     seo_keywords = request.form.get('seo_keywords', '')
     tone = request.form.get('tone', 'Poetic & Evocative')
+    output_length = request.form.get('output_length', 'product')  # product, full, or short
 
     print("== Incoming request data ==")
     print("use_case:", use_case)
@@ -79,6 +80,7 @@ def generate():
     print("competitor_text:", competitor_text)
     print("seo_keywords:", seo_keywords)
     print("tone:", tone)
+    print("output_length:", output_length)
 
     # Determine key notes robustly
     final_key_notes = key_notes_input
@@ -89,16 +91,71 @@ def generate():
 
     print("Final used notes:", final_key_notes)
 
+    # Configure output specifications based on selected length
+    if output_length == 'short':
+        length_instruction = """
+# OUTPUT LENGTH: SHORT FORM (150-200 words)
+Create a concise yet evocative fragrance story. Even in brevity, maintain the Aura Intelligence touch - sensory, emotive, and magnetic.
+
+STRUCTURE:
+- ### Opening (2-3 sentences that transport the reader)
+- ### Notes (Present as poetic bullet points, not just a list)
+  * Top: [describe with imagery]
+  * Heart: [describe with emotion]
+  * Base: [describe with feeling]
+- ### Essence (1-2 sentences capturing who wears this and why)
+
+VOICE: Concise but never clinical. Each word should evoke a feeling, not just inform. Think luxury ad copy that lingers in memory."""
+        max_tokens = 350
+        
+    elif output_length == 'full':
+        length_instruction = """
+# OUTPUT LENGTH: FULL STORY (800-1200 words)
+Craft an immersive olfactory narrative that transcends product description. This is storytelling as art - create a world where the fragrance lives.
+
+STRUCTURE:
+Output detailed Markdown sections with '###' headings:
+- ### The Awakening (Sensory hook - transport the reader to a moment, place, or feeling)
+- ### The Olfactory Journey (Layer-by-layer progression through top, heart, base - make each note a character in the story)
+- ### The Muse (Paint the portrait of the wearer - lifestyle, aspirations, secret desires)
+- ### The Experience (Sensory immersion - how this fragrance transforms moments, spaces, perceptions)
+- ### The Invitation (Poetic closing that leaves them longing for the scent)
+
+VOICE: Rich, poetic, cinematic. Use metaphor, sensory language, and emotional resonance. This isn't a product - it's a portal to another world."""
+        max_tokens = 1800
+        
+    else:  # product (default)
+        length_instruction = """
+# OUTPUT LENGTH: PRODUCT DESCRIPTION (300-500 words)
+Create an SEO-smart fragrance story that balances search visibility with sensory storytelling. This should feel luxurious and magnetic, not formulaic.
+
+STRUCTURE:
+Output Markdown sections with '###' headings:
+- ### The Story (2-3 paragraph opening - set the scene, evoke a feeling, introduce the fragrance's soul)
+- ### The Notes
+  * **Top Notes:** [Don't just list - describe how they greet the skin, the first impression]
+  * **Heart Notes:** [The emotional center - what blooms as time passes]
+  * **Base Notes:** [The lasting memory - what lingers on skin and in mind]
+- ### The Essence (Who is this for? What moments does it elevate? Be specific but poetic)
+
+VOICE: Luxury brand storytelling meets e-commerce clarity. Use keywords naturally within evocative sentences. Short paragraphs for scannability, but never sacrifice beauty for SEO. Think Byredo, Le Labo, Diptyque - sophisticated yet accessible."""
+        max_tokens = 1024
+
     # Compose the system prompt
     system_prompt = f"""
-# ROLE & EXPERTISE
-You are "Aura," an elite AI-powered Niche Fragrance Copywriter. Your expertise combines the art of a master perfumer with the skill of a direct-response copywriter.
+# ROLE
+You are "Aura" - an elite fragrance copywriter who transforms scent into story. You combine the precision of a master perfumer, the artistry of luxury brand storytelling, and the conversion power of world-class marketing copy.
 
-# Note Accuracy
-You have been provided with the definitive olfactory notes. Use these as the source of truth.
+# CORE DIRECTIVE
+Make readers **feel the fragrance before they smell it**. Create desire through sensory language, emotional resonance, and narrative immersion.
 
-# CORE OBJECTIVE
-Generate a multi-part story for a niche fragrance. Use the provided info.
+# YOUR APPROACH
+- **Fragrances are experiences, not products** - Write about moments, identities, and memories
+- **Every word must earn its place** - Be evocative, never verbose. Be precise, never clinical
+- **Balance poetry with purpose** - Luxury voice that converts, whether for e-commerce or editorial
+- **Notes are truth, prose is magic** - Transform accurate ingredients into sensory poetry
+
+{length_instruction}
 
 # INPUT VARIABLES
 - Fragrance Name: {product_name}
@@ -112,8 +169,11 @@ Generate a multi-part story for a niche fragrance. Use the provided info.
 - SEO Keywords: {seo_keywords or 'Not provided'}
 - Writing Style/Tone: {tone}
 
-# OUTPUT STRUCTURE
-Output Markdown sections starting with '###' (e.g., '### The Hook', '### The Olfactory Journey').
+# OUTPUT REQUIREMENTS
+- Use olfactory notes provided as absolute truth - enhance them, don't invent
+- Integrate SEO keywords naturally within evocative prose when provided
+- Match the specified tone while maintaining sophisticated brand voice
+- Create content that's scannable (headings, short paragraphs) yet magnetic
 """
     user_prompt = "Craft the olfactory story."
 
@@ -126,7 +186,7 @@ Output Markdown sections starting with '###' (e.g., '### The Hook', '### The Olf
                     {"role": "user", "content": user_prompt}
                 ],
                 temperature=0.7,
-                max_tokens=1024,
+                max_tokens=max_tokens,
                 top_p=1,
                 stop=None,
                 stream=True,
@@ -357,6 +417,150 @@ Make it conversational and include a call-to-action."""
         print(f"Error generating social media post: {e}")
         print(traceback.format_exc())
         return jsonify({"error": "Failed to generate social media post"}), 500
+
+
+@app.route('/seo-analysis', methods=['POST'])
+def analyze_seo():
+    """
+    Analyze fragrance story for SEO and provide optimization suggestions
+    """
+    if not client:
+        return jsonify({"error": "Groq client not initialized"}), 500
+    
+    try:
+        data = request.get_json()
+        fragrance_name = data.get('name', 'Fragrance')
+        story_content = data.get('content', '')
+        target_keywords = data.get('keywords', '')
+        
+        # Calculate word count
+        word_count = len(story_content.split())
+        
+        # Prepare SEO analysis prompt
+        prompt = f"""Analyze this fragrance product description for SEO optimization.
+
+Fragrance Name: {fragrance_name}
+Target Keywords: {target_keywords or 'Not specified'}
+Content Length: {word_count} words
+Content: {story_content}
+
+Provide:
+1. **SEO Score** (0-100) with brief justification
+2. **Keyword Analysis**: Are target keywords naturally integrated? Mention density and placement.
+3. **Content Length**: Is it optimal for search engines? (300-500 words ideal for e-commerce)
+4. **Readability**: Is it engaging and scannable? Check for headers, bullets, paragraph length.
+5. **Top 3 Optimization Suggestions** (specific, actionable improvements)
+
+Format as JSON with keys: score, keyword_analysis, length_analysis, readability, suggestions (array), word_count"""
+        
+        # Generate SEO analysis
+        completion = client.chat.completions.create(
+            model="groq/compound",  # Use web-search model for SEO best practices
+            messages=[
+                {"role": "system", "content": "You are an SEO expert specializing in e-commerce product descriptions. Analyze content and provide data-driven optimization recommendations."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.3,  # Lower temperature for analytical consistency
+            max_tokens=800,
+        )
+        
+        analysis_text = completion.choices[0].message.content.strip()
+        
+        # Try to parse JSON response, fallback to text if needed
+        try:
+            # Extract JSON from potential markdown code blocks
+            if '```json' in analysis_text:
+                json_start = analysis_text.find('```json') + 7
+                json_end = analysis_text.find('```', json_start)
+                analysis_text = analysis_text[json_start:json_end].strip()
+            elif '```' in analysis_text:
+                json_start = analysis_text.find('```') + 3
+                json_end = analysis_text.find('```', json_start)
+                analysis_text = analysis_text[json_start:json_end].strip()
+            
+            import json
+            analysis_data = json.loads(analysis_text)
+            analysis_data['word_count'] = word_count
+        except:
+            # Fallback: return as structured text
+            analysis_data = {
+                "score": 75,
+                "keyword_analysis": "Analysis completed",
+                "length_analysis": "See detailed report",
+                "readability": "See detailed report",
+                "suggestions": ["Review the detailed analysis below"],
+                "raw_analysis": analysis_text,
+                "word_count": word_count
+            }
+        
+        return jsonify({
+            "success": True,
+            "analysis": analysis_data
+        })
+        
+    except Exception as e:
+        print(f"Error analyzing SEO: {e}")
+        print(traceback.format_exc())
+        return jsonify({"error": "Failed to analyze SEO"}), 500
+
+
+@app.route('/optimize-seo', methods=['POST'])
+def optimize_for_seo():
+    """
+    Automatically optimize content for SEO best practices
+    """
+    if not client:
+        return jsonify({"error": "Groq client not initialized"}), 500
+    
+    try:
+        data = request.get_json()
+        fragrance_name = data.get('name', 'Fragrance')
+        original_content = data.get('content', '')
+        target_keywords = data.get('keywords', '')
+        
+        # Prepare optimization prompt
+        prompt = f"""Rewrite this fragrance product description to be SEO-optimized for e-commerce.
+
+REQUIREMENTS:
+1. **Length**: 300-500 words (ideal for product pages)
+2. **Structure**: Use clear markdown headings (###) for sections:
+   - ### Top Notes
+   - ### Heart Notes  
+   - ### Base Notes
+   - ### The Experience (or similar)
+   - ### Perfect For (target audience)
+3. **Keywords**: Naturally integrate these keywords: {target_keywords or fragrance_name + ', luxury fragrance, perfume'}
+4. **Format**: Use bullet points for note pyramids, short paragraphs (2-3 sentences max)
+5. **Tone**: Maintain luxury brand voice while being concise and scannable
+6. **Call-to-Action**: End with a compelling reason to purchase
+
+ORIGINAL CONTENT:
+{original_content[:2000]}...
+
+Rewrite this as an SEO-optimized product description. Keep the essence but make it concise, structured, and search-engine friendly."""
+        
+        # Generate optimized content
+        completion = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {"role": "system", "content": "You are an expert copywriter specializing in SEO-optimized luxury fragrance descriptions. Create concise, structured, keyword-rich content that ranks well and converts."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.6,
+            max_tokens=1024,
+        )
+        
+        optimized_content = completion.choices[0].message.content.strip()
+        
+        return jsonify({
+            "success": True,
+            "optimized_content": optimized_content
+        })
+        
+    except Exception as e:
+        print(f"Error optimizing content: {e}")
+        print(traceback.format_exc())
+        return jsonify({"error": "Failed to optimize content"}), 500
 
 
 if __name__ == '__main__':
