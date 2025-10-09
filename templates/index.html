@@ -169,14 +169,11 @@
             <p class="text-lg text-gray-600 mt-2" style="letter-spacing: 0.05em;">Your Olfactory Storyteller & Curator</p>
         </header>
 
-        <div class="flex justify-center mb-8 gap-4">
+        <div class="flex justify-center mb-8">
             <div class="mode-toggle-group inline-flex" role="group">
                 <button type="button" id="mode-storyteller" class="active">Storyteller</button>
                 <button type="button" id="mode-curator">Curator</button>
             </div>
-            <button type="button" id="browse-collections-btn" class="btn btn-outline py-2 px-5 inline-flex items-center gap-2">
-                <span>Browse Collections</span>
-            </button>
         </div>
 
         <div id="storyteller-wrapper">
@@ -189,6 +186,15 @@
                         <input type="radio" id="use-case-existing" name="use_case" value="existing" checked><label for="use-case-existing">An Existing Fragrance</label>
                         <input type="radio" id="use-case-new" name="use_case" value="new"><label for="use-case-new">A New Creation</label>
                     </div>
+                    
+                    <!-- Browse Collections Button -->
+                    <div class="mb-6">
+                        <button type="button" id="browse-collections-btn" class="btn btn-outline w-full py-3 text-sm">
+                            Browse Collections
+                        </button>
+                        <p class="text-xs text-gray-500 text-center mt-2">Need inspiration? Explore our curated niche fragrances</p>
+                    </div>
+                    
                     <div class="grid grid-cols-1 gap-6">
                         <input type="text" name="product_name" class="w-full input-field" placeholder="Fragrance Name (e.g., Creed Virgin Island Water)">
                         <textarea name="key_notes" rows="4" class="w-full input-field" placeholder="Key Olfactory Notes (Top, Heart, Base)"></textarea>
