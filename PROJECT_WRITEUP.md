@@ -35,19 +35,43 @@ The **Browse Collections** feature presented a unique UX challenge. Initially, I
 
 Finally, implementing the **PDF export feature** required learning the ReportLab library on the fly and designing a document layout that maintained brand aesthetics while ensuring readability. The challenge was balancing automated generation with design quality—the PDFs needed to look professional enough for brands to use them in pitch decks or style guides.
 
+**UX/UI Design System Development:** After adding the Science of Scent and AI Lab pages, I conducted a comprehensive UX/UI audit that identified 9 categories of inconsistencies across the 7 template files. The most critical issues were:
+
+1. **Missing Mobile CTA**: The Science page completely lacked a mobile menu CTA button, blocking mobile users from accessing the app
+2. **Navigation Confusion**: Inconsistent button text between "Launch App" and "Story Builder" across desktop/mobile menus
+3. **Emoji Usage**: 25+ emojis scattered throughout the interface (🧠📊🎯🧪💡⚡🔥💎🌸 etc.) that undermined the luxury aesthetic
+4. **Color Palette Drift**: Champagne color values had diverged across files (#C9B896 vs #D4C5A9)
+
+I systematically resolved these issues by:
+- Standardizing all navigation CTAs to "Launch App" (which accurately represents the full tool suite: Story Builder + Curator)
+- Removing 100% of emojis and replacing them with SVG icons or clean text
+- Unifying the champagne color palette (#FEFDFB to #3A3327) across all 7 templates
+- Establishing consistent hover states (text-gray-600 → champagne-500) for all interactive elements
+- Documenting intentional design variance (gradient backgrounds on educational pages vs white on marketing pages) as part of information architecture
+
+This process reinforced that **design systems require ongoing governance**—even small additions like new pages can introduce inconsistencies that compound over time. The audit methodology (categorizing issues by severity: HIGH/MEDIUM/LOW priority) ensured I addressed critical UX blockers first before cosmetic refinements.
+
 ## Future Improvements & Ethical Considerations
 
 Beyond the tone selector stretch goal (which I implemented as a 9-option brand voice selector), there are several meaningful enhancements I would pursue:
 
 **1. Multi-Language Support:** Expanding the application to generate product descriptions in French, Italian, and Japanese would make it valuable for global fragrance houses. The LLM already supports multilingual generation, but the UI and prompt templates would need internationalization.
 
-**2. Image-to-Description Pipeline:** Integrating a vision model (like GPT-4 Vision) to analyze perfume bottle designs and generate descriptions that reference visual aesthetics would create a more holistic storytelling approach.
+**2. Advanced Multi-Agent Features:** Expanding the AI Lab to include sentiment analysis agents, trend prediction agents, and pricing optimization agents would transform the tool into a comprehensive fragrance marketing intelligence platform.
 
-**3. A/B Testing Framework:** Building a feature where brands could generate multiple description variants and track which versions drive higher engagement or conversion rates would transform this from a creative tool into a data-driven marketing platform.
+**3. Image-to-Description Pipeline:** Integrating a vision model (like GPT-4 Vision) to analyze perfume bottle designs and generate descriptions that reference visual aesthetics would create a more holistic storytelling approach.
 
-**4. Fragrance Family Classification:** Using the LLM to automatically classify fragrances into olfactory families (floral, woody, oriental, fresh) based on note compositions would help with collection organization and recommendation engines.
+**3. Image-to-Description Pipeline:** Integrating a vision model (like GPT-4 Vision) to analyze perfume bottle designs and generate descriptions that reference visual aesthetics would create a more holistic storytelling approach.
 
-**5. Historical Brand Voice Analysis:** Allowing brands to upload their existing product descriptions, then fine-tuning the LLM's outputs to match their established voice and terminology would ensure consistency across their entire catalog.
+**4. A/B Testing Framework:** Building a feature where brands could generate multiple description variants and track which versions drive higher engagement or conversion rates would transform this from a creative tool into a data-driven marketing platform.
+
+**4. A/B Testing Framework:** Building a feature where brands could generate multiple description variants and track which versions drive higher engagement or conversion rates would transform this from a creative tool into a data-driven marketing platform.
+
+**5. Fragrance Family Classification:** Using the LLM to automatically classify fragrances into olfactory families (floral, woody, oriental, fresh) based on note compositions would help with collection organization and recommendation engines.
+
+**5. Fragrance Family Classification:** Using the LLM to automatically classify fragrances into olfactory families (floral, woody, oriental, fresh) based on note compositions would help with collection organization and recommendation engines.
+
+**6. Historical Brand Voice Analysis:** Allowing brands to upload their existing product descriptions, then fine-tuning the LLM's outputs to match their established voice and terminology would ensure consistency across their entire catalog.
 
 From an **ethical perspective**, several considerations are critical for real-world deployment:
 
@@ -67,6 +91,8 @@ In conclusion, this project demonstrates how generative AI can augment creative 
 
 ---
 
-**Total Development Time:** ~40 hours  
-**Lines of Code:** 5,262  
+**Total Development Time:** ~55 hours  
+**Lines of Code:** 7,000+  
+**Template Files:** 7 pages (Home, Features, How It Works, Use Cases, Science, AI Lab, Main App)
+**UX/UI Improvements:** Emoji-free luxury design, standardized champagne color palette, unified navigation system
 **GitHub Repository:** https://github.com/dcthedeveloper/Aura-Intelligence

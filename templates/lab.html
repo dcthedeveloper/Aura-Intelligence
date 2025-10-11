@@ -73,7 +73,7 @@
                     <a href="/science" class="text-gray-600 hover:text-champagne-500 transition">Science</a>
                     <a href="/lab" class="text-champagne-500 font-medium">AI Lab</a>
                     <a href="/app" class="bg-gradient-to-r from-champagne-400 to-champagne-500 text-white px-6 py-2 rounded-lg hover:from-champagne-500 hover:to-champagne-600 transition">
-                        Story Builder
+                        Launch App
                     </a>
                 </div>
                 <button id="mobile-menu-btn" class="md:hidden text-gray-900">
@@ -83,13 +83,13 @@
                 </button>
             </div>
             <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2 space-y-2">
-                <a href="/how-it-works" class="block text-gray-600 hover:text-gray-900 py-2">How It Works</a>
-                <a href="/use-cases" class="block text-gray-600 hover:text-gray-900 py-2">Use Cases</a>
-                <a href="/features" class="block text-gray-600 hover:text-gray-900 py-2">Features</a>
-                <a href="/science" class="block text-gray-600 hover:text-gray-900 py-2">Science</a>
+                <a href="/how-it-works" class="block text-gray-600 hover:text-champagne-500 py-2">How It Works</a>
+                <a href="/use-cases" class="block text-gray-600 hover:text-champagne-500 py-2">Use Cases</a>
+                <a href="/features" class="block text-gray-600 hover:text-champagne-500 py-2">Features</a>
+                <a href="/science" class="block text-gray-600 hover:text-champagne-500 py-2">Science</a>
                 <a href="/lab" class="block text-champagne-500 font-medium py-2">AI Lab</a>
                 <a href="/app" class="block bg-gradient-to-r from-champagne-400 to-champagne-500 text-white px-6 py-2 rounded-lg text-center">
-                    Story Builder
+                    Launch App
                 </a>
             </div>
         </div>
@@ -173,7 +173,7 @@
                         
                         <button type="submit" id="analyze-btn"
                             class="w-full bg-gradient-to-r from-champagne-400 to-champagne-500 text-white px-8 py-4 rounded-lg text-lg font-medium hover:from-champagne-500 hover:to-champagne-600 transition shadow-lg">
-                            🧬 Run Multi-Agent Analysis
+                            Run Multi-Agent Analysis
                         </button>
                     </form>
                 </div>
@@ -271,7 +271,7 @@
                     <div class="text-center">
                         <button id="generate-variants-btn" disabled
                             class="bg-gradient-to-r from-champagne-400 to-champagne-500 text-white px-8 py-4 rounded-lg text-lg font-medium hover:from-champagne-500 hover:to-champagne-600 transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
-                            ✨ Generate Story Variants for A/B Testing
+                            Generate Story Variants for A/B Testing
                         </button>
                     </div>
                 </div>
@@ -317,7 +317,7 @@
             
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="bg-white rounded-xl p-6 border border-gray-200">
-                    <h3 class="font-bold text-gray-900 mb-3">🎯 The Competitive Advantage</h3>
+                    <h3 class="font-bold text-gray-900 mb-3">The Competitive Advantage</h3>
                     <p class="text-gray-600 text-sm">
                         By analyzing customers through multiple specialized lenses (demographics, psychology, preferences, trends), 
                         you create stories that resonate on deeper levels than generic AI-generated copy.
@@ -325,7 +325,7 @@
                 </div>
                 
                 <div class="bg-white rounded-xl p-6 border border-gray-200">
-                    <h3 class="font-bold text-gray-900 mb-3">🧪 A/B Testing Power</h3>
+                    <h3 class="font-bold text-gray-900 mb-3">A/B Testing Power</h3>
                     <p class="text-gray-600 text-sm">
                         Generate multiple variants with different psychological approaches, then test which messaging 
                         drives higher engagement and conversions. Data-driven storytelling.
@@ -458,7 +458,7 @@
         document.getElementById('generate-variants-btn').addEventListener('click', async () => {
             const btn = document.getElementById('generate-variants-btn');
             const originalText = btn.innerHTML;
-            btn.innerHTML = '⚗️ Generating Story Variants...';
+            btn.innerHTML = 'Generating Story Variants...';
             btn.disabled = true;
             
             // Show variants section

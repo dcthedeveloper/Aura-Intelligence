@@ -1,4 +1,4 @@
-# 🌸 Aura Intelligence  
+# Aura Intelligence  
 ### The Olfactory Storyteller & Curator  
 
 [![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://www.python.org/)
@@ -30,7 +30,10 @@ A dual-mode AI application leveraging Groq's advanced language models:
 ### Competitive Advantage
 - **Web-Search Integration**: Real-time fragrance data via `groq/compound` model
 - **Dual Model Architecture**: Optimized for both accuracy (web search) and creativity (storytelling)
+- **Neuroscience-Backed Content**: Science of Scent page explains olfactory marketing psychology
+- **Multi-Agent AI Lab**: Customer persona analysis and A/B testing for marketing optimization
 - **Zero Learning Curve**: Intuitive, guided 4-step workflow
+- **Luxury Design System**: Emoji-free, champagne-accented minimalist aesthetic
 - **Production-Ready**: Streaming responses, error handling, mobile-responsive design
 
 ### Business Model Potential
@@ -81,6 +84,49 @@ A conversational AI fragrance expert powered by live web data.
 - **Streaming Responses**: Real-time answer generation
 
 **Model Used**: `groq/compound` (web-search enabled system)
+
+---
+
+### 🧪 **Science of Scent**  
+Educational content explaining the neuroscience behind olfactory marketing.
+
+**Key Topics:**
+- **Neuroscience Foundation**: How scent bypasses cognitive filters and triggers emotional memory
+- **Research-Backed Insights**: Links to Harvard, Psychology Today, and HBR studies
+- **Marketing Psychology**: Why scent marketing drives 40% higher brand recall
+- **Olfactory Journey**: Understanding how fragrance notes interact with brain chemistry
+- **Business Applications**: Using scent psychology to enhance customer experiences
+
+**Educational Sections**:
+- The Power of Scent (emotional memory triggers)
+- Neuroscience Meets Marketing (limbic system activation)
+- The Olfactory Journey (perfume pyramid structure)
+- Building Your Scent Story (brand identity through fragrance)
+
+**Page Design**: Gradient background with translucent navigation, SVG icons for neuroscience concepts
+
+---
+
+### 🔬 **AI Lab (Multi-Agent Analysis)**  
+Advanced customer persona analysis and A/B testing for fragrance marketing optimization.
+
+**Key Capabilities:**
+- **Multi-Agent Customer Analysis**: 
+  - Psychographic Analyst (emotional triggers, values, lifestyle)
+  - Behavioral Analyst (purchase patterns, decision-making)
+  - Market Analyst (competitive positioning, trends)
+  - Brand Strategist (messaging recommendations)
+- **A/B Testing Simulation**: Compare two fragrance descriptions with predicted performance metrics
+- **JSON-Formatted Insights**: Structured output for easy integration with marketing tools
+- **Strategic Recommendations**: Actionable advice for targeting specific customer segments
+
+**Use Cases**:
+- Understanding target audience psychology before launching campaigns
+- Testing description variants before committing to production
+- Competitive analysis for positioning new fragrances
+- Data-driven messaging strategies
+
+**Model Used**: `llama-3.3-70b-versatile` with specialized multi-agent prompts
 
 ---
 
@@ -168,16 +214,19 @@ Aura-Intelligence/
 ├── .env.example              # Template for environment variables
 ├── .gitignore                # Git ignore rules (protects .env)
 ├── templates/
-│   ├── app.html              # Story Builder tool (1,813 lines)
-│   ├── home.html             # Landing page (559 lines)
-│   ├── how_it_works.html     # How It Works page (547 lines)
-│   ├── use_cases.html        # Use Cases page (703 lines)
-│   └── features.html         # Features page (675 lines)
+│   ├── app.html              # Story Builder & Curator tool (1,813 lines)
+│   ├── home.html             # Landing page (562 lines)
+│   ├── how_it_works.html     # How It Works page (550 lines)
+│   ├── use_cases.html        # Use Cases page (706 lines)
+│   ├── features.html         # Features page (675 lines)
+│   ├── science.html          # Science of Scent (neuroscience) (513 lines)
+│   └── lab.html              # AI Lab (multi-agent analysis) (644 lines)
 ├── LICENSE                   # MIT License
 ├── PROJECT_WRITEUP.md        # Technical documentation
+├── SUBMISSION_CHECKLIST.md   # Project submission checklist
 └── README.md                 # This file
 
-Total: ~5,900 lines of production code
+Total: ~7,000+ lines of production code
 ```
 
 ---
@@ -226,16 +275,20 @@ Total: ~5,900 lines of production code
 ## 🎨 Design Philosophy
 
 **Luxury Aesthetic**  
-- Cream (#F8F6F3) backgrounds inspired by premium packaging
-- Playfair Display serif typography for elegance
-- Champagne (#C9B896) accent colors for minimal luxury
+- Champagne color palette (#FEFDFB to #3A3327) inspired by premium fragrance packaging
+- Cormorant Garamond serif headings + Inter body text for modern elegance
+- Emoji-free design system for sophisticated, minimalist brand presence
+- Consistent champagne-500 accent colors across all interactive elements
+- Gradient backgrounds for information architecture (Science page uses subtle gradients)
 - Minimalist design matching niche fragrance brands (Byredo, Kilian, Nishane)
 
 **User Experience**  
 - **Progressive Disclosure**: 4-step form prevents overwhelm
+- **Unified Navigation**: "Launch App" CTA consistently leads to full tool suite
+- **Mobile-First**: Fully responsive design with standardized mobile menus
 - **Micro-Interactions**: Smooth animations and transitions
 - **Zero Learning Curve**: Smart placeholders and inline hints
-- **Mobile-First**: Fully responsive design
+- **Information Architecture**: Intentional background color variance (white for marketing pages, gradients for educational content)
 
 **Performance**  
 - **Streaming Responses**: See results generate in real-time
@@ -315,7 +368,7 @@ Total: ~5,900 lines of production code
 - ✅ Storyteller mode with 4-step workflow
 - ✅ Curator chatbot with web search
 - ✅ Dual model architecture
-- ✅ Mobile-responsive design
+- ✅ Mobile-responsive design with consistent navigation
 - ✅ **Copy to Clipboard**
 - ✅ **Save & History** (localStorage, 50 stories)
 - ✅ **PDF Export**
@@ -324,6 +377,9 @@ Total: ~5,900 lines of production code
 - ✅ **Output Length Control** (Product/Full/Short)
 - ✅ **Enhanced Tone Selection** (8 tones with previews)
 - ✅ **Curated Collections** (Best Niche Fragrances - 21 premium scents)
+- ✅ **Science of Scent Page** (Neuroscience-backed olfactory marketing education)
+- ✅ **AI Lab** (Multi-agent customer analysis & A/B testing tool)
+- ✅ **Comprehensive UX/UI Audit** (Luxury design system with emoji-free aesthetic)
 
 ### Phase 2 (Q1-Q2 2026) - Expansion
 - 🔲 User authentication & cloud storage
