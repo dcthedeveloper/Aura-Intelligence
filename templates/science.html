@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Science of Scent | Aura Intelligence</title>
+    <meta name="description" content="Discover the neuroscience behind scent marketing. Learn how fragrance affects emotion, memory, and purchasing decisions.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        champagne: {
+                            50: '#fdfaf5',
+                            100: '#f9f2e6',
+                            200: '#f2e3ca',
+                            300: '#e8ceaa',
+                            400: '#ddb788',
+                            500: '#cfa06b',
+                            600: '#b78955',
+                            700: '#9a7147',
+                            800: '#7c5c3d',
+                            900: '#634a33',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #b78955 0%, #ddb788 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .research-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .research-card:hover {
+            border-color: #b78955;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(183, 137, 85, 0.2);
+        }
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 via-champagne-50 to-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/80 backdrop-blur-md border-b border-champagne-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-champagne-400 to-champagne-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">A</span>
+                    </div>
+                    <span class="text-2xl font-bold bg-gradient-to-r from-champagne-600 to-champagne-800 bg-clip-text text-transparent">Aura Intelligence</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="/" class="text-gray-700 hover:text-champagne-700 transition">Home</a>
+                    <a href="/how-it-works" class="text-gray-700 hover:text-champagne-700 transition">How It Works</a>
+                    <a href="/features" class="text-gray-700 hover:text-champagne-700 transition">Features</a>
+                    <a href="/use-cases" class="text-gray-700 hover:text-champagne-700 transition">Use Cases</a>
+                    <a href="/science" class="text-champagne-700 font-semibold">Science</a>
+                    <a href="/lab" class="text-gray-700 hover:text-champagne-700 transition">AI Lab</a>
+                </div>
+                <a href="/app" class="bg-gradient-to-r from-champagne-600 to-champagne-700 text-white px-6 py-2 rounded-lg hover:from-champagne-700 hover:to-champagne-800 transition shadow-lg">
+                    Try Free
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="inline-block mb-4">
+                    <span class="bg-champagne-200 text-champagne-700 px-4 py-2 rounded-full text-sm font-semibold">
+                        🧠 Neuroscience-Backed
+                    </span>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                    The <span class="gradient-text">Science of Scent</span>
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Why does fragrance marketing work? It's not magic—it's neuroscience. Discover how scent bypasses logic to create immediate emotional connections, trigger vivid memories, and drive purchasing decisions.
+                </p>
+            </div>
+
+            <!-- Key Stats -->
+            <div class="grid md:grid-cols-3 gap-8 mb-20">
+                <div class="bg-white/80 backdrop-blur rounded-2xl p-8 text-center border-2 border-champagne-200 shadow-xl">
+                    <div class="stat-number gradient-text mb-2">75%</div>
+                    <p class="text-gray-700 font-semibold mb-2">of daily emotions</p>
+                    <p class="text-sm text-gray-600">are triggered by smell, more than any other sense</p>
+                </div>
+                <div class="bg-white/80 backdrop-blur rounded-2xl p-8 text-center border-2 border-champagne-200 shadow-xl">
+                    <div class="stat-number gradient-text mb-2">40%</div>
+                    <p class="text-gray-700 font-semibold mb-2">mood improvement</p>
+                    <p class="text-sm text-gray-600">from pleasant scents vs. neutral environments</p>
+                </div>
+                <div class="bg-white/80 backdrop-blur rounded-2xl p-8 text-center border-2 border-champagne-200 shadow-xl">
+                    <div class="stat-number gradient-text mb-2">100x</div>
+                    <p class="text-gray-700 font-semibold mb-2">more memorable</p>
+                    <p class="text-sm text-gray-600">smell-triggered memories vs. visual or auditory recall</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brain Science Section -->
+    <section class="py-20 bg-white/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    How Scent <span class="gradient-text">Rewires the Brain</span>
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    The olfactory bulb has direct connections to the amygdala and hippocampus—emotion and memory centers—creating instant, powerful responses.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                    <div class="bg-gradient-to-br from-champagne-100 to-champagne-200 rounded-3xl p-12 float-animation">
+                        <svg class="w-full h-64" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Brain illustration -->
+                            <ellipse cx="200" cy="150" rx="150" ry="120" fill="#f2e3ca" stroke="#b78955" stroke-width="3"/>
+                            <!-- Olfactory bulb -->
+                            <circle cx="200" cy="80" r="25" fill="#ddb788" stroke="#b78955" stroke-width="2"/>
+                            <text x="200" y="70" text-anchor="middle" font-size="10" fill="#634a33">Olfactory</text>
+                            <text x="200" y="82" text-anchor="middle" font-size="10" fill="#634a33">Bulb</text>
+                            <!-- Amygdala -->
+                            <circle cx="140" cy="140" r="20" fill="#b78955" stroke="#7c5c3d" stroke-width="2"/>
+                            <text x="140" y="145" text-anchor="middle" font-size="9" fill="white">Amygdala</text>
+                            <text x="140" y="175" text-anchor="middle" font-size="10" fill="#634a33">(Emotion)</text>
+                            <!-- Hippocampus -->
+                            <circle cx="260" cy="140" r="20" fill="#b78955" stroke="#7c5c3d" stroke-width="2"/>
+                            <text x="260" y="145" text-anchor="middle" font-size="9" fill="white">Hippo-</text>
+                            <text x="260" y="154" text-anchor="middle" font-size="9" fill="white">campus</text>
+                            <text x="260" y="175" text-anchor="middle" font-size="10" fill="#634a33">(Memory)</text>
+                            <!-- Connections -->
+                            <line x1="200" y1="105" x2="150" y2="125" stroke="#9a7147" stroke-width="3" stroke-dasharray="5,5"/>
+                            <line x1="200" y1="105" x2="250" y2="125" stroke="#9a7147" stroke-width="3" stroke-dasharray="5,5"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="bg-white rounded-xl p-6 border-l-4 border-champagne-600 shadow-lg">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">🧠 Direct Neural Pathway</h3>
+                        <p class="text-gray-700">Unlike sight or sound, scent bypasses the thalamus and connects directly to emotional centers. That's why a fragrance can trigger instant feelings before conscious thought.</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 border-l-4 border-champagne-600 shadow-lg">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">💭 Memory Formation</h3>
+                        <p class="text-gray-700">The hippocampus encodes smell-memory pairs as one unit. This is the "Proustian moment"—a scent instantly transporting you to a specific time and place.</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 border-l-4 border-champagne-600 shadow-lg">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">❤️ Emotional Encoding</h3>
+                        <p class="text-gray-700">The amygdala processes emotions and stores them with scents. Smell and emotion are literally saved as <em>one memory</em> in the brain—inseparable.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Findings -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    <span class="gradient-text">Research-Backed</span> Insights
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Leading universities and research institutions have proven the power of scent marketing.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Research Card 1 -->
+                <div class="research-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="w-12 h-12 bg-champagne-200 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">🎓</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Harvard Study</h3>
+                    <p class="text-gray-700 mb-4">
+                        Smell is the only fully developed sense in the womb and most developed in children until age 10—creating lifelong scent preferences.
+                    </p>
+                    <a href="https://news.harvard.edu/gazette/story/2020/02/how-scent-emotion-and-memory-are-intertwined-and-exploited/" 
+                       target="_blank"
+                       class="text-champagne-700 font-semibold hover:text-champagne-800 transition">
+                        Read Research →
+                    </a>
+                </div>
+
+                <!-- Research Card 2 -->
+                <div class="research-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="w-12 h-12 bg-champagne-200 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">🔬</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Psychology Today</h3>
+                    <p class="text-gray-700 mb-4">
+                        Scent influences attraction via MHC (immune system genes). People are drawn to scents indicating genetic compatibility and health.
+                    </p>
+                    <a href="https://www.psychologytoday.com/us/basics/scent" 
+                       target="_blank"
+                       class="text-champagne-700 font-semibold hover:text-champagne-800 transition">
+                        Explore Science →
+                    </a>
+                </div>
+
+                <!-- Research Card 3 -->
+                <div class="research-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="w-12 h-12 bg-champagne-200 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">🛍️</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Harvard Business Review</h3>
+                    <p class="text-gray-700 mb-4">
+                        Scent branding creates "immediate and memorable connections" between brands and consumers—differentiating emotionally in crowded markets.
+                    </p>
+                    <a href="https://hbr.org/2018/04/inside-the-invisible-but-influential-world-of-scent-branding" 
+                       target="_blank"
+                       class="text-champagne-700 font-semibold hover:text-champagne-800 transition">
+                        Business Case →
+                    </a>
+                </div>
+
+                <!-- Research Card 4 -->
+                <div class="research-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="w-12 h-12 bg-champagne-200 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">🧘</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Aromatherapy Effects</h3>
+                    <p class="text-gray-700 mb-4">
+                        Clinical studies show aromatherapy reduces stress hormones by 40%, promotes deeper sleep cycles, and eases chronic pain perception.
+                    </p>
+                    <span class="text-champagne-700 font-semibold">Peer-Reviewed ✓</span>
+                </div>
+
+                <!-- Research Card 5 -->
+                <div class="research-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="w-12 h-12 bg-champagne-200 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">🎨</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Color-Scent Synesthesia</h3>
+                    <p class="text-gray-700 mb-4">
+                        Most people "smell in color"—citrus evokes orange/yellow, vetiver conjures green/brown. This cross-sensory processing enhances brand recall.
+                    </p>
+                    <span class="text-champagne-700 font-semibold">Neuroscience ✓</span>
+                </div>
+
+                <!-- Research Card 6 -->
+                <div class="research-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="w-12 h-12 bg-champagne-200 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">💰</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Purchase Behavior</h3>
+                    <p class="text-gray-700 mb-4">
+                        Nostalgic scents tied to positive childhood memories increase purchase intent by 65% and willingness to pay premium prices by 23%.
+                    </p>
+                    <span class="text-champagne-700 font-semibold">Consumer Research ✓</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marketing Applications -->
+    <section class="py-20 bg-gradient-to-br from-champagne-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    Why This <span class="gradient-text">Matters for Marketing</span>
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Understanding the neuroscience of scent transforms how you position fragrances—and drives measurable results.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white rounded-2xl p-8 border-2 border-champagne-200 shadow-xl">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-champagne-400 to-champagne-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <span class="text-3xl">⚡</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">Instant Emotional Resonance</h3>
+                            <p class="text-gray-700 mb-4">
+                                Because scent bypasses cognitive processing, your copy should mirror this immediacy. Use sensory language that triggers <em>feeling</em> before thinking.
+                            </p>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start">
+                                    <span class="text-champagne-600 mr-2">✓</span>
+                                    <span>Lead with emotional benefits, not ingredient lists</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-champagne-600 mr-2">✓</span>
+                                    <span>Create visceral imagery ("sun-warmed skin" not "woody amber")</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-champagne-600 mr-2">✓</span>
+                                    <span>Use power words: memories, confidence, attraction, escape</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 border-2 border-champagne-200 shadow-xl">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-champagne-400 to-champagne-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <span class="text-3xl">🎯</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">Memory-Anchored Positioning</h3>
+                            <p class="text-gray-700 mb-4">
+                                Tap into nostalgic scent memories formed in childhood. Position fragrances as "time machines" to cherished moments.
+                            </p>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start">
+                                    <span class="text-champagne-600 mr-2">✓</span>
+                                    <span>Reference universal memories (summer rain, grandmother's garden)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-champagne-600 mr-2">✓</span>
+                                    <span>Create "signature scent" positioning for life milestones</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-champagne-600 mr-2">✓</span>
+                                    <span>Use temporal language: "remember," "transport," "return"</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 border-2 border-champagne-200 shadow-xl">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-champagne-400 to-champagne-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <span class="text-3xl">💝</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">Identity & Self-Expression</h3>
+                            <p class="text-gray-700 mb-4">
+                                Fragrance choices signal identity markers. Frame scents as extensions of personality, not just products.
+                            </p>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start">
+                                    <span class="text-champagne-600 mr-2">✓</span>
+                                    <span>Position as "your signature," "your essence," "your aura"</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-champagne-600 mr-2">✓</span>
+                                    <span>Connect to aspirational identities and lifestyle goals</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-champagne-600 mr-2">✓</span>
+                                    <span>Use psychological benefits: confidence, allure, presence</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 border-2 border-champagne-200 shadow-xl">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-champagne-400 to-champagne-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <span class="text-3xl">🔄</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">The Marketing Flywheel</h3>
+                            <p class="text-gray-700 mb-4">
+                                Education builds trust, which drives trial, which proves value, which creates advocates.
+                            </p>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start">
+                                    <span class="text-champagne-600 mr-2">✓</span>
+                                    <span><strong>Educate:</strong> Share neuroscience (you're doing it!)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-champagne-600 mr-2">✓</span>
+                                    <span><strong>Demonstrate:</strong> Free AI-generated copy proves the approach</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-champagne-600 mr-2">✓</span>
+                                    <span><strong>Convert:</strong> Results speak—brands upgrade for premium features</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Aura Advantage -->
+    <section class="py-20 bg-gradient-to-br from-gray-900 via-champagne-900 to-gray-900 text-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-6">
+                The <span class="text-champagne-300">Aura Intelligence</span> Difference
+            </h2>
+            <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                Most fragrance copywriters write about scent. <br>
+                <span class="text-champagne-300 font-semibold">We write copy that mimics how scent works in the brain.</span>
+            </p>
+            <div class="bg-white/10 backdrop-blur rounded-2xl p-8 mb-8 border border-champagne-300/30">
+                <div class="grid md:grid-cols-3 gap-6 text-left">
+                    <div>
+                        <div class="text-champagne-300 font-bold text-lg mb-2">🧠 Neuroscience-Based</div>
+                        <p class="text-gray-300 text-sm">Our AI agents use psychology research to trigger emotion first, logic second—just like scent.</p>
+                    </div>
+                    <div>
+                        <div class="text-champagne-300 font-bold text-lg mb-2">📊 Psychology Scoring</div>
+                        <p class="text-gray-300 text-sm">Every story gets a psychological impact score showing how well it taps into memory and emotion.</p>
+                    </div>
+                    <div>
+                        <div class="text-champagne-300 font-bold text-lg mb-2">🧪 A/B Tested</div>
+                        <p class="text-gray-300 text-sm">Generate variants optimized for different psychological triggers, then test which converts best.</p>
+                    </div>
+                </div>
+            </div>
+            <a href="/app" class="inline-block bg-champagne-500 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-champagne-600 transition shadow-2xl">
+                Experience Science-Backed Copy →
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-br from-champagne-400 to-champagne-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold">A</span>
+                        </div>
+                        <span class="text-white font-bold text-lg">Aura Intelligence</span>
+                    </div>
+                    <p class="text-sm">Neuroscience-backed fragrance copywriting powered by AI.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Product</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/how-it-works" class="hover:text-champagne-400 transition">How It Works</a></li>
+                        <li><a href="/features" class="hover:text-champagne-400 transition">Features</a></li>
+                        <li><a href="/use-cases" class="hover:text-champagne-400 transition">Use Cases</a></li>
+                        <li><a href="/app" class="hover:text-champagne-400 transition">Try Free</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Research</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/science" class="hover:text-champagne-400 transition">Science of Scent</a></li>
+                        <li><a href="/lab" class="hover:text-champagne-400 transition">AI Lab</a></li>
+                        <li><a href="https://news.harvard.edu/gazette/story/2020/02/how-scent-emotion-and-memory-are-intertwined-and-exploited/" target="_blank" class="hover:text-champagne-400 transition">Harvard Study</a></li>
+                        <li><a href="https://www.psychologytoday.com/us/basics/scent" target="_blank" class="hover:text-champagne-400 transition">Psychology Today</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="https://github.com/dcthedeveloper/Aura-Intelligence" target="_blank" class="hover:text-champagne-400 transition">GitHub</a></li>
+                        <li><a href="/" class="hover:text-champagne-400 transition">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-sm">
+                <p>&copy; 2025 Aura Intelligence. Built with neuroscience, powered by AI.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

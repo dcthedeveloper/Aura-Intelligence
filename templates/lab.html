@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olfactory AI Lab - Aura Intelligence</title>
+    <meta name="description" content="Multi-agent AI analysis and A/B testing for fragrance storytelling. Build better copy with customer insights and variant testing.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'champagne': {
+                            50: '#FEFDFB',
+                            100: '#F8F6F3',
+                            200: '#E8E0D5',
+                            300: '#D4C7B5',
+                            400: '#C9B896',
+                            500: '#B5A585',
+                            600: '#A18F71',
+                            700: '#7D6F56',
+                            800: '#5A503D',
+                            900: '#3A3327',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #C9B896, #B5A585);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .agent-card {
+            transition: all 0.3s ease;
+        }
+        .agent-card.active {
+            border-color: #C9B896;
+            box-shadow: 0 4px 20px rgba(201, 184, 150, 0.2);
+        }
+        .variant-card {
+            transition: all 0.3s ease;
+        }
+        .variant-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center h-10">
+                <a href="/" class="text-2xl font-serif font-bold">
+                    <span style="background: linear-gradient(135deg, #C9B896 0%, #B5A585 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Aura</span> Intelligence
+                </a>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="/how-it-works" class="text-gray-600 hover:text-champagne-500 transition">How It Works</a>
+                    <a href="/use-cases" class="text-gray-600 hover:text-champagne-500 transition">Use Cases</a>
+                    <a href="/features" class="text-gray-600 hover:text-champagne-500 transition">Features</a>
+                    <a href="/science" class="text-gray-600 hover:text-champagne-500 transition">Science</a>
+                    <a href="/lab" class="text-champagne-500 font-medium">AI Lab</a>
+                    <a href="/app" class="bg-gradient-to-r from-champagne-400 to-champagne-500 text-white px-6 py-2 rounded-lg hover:from-champagne-500 hover:to-champagne-600 transition">
+                        Story Builder
+                    </a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-900">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2 space-y-2">
+                <a href="/how-it-works" class="block text-gray-600 hover:text-gray-900 py-2">How It Works</a>
+                <a href="/use-cases" class="block text-gray-600 hover:text-gray-900 py-2">Use Cases</a>
+                <a href="/features" class="block text-gray-600 hover:text-gray-900 py-2">Features</a>
+                <a href="/science" class="block text-gray-600 hover:text-gray-900 py-2">Science</a>
+                <a href="/lab" class="block text-champagne-500 font-medium py-2">AI Lab</a>
+                <a href="/app" class="block bg-gradient-to-r from-champagne-400 to-champagne-500 text-white px-6 py-2 rounded-lg text-center">
+                    Story Builder
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-16 bg-gradient-to-br from-white to-champagne-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-block px-4 py-2 bg-champagne-200 text-champagne-700 rounded-full text-sm font-medium mb-6">
+                Advanced AI Research Lab
+            </div>
+            <h1 class="text-5xl md:text-6xl font-serif font-bold text-gray-900 mb-6">
+                The <span class="gradient-text">Olfactory AI Lab</span>
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-4">
+                Multi-agent customer analysis + A/B testing for fragrance storytelling
+            </p>
+            <p class="text-lg text-gray-500 max-w-2xl mx-auto">
+                See how 5 specialized AI agents analyze your customer, then generate multiple story variants to test which resonates best.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Lab Interface -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Step 1: Input Form -->
+            <div class="mb-12">
+                <div class="bg-white rounded-2xl border border-gray-200 p-8">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-10 h-10 bg-champagne-500 text-white rounded-full flex items-center justify-center font-bold">
+                            1
+                        </div>
+                        <h2 class="text-2xl font-serif font-bold text-gray-900">
+                            Enter Fragrance Details
+                        </h2>
+                    </div>
+                    
+                    <form id="lab-form" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Fragrance Name</label>
+                                <input type="text" id="fragrance_name" name="fragrance_name" 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-champagne-500 focus:border-champagne-500"
+                                    placeholder="e.g., Midnight Garden"
+                                    required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Target Audience</label>
+                                <input type="text" id="target_audience" name="target_audience" 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-champagne-500 focus:border-champagne-500"
+                                    placeholder="e.g., Modern professionals seeking sophistication">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Key Notes</label>
+                            <textarea id="key_notes" name="key_notes" rows="3"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-champagne-500 focus:border-champagne-500"
+                                placeholder="e.g., Top: Bergamot, Saffron | Heart: Jasmine Sambac, Rose | Base: Sandalwood, Amber"></textarea>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Vibe Keywords</label>
+                            <input type="text" id="vibe_keywords" name="vibe_keywords" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-champagne-500 focus:border-champagne-500"
+                                placeholder="e.g., Mysterious, elegant, seductive">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Number of Story Variants</label>
+                            <select id="num_variants" name="num_variants" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-champagne-500 focus:border-champagne-500">
+                                <option value="2">2 Variants (A/B Test)</option>
+                                <option value="3">3 Variants (A/B/C Test)</option>
+                                <option value="4">4 Variants (Full Agent Coverage)</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" id="analyze-btn"
+                            class="w-full bg-gradient-to-r from-champagne-400 to-champagne-500 text-white px-8 py-4 rounded-lg text-lg font-medium hover:from-champagne-500 hover:to-champagne-600 transition shadow-lg">
+                            🧬 Run Multi-Agent Analysis
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Step 2: Agent Analysis Results -->
+            <div id="agent-results" class="mb-12 hidden">
+                <div class="bg-white rounded-2xl border border-gray-200 p-8">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-10 h-10 bg-champagne-500 text-white rounded-full flex items-center justify-center font-bold">
+                            2
+                        </div>
+                        <h2 class="text-2xl font-serif font-bold text-gray-900">
+                            Multi-Agent Customer Analysis
+                        </h2>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                        <!-- Agent 1: Customer Profile -->
+                        <div class="agent-card bg-gradient-to-br from-blue-50 to-white rounded-xl border-2 border-gray-200 p-6">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <div class="w-10 h-10 bg-blue-500 text-white rounded-lg flex items-center justify-center">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="font-bold text-gray-900">Customer Profile</h3>
+                            </div>
+                            <div id="profile-analysis" class="text-sm text-gray-700 leading-relaxed">
+                                <div class="animate-pulse">Analyzing demographics...</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Agent 2: Preferences -->
+                        <div class="agent-card bg-gradient-to-br from-purple-50 to-white rounded-xl border-2 border-gray-200 p-6">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <div class="w-10 h-10 bg-purple-500 text-white rounded-lg flex items-center justify-center">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="font-bold text-gray-900">Preferences</h3>
+                            </div>
+                            <div id="preference-analysis" class="text-sm text-gray-700 leading-relaxed">
+                                <div class="animate-pulse">Analyzing scent preferences...</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Agent 3: Psychology -->
+                        <div class="agent-card bg-gradient-to-br from-pink-50 to-white rounded-xl border-2 border-gray-200 p-6">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <div class="w-10 h-10 bg-pink-500 text-white rounded-lg flex items-center justify-center">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="font-bold text-gray-900">Psychology</h3>
+                            </div>
+                            <div id="psychology-analysis" class="text-sm text-gray-700 leading-relaxed">
+                                <div class="animate-pulse">Analyzing emotional triggers...</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Agent 4: Market Trends -->
+                        <div class="agent-card bg-gradient-to-br from-green-50 to-white rounded-xl border-2 border-gray-200 p-6">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <div class="w-10 h-10 bg-green-500 text-white rounded-lg flex items-center justify-center">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                                    </svg>
+                                </div>
+                                <h3 class="font-bold text-gray-900">Market Trends</h3>
+                            </div>
+                            <div id="market-analysis" class="text-sm text-gray-700 leading-relaxed">
+                                <div class="animate-pulse">Researching market data...</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Agent 5: Synthesis -->
+                        <div class="agent-card bg-gradient-to-br from-champagne-100 to-white rounded-xl border-2 border-champagne-300 p-6 lg:col-span-2">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <div class="w-10 h-10 bg-champagne-500 text-white rounded-lg flex items-center justify-center">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="font-bold text-gray-900">Strategic Synthesis</h3>
+                            </div>
+                            <div id="synthesis-analysis" class="text-sm text-gray-700 leading-relaxed">
+                                <div class="animate-pulse">Synthesizing all insights...</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button id="generate-variants-btn" disabled
+                            class="bg-gradient-to-r from-champagne-400 to-champagne-500 text-white px-8 py-4 rounded-lg text-lg font-medium hover:from-champagne-500 hover:to-champagne-600 transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                            ✨ Generate Story Variants for A/B Testing
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 3: Story Variants (A/B Testing) -->
+            <div id="variants-section" class="hidden">
+                <div class="bg-white rounded-2xl border border-gray-200 p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-champagne-500 text-white rounded-full flex items-center justify-center font-bold">
+                                3
+                            </div>
+                            <h2 class="text-2xl font-serif font-bold text-gray-900">
+                                Story Variants - A/B Testing
+                            </h2>
+                        </div>
+                        <div class="text-sm text-gray-500">
+                            Compare different approaches to find what resonates
+                        </div>
+                    </div>
+                    
+                    <div id="variants-grid" class="grid lg:grid-cols-2 gap-6">
+                        <!-- Variants will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="py-16 bg-gradient-to-br from-champagne-50 to-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-serif font-bold text-gray-900 mb-4">
+                    Why Multi-Agent Analysis?
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Traditional AI gives you one perspective. Our multi-agent system gives you five, creating a complete picture of your customer and market.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                    <h3 class="font-bold text-gray-900 mb-3">🎯 The Competitive Advantage</h3>
+                    <p class="text-gray-600 text-sm">
+                        By analyzing customers through multiple specialized lenses (demographics, psychology, preferences, trends), 
+                        you create stories that resonate on deeper levels than generic AI-generated copy.
+                    </p>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                    <h3 class="font-bold text-gray-900 mb-3">🧪 A/B Testing Power</h3>
+                    <p class="text-gray-600 text-sm">
+                        Generate multiple variants with different psychological approaches, then test which messaging 
+                        drives higher engagement and conversions. Data-driven storytelling.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-300 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="text-xl font-serif font-bold text-white mb-4">
+                        <span style="background: linear-gradient(135deg, #C9B896 0%, #B5A585 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Aura</span> Intelligence
+                    </div>
+                    <p class="text-sm text-gray-400">
+                        AI-powered storytelling for the fragrance industry.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Product</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/how-it-works" class="hover:text-champagne-400 transition">How It Works</a></li>
+                        <li><a href="/use-cases" class="hover:text-champagne-400 transition">Use Cases</a></li>
+                        <li><a href="/features" class="hover:text-champagne-400 transition">Features</a></li>
+                        <li><a href="/lab" class="hover:text-champagne-400 transition">AI Lab</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-champagne-400 transition">Documentation</a></li>
+                        <li><a href="https://github.com/dcthedeveloper/Aura-Intelligence" target="_blank" class="hover:text-champagne-400 transition">GitHub</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-champagne-400 transition">About</a></li>
+                        <li><a href="#" class="hover:text-champagne-400 transition">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Aura Intelligence. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Lab Form Submission
+        document.getElementById('lab-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const analyzeBtn = document.getElementById('analyze-btn');
+            const originalBtnText = analyzeBtn.innerHTML;
+            analyzeBtn.innerHTML = '🔬 Analyzing with 5 AI Agents...';
+            analyzeBtn.disabled = true;
+            
+            // Show agent results section
+            document.getElementById('agent-results').classList.remove('hidden');
+            
+            // Scroll to results
+            document.getElementById('agent-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            const formData = {
+                fragrance_name: document.getElementById('fragrance_name').value,
+                target_audience: document.getElementById('target_audience').value,
+                key_notes: document.getElementById('key_notes').value,
+                vibe_keywords: document.getElementById('vibe_keywords').value
+            };
+            
+            try {
+                const response = await fetch('/analyze-customer', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Populate agent results
+                    document.getElementById('profile-analysis').innerHTML = formatAnalysis(result.analysis.customer_profile);
+                    document.getElementById('preference-analysis').innerHTML = formatAnalysis(result.analysis.preferences);
+                    document.getElementById('psychology-analysis').innerHTML = formatAnalysis(result.analysis.psychology);
+                    document.getElementById('market-analysis').innerHTML = formatAnalysis(result.analysis.market_trends);
+                    document.getElementById('synthesis-analysis').innerHTML = formatAnalysis(result.analysis.synthesis);
+                    
+                    // Activate agent cards
+                    document.querySelectorAll('.agent-card').forEach(card => {
+                        card.classList.add('active');
+                    });
+                    
+                    // Store insights for variant generation
+                    window.agentInsights = result.analysis;
+                    
+                    // Enable variant generation button
+                    document.getElementById('generate-variants-btn').disabled = false;
+                } else {
+                    alert('Analysis failed: ' + result.error);
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to run multi-agent analysis. Please try again.');
+            } finally {
+                analyzeBtn.innerHTML = originalBtnText;
+                analyzeBtn.disabled = false;
+            }
+        });
+        
+        // Generate Variants Button
+        document.getElementById('generate-variants-btn').addEventListener('click', async () => {
+            const btn = document.getElementById('generate-variants-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '⚗️ Generating Story Variants...';
+            btn.disabled = true;
+            
+            // Show variants section
+            document.getElementById('variants-section').classList.remove('hidden');
+            document.getElementById('variants-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            const numVariants = parseInt(document.getElementById('num_variants').value);
+            
+            const requestData = {
+                fragrance_name: document.getElementById('fragrance_name').value,
+                key_notes: document.getElementById('key_notes').value,
+                agent_insights: window.agentInsights,
+                num_variants: numVariants
+            };
+            
+            try {
+                const response = await fetch('/generate-variants', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayVariants(result.variants);
+                } else {
+                    alert('Variant generation failed: ' + result.error);
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to generate variants. Please try again.');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+        
+        function formatAnalysis(text) {
+            // Simple markdown-style formatting
+            return text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\n/g, '<br/>');
+        }
+        
+        function displayVariants(variants) {
+            const grid = document.getElementById('variants-grid');
+            grid.innerHTML = '';
+            
+            variants.forEach((variant, index) => {
+                const variantCard = document.createElement('div');
+                variantCard.className = 'variant-card bg-white rounded-xl border-2 border-gray-200 p-6';
+                
+                const agentColors = {
+                    'psychology': 'pink',
+                    'customer_profile': 'blue',
+                    'market_trends': 'green',
+                    'preferences': 'purple'
+                };
+                
+                const color = agentColors[variant.focus_agent] || 'gray';
+                
+                variantCard.innerHTML = `
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-${color}-500 text-white rounded-lg flex items-center justify-center font-bold text-sm">
+                                ${String.fromCharCode(65 + index)}
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900">${variant.name}</h3>
+                                <p class="text-xs text-gray-500">Powered by ${variant.focus_agent.replace('_', ' ')} agent</p>
+                            </div>
+                        </div>
+                        <button onclick="copyVariant(${index})" class="text-champagne-600 hover:text-champagne-700 transition text-sm font-medium">
+                            📋 Copy
+                        </button>
+                    </div>
+                    <div class="prose prose-sm max-w-none text-gray-700 variant-content" id="variant-${index}">
+                        ${formatMarkdown(variant.content)}
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-200 flex items-center justify-between">
+                        <button onclick="selectWinner(${index}, '${variant.name}')" 
+                            class="text-champagne-600 hover:text-champagne-700 font-medium text-sm flex items-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span>Select as Winner</span>
+                        </button>
+                        <button onclick="exportVariant(${index})" 
+                            class="text-gray-600 hover:text-gray-800 text-sm">
+                            Export PDF
+                        </button>
+                    </div>
+                `;
+                
+                grid.appendChild(variantCard);
+            });
+            
+            // Store variants globally
+            window.variants = variants;
+        }
+        
+        function formatMarkdown(text) {
+            return text
+                .replace(/### (.*?)(\n|$)/g, '<h3 class="text-lg font-bold text-gray-900 mt-4 mb-2">$1</h3>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\* (.*?)(\n|$)/g, '<li class="ml-4">$1</li>')
+                .replace(/\n\n/g, '<br/><br/>');
+        }
+        
+        function copyVariant(index) {
+            const variant = window.variants[index];
+            navigator.clipboard.writeText(variant.content);
+            
+            // Visual feedback
+            event.target.innerHTML = '✓ Copied!';
+            setTimeout(() => {
+                event.target.innerHTML = '📋 Copy';
+            }, 2000);
+        }
+        
+        function selectWinner(index, name) {
+            // Visual feedback
+            document.querySelectorAll('.variant-card').forEach((card, i) => {
+                if (i === index) {
+                    card.classList.add('ring-4', 'ring-champagne-400', 'bg-champagne-50');
+                } else {
+                    card.classList.remove('ring-4', 'ring-champagne-400', 'bg-champagne-50');
+                    card.style.opacity = '0.6';
+                }
+            });
+            
+            // Show success message
+            const message = document.createElement('div');
+            message.className = 'fixed bottom-8 right-8 bg-champagne-500 text-white px-6 py-4 rounded-lg shadow-2xl';
+            message.innerHTML = `<strong>Winner Selected!</strong><br/>Variant ${String.fromCharCode(65 + index)}: ${name}`;
+            document.body.appendChild(message);
+            
+            setTimeout(() => {
+                message.remove();
+            }, 3000);
+        }
+        
+        async function exportVariant(index) {
+            const variant = window.variants[index];
+            const fragranceName = document.getElementById('fragrance_name').value;
+            
+            try {
+                const response = await fetch('/export-pdf', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: `${fragranceName} - Variant ${String.fromCharCode(65 + index)}`,
+                        content: variant.content
+                    })
+                });
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `${fragranceName.replace(/\s+/g, '_')}_Variant_${String.fromCharCode(65 + index)}.pdf`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    a.remove();
+                }
+            } catch (error) {
+                console.error('Export error:', error);
+                alert('Failed to export PDF');
+            }
+        }
+    </script>
+
+</body>
+</html>
