@@ -445,6 +445,11 @@
                     
                     // Enable variant generation button
                     document.getElementById('generate-variants-btn').disabled = false;
+                    
+                    // Track analytics
+                    if (window.auraAnalytics) {
+                        window.auraAnalytics.trackFeature('lab');
+                    }
                 } else {
                     alert('Analysis failed: ' + result.error);
                 }

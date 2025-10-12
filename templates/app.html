@@ -312,6 +312,7 @@
                     <a href="/features" class="text-gray-600 hover:text-champagne-500 transition">Features</a>
                     <a href="/science" class="text-gray-600 hover:text-champagne-500 transition">Science</a>
                     <a href="/lab" class="text-gray-600 hover:text-champagne-500 transition">AI Lab</a>
+                    <a href="/dashboard" class="text-gray-600 hover:text-champagne-500 transition">Dashboard</a>
                     <a href="/" class="text-gray-600 hover:text-champagne-500 transition">← Back to Home</a>
                 </div>
                 <!-- Mobile menu button -->
@@ -328,6 +329,7 @@
                 <a href="/features" class="block text-gray-600 hover:text-champagne-500 py-2">Features</a>
                 <a href="/science" class="block text-gray-600 hover:text-champagne-500 py-2">Science</a>
                 <a href="/lab" class="block text-gray-600 hover:text-champagne-500 py-2">AI Lab</a>
+                <a href="/dashboard" class="block text-gray-600 hover:text-champagne-500 py-2">Dashboard</a>
                 <a href="/" class="block text-gray-600 hover:text-champagne-500 py-2">← Back to Home</a>
             </div>
         </div>
@@ -1076,6 +1078,15 @@
                     html = `<div class="output-card"><div class="prose-custom">${marked.parse(fullResponse)}</div></div>`;
                 }
                 outputContentDiv.innerHTML = html;
+                
+                // Track analytics for dashboard
+                if (window.auraAnalytics) {
+                    const formData = new FormData(generatorForm);
+                    const fragranceName = formData.get('product_name') || 'Unnamed Fragrance';
+                    const tone = formData.get('tone') || 'Not specified';
+                    const wordCount = fullResponse.split(/\s+/).length;
+                    window.auraAnalytics.trackStoryGeneration(fragranceName, tone, wordCount);
+                }
 
             } catch (error) {
                 console.error('Generate Error:', error);
@@ -1156,6 +1167,11 @@
 
                     // Add to conversation history
                     conversationHistory.push({ role: 'assistant', content: data.response });
+                    
+                    // Track analytics
+                    if (window.auraAnalytics) {
+                        window.auraAnalytics.trackFeature('curator');
+                    }
                 } else {
                     throw new Error(data.error || 'Unknown error');
                 }
@@ -1259,6 +1275,11 @@
             if (saved.length > 50) saved.pop();
             
             localStorage.setItem('savedStories', JSON.stringify(saved));
+            
+            // Track analytics
+            if (window.auraAnalytics) {
+                window.auraAnalytics.trackFeature('storyBuilder');
+            }
             
             // Visual feedback
             saveBtnText.textContent = 'Saved! ✅';

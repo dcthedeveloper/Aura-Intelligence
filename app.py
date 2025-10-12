@@ -61,6 +61,13 @@ def science():
     """
     return render_template('science.html')
 
+@app.route('/dashboard')
+def dashboard():
+    """
+    Marketing Dashboard - Analytics and performance tracking
+    """
+    return render_template('dashboard.html')
+
 def get_accurate_notes(fragrance_name):
     """
     Uses a web-search enabled model to get accurate notes for a known fragrance.

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Dashboard - Aura Intelligence</title>
+    <meta name="description" content="Track your fragrance storytelling performance, A/B test results, and content analytics.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'champagne': {
+                            50: '#FEFDFB',
+                            100: '#F8F6F3',
+                            200: '#E8E0D5',
+                            300: '#D4C7B5',
+                            400: '#C9B896',
+                            500: '#B5A585',
+                            600: '#A18F71',
+                            700: '#7D6F56',
+                            800: '#5A503D',
+                            900: '#3A3327',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #C9B896, #B5A585);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat-card {
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center h-10">
+                <a href="/" class="text-2xl font-serif font-bold">
+                    <span style="background: linear-gradient(135deg, #C9B896 0%, #B5A585 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Aura</span> Intelligence
+                </a>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="/how-it-works" class="text-gray-600 hover:text-champagne-500 transition">How It Works</a>
+                    <a href="/use-cases" class="text-gray-600 hover:text-champagne-500 transition">Use Cases</a>
+                    <a href="/features" class="text-gray-600 hover:text-champagne-500 transition">Features</a>
+                    <a href="/science" class="text-gray-600 hover:text-champagne-500 transition">Science</a>
+                    <a href="/lab" class="text-gray-600 hover:text-champagne-500 transition">AI Lab</a>
+                    <a href="/dashboard" class="text-champagne-500 font-medium">Dashboard</a>
+                    <a href="/app" class="bg-gradient-to-r from-champagne-400 to-champagne-500 text-white px-6 py-2 rounded-lg hover:from-champagne-500 hover:to-champagne-600 transition">
+                        Launch App
+                    </a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-900">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2 space-y-2">
+                <a href="/how-it-works" class="block text-gray-600 hover:text-champagne-500 py-2">How It Works</a>
+                <a href="/use-cases" class="block text-gray-600 hover:text-champagne-500 py-2">Use Cases</a>
+                <a href="/features" class="block text-gray-600 hover:text-champagne-500 py-2">Features</a>
+                <a href="/science" class="block text-gray-600 hover:text-champagne-500 py-2">Science</a>
+                <a href="/lab" class="block text-gray-600 hover:text-champagne-500 py-2">AI Lab</a>
+                <a href="/dashboard" class="block text-champagne-500 font-medium py-2">Dashboard</a>
+                <a href="/app" class="block bg-gradient-to-r from-champagne-400 to-champagne-500 text-white px-6 py-2 rounded-lg text-center">
+                    Launch App
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-2">
+                        Marketing <span class="gradient-text">Dashboard</span>
+                    </h1>
+                    <p class="text-lg text-gray-600">
+                        Track your fragrance storytelling performance and content analytics
+                    </p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="refresh-btn" class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition flex items-center space-x-2">
+                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                        <span class="text-sm font-medium">Refresh</span>
+                    </button>
+                    <button id="clear-data-btn" class="px-4 py-2 bg-white border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition text-sm font-medium">
+                        Clear Data
+                    </button>
+                </div>
+            </div>
+
+            <!-- Key Metrics Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Total Stories -->
+                <div class="stat-card bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-champagne-400 to-champagne-500 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-xs text-green-600 font-medium bg-green-50 px-2 py-1 rounded-full" id="stories-trend">+0%</span>
+                    </div>
+                    <div class="text-3xl font-bold text-gray-900 mb-1" id="total-stories">0</div>
+                    <div class="text-sm text-gray-600">Total Stories Generated</div>
+                </div>
+
+                <!-- Saved Stories -->
+                <div class="stat-card bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-500 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-xs text-blue-600 font-medium bg-blue-50 px-2 py-1 rounded-full" id="saved-trend">+0%</span>
+                    </div>
+                    <div class="text-3xl font-bold text-gray-900 mb-1" id="saved-stories">0</div>
+                    <div class="text-sm text-gray-600">Stories Saved</div>
+                </div>
+
+                <!-- Avg SEO Score -->
+                <div class="stat-card bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-500 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-xs text-purple-600 font-medium bg-purple-50 px-2 py-1 rounded-full" id="seo-trend">--</span>
+                    </div>
+                    <div class="text-3xl font-bold text-gray-900 mb-1" id="avg-seo-score">--</div>
+                    <div class="text-sm text-gray-600">Average SEO Score</div>
+                </div>
+
+                <!-- A/B Tests Run -->
+                <div class="stat-card bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-500 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                            </svg>
+                        </div>
+                        <span class="text-xs text-green-600 font-medium bg-green-50 px-2 py-1 rounded-full" id="ab-trend">+0%</span>
+                    </div>
+                    <div class="text-3xl font-bold text-gray-900 mb-1" id="ab-tests">0</div>
+                    <div class="text-sm text-gray-600">A/B Tests Completed</div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- Usage Over Time -->
+                <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">Usage Over Time</h3>
+                    <canvas id="usage-chart" height="200"></canvas>
+                </div>
+
+                <!-- Top Tones Used -->
+                <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">Most Popular Tones</h3>
+                    <canvas id="tones-chart" height="200"></canvas>
+                </div>
+            </div>
+
+            <!-- Feature Adoption -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Feature Usage -->
+                <div class="lg:col-span-2 bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">Feature Adoption</h3>
+                    <div class="space-y-4">
+                        <!-- Story Builder -->
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-medium text-gray-700">Story Builder</span>
+                                <span class="text-sm font-bold text-champagne-600" id="story-builder-count">0 uses</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-champagne-400 to-champagne-500 h-2 rounded-full" id="story-builder-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Curator Chat -->
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-medium text-gray-700">AI Curator Chat</span>
+                                <span class="text-sm font-bold text-blue-600" id="curator-count">0 uses</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-blue-400 to-blue-500 h-2 rounded-full" id="curator-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- AI Lab -->
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-medium text-gray-700">AI Lab (Multi-Agent)</span>
+                                <span class="text-sm font-bold text-purple-600" id="lab-count">0 uses</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-purple-400 to-purple-500 h-2 rounded-full" id="lab-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Social Media Generator -->
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-medium text-gray-700">Social Media Posts</span>
+                                <span class="text-sm font-bold text-green-600" id="social-count">0 uses</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-green-400 to-green-500 h-2 rounded-full" id="social-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- PDF Exports -->
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-medium text-gray-700">PDF Exports</span>
+                                <span class="text-sm font-bold text-red-600" id="pdf-count">0 uses</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-red-400 to-red-500 h-2 rounded-full" id="pdf-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">Recent Activity</h3>
+                    <div class="space-y-3" id="recent-activity">
+                        <div class="text-sm text-gray-500 italic">No activity yet</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Fragrances Analyzed -->
+            <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                <h3 class="text-lg font-bold text-gray-900 mb-4">Top Fragrances Analyzed</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead>
+                            <tr class="border-b border-gray-200">
+                                <th class="text-left py-3 px-4 text-sm font-semibold text-gray-700">Rank</th>
+                                <th class="text-left py-3 px-4 text-sm font-semibold text-gray-700">Fragrance Name</th>
+                                <th class="text-left py-3 px-4 text-sm font-semibold text-gray-700">Times Generated</th>
+                                <th class="text-left py-3 px-4 text-sm font-semibold text-gray-700">Tone Used</th>
+                                <th class="text-left py-3 px-4 text-sm font-semibold text-gray-700">Avg Word Count</th>
+                            </tr>
+                        </thead>
+                        <tbody id="top-fragrances">
+                            <tr>
+                                <td colspan="5" class="text-center py-8 text-gray-500">No data available yet. Start generating stories!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-300 py-12 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="text-xl font-serif font-bold text-white mb-4">
+                        <span style="background: linear-gradient(135deg, #C9B896 0%, #B5A585 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Aura</span> Intelligence
+                    </div>
+                    <p class="text-sm text-gray-400">
+                        AI-powered storytelling for the fragrance industry.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Product</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/how-it-works" class="hover:text-champagne-400 transition">How It Works</a></li>
+                        <li><a href="/use-cases" class="hover:text-champagne-400 transition">Use Cases</a></li>
+                        <li><a href="/features" class="hover:text-champagne-400 transition">Features</a></li>
+                        <li><a href="/dashboard" class="hover:text-champagne-400 transition">Dashboard</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/science" class="hover:text-champagne-400 transition">Science of Scent</a></li>
+                        <li><a href="/lab" class="hover:text-champagne-400 transition">AI Lab</a></li>
+                        <li><a href="https://github.com/dcthedeveloper/Aura-Intelligence" target="_blank" class="hover:text-champagne-400 transition">GitHub</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-champagne-400 transition">About</a></li>
+                        <li><a href="#" class="hover:text-champagne-400 transition">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Aura Intelligence. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Analytics data structure
+        const analytics = {
+            stories: [],
+            saved: [],
+            seo: [],
+            abTests: [],
+            features: {
+                storyBuilder: 0,
+                curator: 0,
+                lab: 0,
+                social: 0,
+                pdf: 0
+            },
+            activity: []
+        };
+
+        // Load analytics from localStorage
+        function loadAnalytics() {
+            const stored = localStorage.getItem('aura_analytics');
+            if (stored) {
+                Object.assign(analytics, JSON.parse(stored));
+            }
+            updateDashboard();
+        }
+
+        // Save analytics to localStorage
+        function saveAnalytics() {
+            localStorage.setItem('aura_analytics', JSON.stringify(analytics));
+        }
+
+        // Update all dashboard metrics
+        function updateDashboard() {
+            // Total stories
+            document.getElementById('total-stories').textContent = analytics.stories.length;
+            
+            // Saved stories
+            const savedCount = analytics.saved.length;
+            document.getElementById('saved-stories').textContent = savedCount;
+            
+            // Average SEO score
+            if (analytics.seo.length > 0) {
+                const avgSEO = (analytics.seo.reduce((sum, score) => sum + score, 0) / analytics.seo.length).toFixed(0);
+                document.getElementById('avg-seo-score').textContent = avgSEO;
+                document.getElementById('seo-trend').textContent = avgSEO >= 70 ? 'Good' : 'Fair';
+            }
+            
+            // A/B tests
+            document.getElementById('ab-tests').textContent = analytics.abTests.length;
+            
+            // Feature adoption
+            const total = Object.values(analytics.features).reduce((sum, val) => sum + val, 0);
+            
+            document.getElementById('story-builder-count').textContent = `${analytics.features.storyBuilder} uses`;
+            document.getElementById('curator-count').textContent = `${analytics.features.curator} uses`;
+            document.getElementById('lab-count').textContent = `${analytics.features.lab} uses`;
+            document.getElementById('social-count').textContent = `${analytics.features.social} uses`;
+            document.getElementById('pdf-count').textContent = `${analytics.features.pdf} uses`;
+            
+            if (total > 0) {
+                document.getElementById('story-builder-bar').style.width = `${(analytics.features.storyBuilder / total) * 100}%`;
+                document.getElementById('curator-bar').style.width = `${(analytics.features.curator / total) * 100}%`;
+                document.getElementById('lab-bar').style.width = `${(analytics.features.lab / total) * 100}%`;
+                document.getElementById('social-bar').style.width = `${(analytics.features.social / total) * 100}%`;
+                document.getElementById('pdf-bar').style.width = `${(analytics.features.pdf / total) * 100}%`;
+            }
+            
+            // Recent activity
+            updateRecentActivity();
+            
+            // Top fragrances
+            updateTopFragrances();
+            
+            // Charts
+            updateCharts();
+        }
+
+        // Update recent activity
+        function updateRecentActivity() {
+            const activityDiv = document.getElementById('recent-activity');
+            const recent = analytics.activity.slice(-5).reverse();
+            
+            if (recent.length === 0) {
+                activityDiv.innerHTML = '<div class="text-sm text-gray-500 italic">No activity yet</div>';
+                return;
+            }
+            
+            activityDiv.innerHTML = recent.map(item => `
+                <div class="flex items-start space-x-3 pb-3 border-b border-gray-100 last:border-0">
+                    <div class="w-2 h-2 bg-champagne-500 rounded-full mt-2"></div>
+                    <div class="flex-1">
+                        <div class="text-sm font-medium text-gray-900">${item.action}</div>
+                        <div class="text-xs text-gray-500">${item.timestamp}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Update top fragrances table
+        function updateTopFragrances() {
+            const fragranceMap = {};
+            
+            analytics.stories.forEach(story => {
+                if (!fragranceMap[story.name]) {
+                    fragranceMap[story.name] = {
+                        count: 0,
+                        tones: [],
+                        wordCounts: []
+                    };
+                }
+                fragranceMap[story.name].count++;
+                fragranceMap[story.name].tones.push(story.tone || 'Not specified');
+                fragranceMap[story.name].wordCounts.push(story.wordCount || 0);
+            });
+            
+            const topFragrances = Object.entries(fragranceMap)
+                .sort((a, b) => b[1].count - a[1].count)
+                .slice(0, 10);
+            
+            const tbody = document.getElementById('top-fragrances');
+            
+            if (topFragrances.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-gray-500">No data available yet. Start generating stories!</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = topFragrances.map(([name, data], index) => {
+                const avgWordCount = Math.round(data.wordCounts.reduce((sum, wc) => sum + wc, 0) / data.wordCounts.length);
+                const mostCommonTone = data.tones.sort((a,b) => 
+                    data.tones.filter(v => v === a).length - data.tones.filter(v => v === b).length
+                ).pop();
+                
+                return `
+                    <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                        <td class="py-3 px-4 text-sm font-bold text-champagne-600">#${index + 1}</td>
+                        <td class="py-3 px-4 text-sm font-medium text-gray-900">${name}</td>
+                        <td class="py-3 px-4 text-sm text-gray-700">${data.count}</td>
+                        <td class="py-3 px-4 text-sm text-gray-700">${mostCommonTone}</td>
+                        <td class="py-3 px-4 text-sm text-gray-700">${avgWordCount} words</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Charts
+        let usageChart, tonesChart;
+
+        function updateCharts() {
+            // Usage over time chart
+            const ctx1 = document.getElementById('usage-chart').getContext('2d');
+            
+            // Group stories by date
+            const dates = {};
+            analytics.stories.forEach(story => {
+                const date = story.date || new Date().toISOString().split('T')[0];
+                dates[date] = (dates[date] || 0) + 1;
+            });
+            
+            const sortedDates = Object.keys(dates).sort().slice(-7); // Last 7 days
+            const counts = sortedDates.map(date => dates[date]);
+            
+            if (usageChart) usageChart.destroy();
+            
+            usageChart = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: sortedDates.map(date => new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })),
+                    datasets: [{
+                        label: 'Stories Generated',
+                        data: counts,
+                        borderColor: '#C9B896',
+                        backgroundColor: 'rgba(201, 184, 150, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, ticks: { precision: 0 } }
+                    }
+                }
+            });
+            
+            // Tones chart
+            const ctx2 = document.getElementById('tones-chart').getContext('2d');
+            
+            const tones = {};
+            analytics.stories.forEach(story => {
+                const tone = story.tone || 'Not specified';
+                tones[tone] = (tones[tone] || 0) + 1;
+            });
+            
+            const toneLabels = Object.keys(tones).slice(0, 5);
+            const toneCounts = toneLabels.map(tone => tones[tone]);
+            
+            if (tonesChart) tonesChart.destroy();
+            
+            tonesChart = new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: toneLabels,
+                    datasets: [{
+                        data: toneCounts,
+                        backgroundColor: [
+                            '#C9B896',
+                            '#B5A585',
+                            '#A18F71',
+                            '#7D6F56',
+                            '#5A503D'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Track analytics from other pages
+        function trackStoryGeneration(name, tone, wordCount) {
+            analytics.stories.push({
+                name: name,
+                tone: tone,
+                wordCount: wordCount,
+                date: new Date().toISOString().split('T')[0],
+                timestamp: new Date().toISOString()
+            });
+            
+            analytics.features.storyBuilder++;
+            
+            analytics.activity.push({
+                action: `Generated story for "${name}"`,
+                timestamp: new Date().toLocaleString()
+            });
+            
+            saveAnalytics();
+        }
+
+        function trackFeature(feature) {
+            if (analytics.features.hasOwnProperty(feature)) {
+                analytics.features[feature]++;
+                saveAnalytics();
+            }
+        }
+
+        function trackSEO(score) {
+            analytics.seo.push(score);
+            saveAnalytics();
+        }
+
+        function trackABTest() {
+            analytics.abTests.push({
+                date: new Date().toISOString().split('T')[0],
+                timestamp: new Date().toISOString()
+            });
+            saveAnalytics();
+        }
+
+        // Expose tracking functions globally
+        window.auraAnalytics = {
+            trackStoryGeneration,
+            trackFeature,
+            trackSEO,
+            trackABTest
+        };
+
+        // Refresh button
+        document.getElementById('refresh-btn').addEventListener('click', () => {
+            loadAnalytics();
+            
+            // Show feedback
+            const btn = document.getElementById('refresh-btn');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<svg class="w-5 h-5 text-green-600 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg><span class="text-sm font-medium">Refreshed!</span>';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+            }, 1500);
+        });
+
+        // Clear data button
+        document.getElementById('clear-data-btn').addEventListener('click', () => {
+            if (confirm('Are you sure you want to clear all analytics data? This cannot be undone.')) {
+                localStorage.removeItem('aura_analytics');
+                location.reload();
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Load analytics on page load
+        loadAnalytics();
+
+        // Simulate some demo data if empty (for portfolio demonstration)
+        if (analytics.stories.length === 0 && window.location.search.includes('demo=true')) {
+            const demoFragrances = [
+                { name: 'Midnight Garden', tone: 'Mysterious', wordCount: 450 },
+                { name: 'Creed Aventus', tone: 'Bold', wordCount: 520 },
+                { name: 'Ocean Breeze', tone: 'Fresh', wordCount: 380 },
+                { name: 'Velvet Rose', tone: 'Romantic', wordCount: 495 },
+                { name: 'Sandalwood Dreams', tone: 'Earthy', wordCount: 410 }
+            ];
+            
+            demoFragrances.forEach((frag, i) => {
+                trackStoryGeneration(frag.name, frag.tone, frag.wordCount);
+            });
+            
+            analytics.features.curator = 12;
+            analytics.features.lab = 3;
+            analytics.features.social = 8;
+            analytics.features.pdf = 5;
+            analytics.seo = [75, 82, 68, 91, 77];
+            analytics.abTests = [{}, {}, {}];
+            
+            saveAnalytics();
+            updateDashboard();
+        }
+    </script>
+
+</body>
+</html>

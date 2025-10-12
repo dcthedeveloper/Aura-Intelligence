@@ -130,6 +130,44 @@ Advanced customer persona analysis and A/B testing for fragrance marketing optim
 
 ---
 
+### 📊 **Marketing Dashboard**  
+Real-time analytics and performance tracking for your fragrance storytelling.
+
+**Key Capabilities:**
+- **Usage Analytics**: 
+  - Total stories generated
+  - Stories saved to library
+  - A/B tests completed
+  - Feature adoption metrics
+- **Content Performance**: 
+  - Average SEO scores
+  - Top performing tones/vibes
+  - Most analyzed fragrances
+  - Word count trends
+- **Visualization**: 
+  - Usage over time (7-day trend chart)
+  - Most popular tones (doughnut chart)
+  - Feature adoption progress bars
+  - Recent activity feed
+- **Export & Insights**: 
+  - Top fragrances analyzed table
+  - Engagement metrics by feature
+  - Data refresh and clear options
+
+**Technical Implementation**:
+- **LocalStorage Tracking**: Client-side analytics for privacy-first data collection
+- **Chart.js Visualization**: Interactive, champagne-themed charts
+- **Cross-Page Integration**: Analytics tracking from Story Builder, Curator, and AI Lab
+- **Real-Time Updates**: Live dashboard refresh with activity feed
+
+**Use Cases**:
+- Portfolio demonstration of full-stack product thinking
+- Content strategy optimization based on usage patterns
+- A/B test result tracking and comparison
+- Feature adoption analysis for product development
+
+---
+
 ## 🛠️ Tech Stack  
 
 | Component | Technology | Purpose |
@@ -208,25 +246,26 @@ The app will open to the landing page. Navigate to `/app` to access the Story Bu
 
 ```
 Aura-Intelligence/
-├── app.py                     # Flask backend (588 lines)
+├── app.py                     # Flask backend (650+ lines)
 ├── requirements.txt           # Python dependencies
 ├── .env                       # Environment variables (create this)
 ├── .env.example              # Template for environment variables
 ├── .gitignore                # Git ignore rules (protects .env)
 ├── templates/
-│   ├── app.html              # Story Builder & Curator tool (1,813 lines)
+│   ├── app.html              # Story Builder & Curator tool (1,830+ lines)
 │   ├── home.html             # Landing page (562 lines)
 │   ├── how_it_works.html     # How It Works page (550 lines)
 │   ├── use_cases.html        # Use Cases page (706 lines)
 │   ├── features.html         # Features page (675 lines)
 │   ├── science.html          # Science of Scent (neuroscience) (513 lines)
-│   └── lab.html              # AI Lab (multi-agent analysis) (644 lines)
+│   ├── lab.html              # AI Lab (multi-agent analysis) (650+ lines)
+│   └── dashboard.html        # Marketing Dashboard (analytics) (900+ lines)
 ├── LICENSE                   # MIT License
 ├── PROJECT_WRITEUP.md        # Technical documentation
 ├── SUBMISSION_CHECKLIST.md   # Project submission checklist
 └── README.md                 # This file
 
-Total: ~7,000+ lines of production code
+Total: ~8,000+ lines of production code
 ```
 
 ---
@@ -379,6 +418,7 @@ Total: ~7,000+ lines of production code
 - ✅ **Curated Collections** (Best Niche Fragrances - 21 premium scents)
 - ✅ **Science of Scent Page** (Neuroscience-backed olfactory marketing education)
 - ✅ **AI Lab** (Multi-agent customer analysis & A/B testing tool)
+- ✅ **Marketing Dashboard** (Real-time analytics with Chart.js visualizations)
 - ✅ **Comprehensive UX/UI Audit** (Luxury design system with emoji-free aesthetic)
 
 ### Phase 2 (Q1-Q2 2026) - Expansion
@@ -395,7 +435,7 @@ Total: ~7,000+ lines of production code
 - 🔲 Brand voice training (upload samples, AI learns your style)
 
 ### Phase 3 (Q3-Q4 2026) - Monetization
-- 🔲 Analytics dashboard (track generations, saves, conversions)
+- 🔲 Enhanced analytics (cloud-based historical tracking & exports)
 - 🔲 Shopify/WooCommerce plugin (one-click integration)
 - 🔲 Team collaboration features
 - 🔲 Usage-based pricing tiers
