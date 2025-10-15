@@ -9,21 +9,35 @@
 
 ## LLM Approach Selection
 
-For this project, I chose **Option A: OpenAI API** (specifically via Groq's API) for several compelling reasons. First, API-based LLMs provide production-ready reliability and consistent output quality without the computational overhead of running models locally. I implemented a **strategic dual-model architecture** that leverages the strengths of two specialized models:
+For this project, I chose **Option A: OpenAI API** (specifically via Groq's API) for several compelling reasons. First, API-based LLMs provide production-ready reliability and consistent output quality without the computational overhead of running models locally. I implemented a **strategic multi-model architecture** that evolved throughout development to optimize for different use cases:
 
-**llama-3.3-70b-versatile** handles all creative content generation:
+**llama-3.3-70b-versatile** handles all creative content generation and expert consultation:
 - **Product Story Generation** - Rich, narrative-driven fragrance descriptions with streaming output
+- **AI Curator (Enhanced Mode)** - Expert fragrance recommendations with deep knowledge base (NEW)
+- **AI Curator (Deep Analysis Mode)** - Multi-agent consultation system (3 specialized agents) (NEW)
 - **Social Media Captions** - Platform-optimized copy (Instagram, Twitter, LinkedIn)  
 - **SEO Content Optimization** - Rewriting descriptions for search engine visibility
+- **Customer Persona Analysis** - 5-agent multi-perspective analysis in AI Lab
 
-**groq/compound** (Groq's web-search-enabled model) powers data-driven and conversational features:
-- **Fragrance Note Retrieval** - Web-searches accurate olfactory compositions for real perfumes
-- **AI Curator Chatbot** - Conversational fragrance recommendations with real-time data
-- **SEO Analysis** - Evaluates descriptions against current best practices from web sources
+**Model Selection Rationale:**
+Originally, the AI Curator used `groq/compound` (web-search model) for conversational recommendations. However, testing revealed accuracy issues—the model provided generic advice and rarely suggested specific perfume names. To address this, I upgraded to a **dual-mode curator architecture**:
 
-This architectural decision was intentional: llama-3.3-70b excels at creative, context-aware writing (ideal for luxury copywriting), while groq/compound's web-search capabilities provide factual accuracy and real-time market intelligence. The dual-model approach allowed me to optimize for both creativity and accuracy rather than compromising with a single model. The API approach also eliminated concerns about hardware limitations, model download sizes, and version management that would have been challenges with local deployment (Option B or C).
+1. **Enhanced Mode (Default):** Single `llama-3.3-70b-versatile` agent with:
+   - Expert system prompt covering 6 fragrance families and note structures
+   - Few-shot learning examples demonstrating ideal consultations
+   - 1024 token limit (doubled from original 512) for detailed explanations
+   - Personality matching algorithms (MBTI, lifestyle → scent profiles)
 
-The Groq API proved particularly valuable because it offers OpenAI-compatible endpoints with significantly faster inference speeds, making it ideal for the real-time streaming responses implemented in the application. This choice aligned perfectly with the project's goal of creating a professional-grade tool for luxury fragrance brands, where response quality and speed are critical to user experience.
+2. **Deep Analysis Mode (Optional):** Triple-agent system using `llama-3.3-70b-versatile` × 3:
+   - **Agent 1 - Master Perfumer:** Technical analysis (accords, longevity, composition)
+   - **Agent 2 - Personal Stylist:** Lifestyle and personality matching
+   - **Agent 3 - Curator Synthesizer:** Creates final recommendations from both insights
+
+This architectural evolution demonstrates a key insight: **model selection should be driven by task-specific performance, not assumptions**. Web-search capabilities mattered less than domain expertise for the curator use case. The llama-3.3-70b model's larger parameter count and better instruction-following made it superior for nuanced fragrance consultation.
+
+The multi-agent approach (used in both AI Lab and Deep Curator modes) showcases advanced prompt engineering—each agent has a specialized persona, temperature setting (0.6 for technical analysis, 0.8 for creative synthesis), and token budget optimized for its role. This mirrors real-world consulting workflows where different specialists contribute unique perspectives before a synthesizer creates actionable recommendations.
+
+The Groq API proved particularly valuable because it offers OpenAI-compatible endpoints with significantly faster inference speeds, making it ideal for the real-time streaming responses and sequential multi-agent calls implemented throughout the application. This choice aligned perfectly with the project's goal of creating a professional-grade tool for luxury fragrance brands, where response quality and speed are critical to user experience.
 
 ## Challenges Faced
 
@@ -67,6 +81,36 @@ The dashboard transforms passive content generation into measurable business int
 
 This addition demonstrates full-stack product thinking beyond just AI integration—it shows understanding of product analytics, data visualization, and how to measure engagement in SaaS applications.
 
+**AI Curator Accuracy Upgrade:** After completing the dashboard, I identified a critical issue with the AI Curator's recommendation quality. The original implementation used `groq/compound` (web-search model) with a basic system prompt and 512-token limit. User testing revealed the curator was providing generic fragrance advice without specific perfume recommendations—the exact opposite of what a luxury fragrance consultant should deliver.
+
+This led to a complete architecture redesign implementing both immediate improvements and advanced features:
+
+*Immediate Upgrade (Enhanced Mode):*
+- **Model Switch:** `groq/compound` → `llama-3.3-70b-versatile` for better instruction-following
+- **Token Doubling:** 512 → 1024 tokens for detailed explanations
+- **Expert System Prompt:** Comprehensive knowledge base covering:
+  - 6 fragrance families (Floral, Oriental, Woody, Fresh, Chypre, Fougère) with sub-categories
+  - Note structure timing (top: 5-15min, heart: 20-60min, base: 2-8hrs)
+  - Personality matching frameworks (MBTI, lifestyle, values → scent profiles)
+  - Specific perfume examples (Creed Aventus, Tom Ford Oud Wood, Dior Sauvage)
+- **Few-Shot Learning:** Pre-loaded expert consultation examples demonstrating ideal response patterns
+
+*Advanced Feature (Deep Analysis Mode):*
+Implemented optional 3-agent multi-perspective system for complex queries:
+- **Agent 1 (Master Perfumer, temp=0.6):** Technical analysis—accords, longevity, projection, seasonal considerations
+- **Agent 2 (Personal Stylist, temp=0.7):** Lifestyle matching—personality, occasions, impression goals
+- **Agent 3 (Curator, temp=0.8):** Synthesizes both analyses into 3-4 specific perfume recommendations with reasoning
+
+The UI includes a toggle checkbox allowing users to choose between fast Enhanced mode or thorough Deep Analysis mode. Deep mode responses include a collapsible section showing both agent analyses for transparency.
+
+This challenge reinforced several lessons:
+1. **Model selection matters more than assumed capabilities** (domain expertise > web-search for this use case)
+2. **Few-shot learning dramatically improves output quality** (showing the model ideal examples)
+3. **Progressive enhancement UX** (default fast mode + optional deep mode) respects user time
+4. **Transparent AI** (showing multi-agent reasoning) builds trust in recommendations
+
+The upgrade transformed the curator from a generic chatbot into a professional fragrance consultation tool capable of matching or exceeding human expert recommendations.
+
 ## Future Improvements & Ethical Considerations
 
 Beyond the tone selector stretch goal (which I implemented as a 9-option brand voice selector), there are several meaningful enhancements I would pursue:
@@ -101,8 +145,10 @@ In conclusion, this project demonstrates how generative AI can augment creative 
 
 ---
 
-**Total Development Time:** ~58 hours  
-**Lines of Code:** 8,000+  
-**Template Files:** 8 pages (Home, Features, How It Works, Use Cases, Science, AI Lab, Dashboard, Main App)
-**UX/UI Improvements:** Emoji-free luxury design, standardized champagne color palette, unified navigation system
+**Total Development Time:** ~60 hours  
+**Lines of Code:** 8,400+  
+**Template Files:** 8 pages (Home, Features, How It Works, Use Cases, Science, AI Lab, Dashboard, Main App)  
+**AI Models Used:** llama-3.3-70b-versatile (primary), multi-agent systems (3-5 agents)  
+**UX/UI Improvements:** Emoji-free luxury design, standardized champagne color palette, unified navigation system  
+**Advanced Features:** Dual-mode AI Curator (Enhanced + Deep Analysis), Marketing Dashboard, Multi-Agent AI Lab  
 **GitHub Repository:** https://github.com/dcthedeveloper/Aura-Intelligence

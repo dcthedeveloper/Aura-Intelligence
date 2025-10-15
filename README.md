@@ -2,7 +2,18 @@
 ### The Olfactory Storyteller & Curator  
 
 [![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://www.python.org/)
-[![Flask](https://img.shields.io/badge/Flask-3.0+-green.svg)](https://flask.palletsprojects.com/)
+[![Flask](https://img.shields.io/badge| Component | Technology | Purpose |
+|-----------|------------|---------|
+| **Backend** | Python 3.7+ with Flask | Lightweight web framework |
+| **AI Engine** | Groq API | Ultra-fast LLM inference |
+| **Storyteller Model** | `llama-3.3-70b-versatile` | Creative writing |
+| **Curator Model (Enhanced)** | `llama-3.3-70b-versatile` | Expert recommendations |
+| **Curator Model (Deep)** | `llama-3.3-70b-versatile` × 3 | Multi-agent analysis |
+| **Multi-Agent Lab** | `llama-3.3-70b-versatile` × 5 | Customer persona analysis |
+| **Frontend** | HTML5, TailwindCSS, Vanilla JS | Responsive, luxury UI |
+| **Markdown Rendering** | Marked.js | Beautiful formatted output |
+| **Analytics** | Chart.js + LocalStorage | Privacy-first tracking |
+| **Environment Management** | python-dotenv | Secure API key handling |0+-green.svg)](https://flask.palletsprojects.com/)
 [![Groq](https://img.shields.io/badge/Groq-API-orange.svg)](https://console.groq.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -69,21 +80,40 @@ A guided, 4-step creative brief system for crafting sophisticated fragrance narr
 
 ---
 
-### 🔍 **Curator Mode (Chatbot)**  
-A conversational AI fragrance expert powered by live web data.
+### 🔍 **Curator Mode (Enhanced AI Assistant)**  
+A dual-mode conversational AI fragrance expert with advanced recommendation capabilities.
 
-**Key Capabilities:**
-- **Real-Time Web Search**: Access to current fragrance databases, reviews, and pricing
-- **Expert Consultation**:
-  - Personalized recommendations based on preferences
-  - Fragrance comparisons and alternatives
-  - Occasion-based suggestions (date night, office, summer)
-  - Education on fragrance families and notes
-- **Natural Conversations**: Context-aware chat with memory
-- **Quick Suggestions**: Pre-built chips for common queries
+**🚀 NEW: Two Intelligence Levels**
+
+**Enhanced Mode (Default):**
+- **Upgraded Model**: `llama-3.3-70b-versatile` for superior accuracy
+- **Expert Knowledge Base**: Deep understanding of:
+  - 6 fragrance families (Floral, Oriental, Woody, Fresh, Chypre, Fougère)
+  - Note structures (top/heart/base with timing & longevity)
+  - Personality matching algorithms (MBTI, lifestyle, values → scent profiles)
+  - Occasion recommendations (work, date, wedding, seasonal)
+- **Few-Shot Learning**: Pre-trained with expert consultation examples
+- **Specific Recommendations**: Suggests actual perfume names (Creed Aventus, Tom Ford Oud Wood, etc.)
+- **1024 Token Responses**: Detailed explanations with actionable advice
+
+**🧠 Deep Analysis Mode (Optional):**
+- **Multi-Agent Architecture**: 3 specialized AI agents collaborate:
+  1. **Master Perfumer**: Technical analysis (accords, longevity, composition)
+  2. **Personal Stylist**: Lifestyle & personality matching
+  3. **Curator Synthesizer**: Creates final recommendations from both insights
+- **Transparent Reasoning**: See each agent's analysis (collapsible view)
+- **Best For**: Complex queries like building fragrance wardrobes, personality deep-dives
+- **Track Record**: Separately tracked analytics (`curatorDeep` vs `curator`)
+
+**Shared Capabilities:**
+- **Natural Conversations**: Context-aware chat with full conversation memory
+- **Quick Start Chips**: Pre-built suggestions (Summer scents, Date night, Woody fragrances)
 - **Streaming Responses**: Real-time answer generation
+- **Smart Follow-Ups**: Asks clarifying questions to refine recommendations
 
-**Model Used**: `groq/compound` (web-search enabled system)
+**Models Used**: 
+- Enhanced: `llama-3.3-70b-versatile` (1 agent)
+- Deep: `llama-3.3-70b-versatile` × 3 (multi-agent system)
 
 ---
 
@@ -299,15 +329,25 @@ Total: ~8,000+ lines of production code
 ### **Curator Mode**
 
 1. Select **"Curator"** from the mode toggle
-2. Type questions or click suggestion chips:
+2. **Choose Your Intelligence Level:**
+   - **Enhanced Mode** (default, checkbox off): Fast, accurate recommendations
+   - **🧠 Deep Analysis Mode** (checkbox on): 3 AI agents for complex queries
+3. Type questions or click suggestion chips:
    - "What's a good fresh summer fragrance?"
-   - "Compare Creed Aventus and Dior Sauvage"
+   - "Help me build a 4-season fragrance wardrobe" (try Deep Mode!)
+   - "I'm an introvert who loves books and coffee. What should I wear?"
    - "Recommend something woody for date night"
-   - "Tell me about Chanel Bleu de Chanel"
-3. Receive real-time answers with web-sourced information
-4. Continue the conversation for deeper recommendations
+4. Receive expert recommendations with specific perfume names
+5. **Deep Mode Only**: Expand analysis insights to see Master Perfumer + Stylist reasoning
+6. Continue the conversation—both modes remember context
 
-**Pro Tip:** The chatbot has memory—build on previous questions for personalized suggestions!
+**Pro Tip:** Use Enhanced Mode for quick questions, Deep Mode when you want transparent multi-agent analysis!
+
+**Example Deep Mode Query:**
+- "I need a signature scent for a creative director who wants to be taken seriously but stay approachable"
+- **Master Perfumer Analysis**: Technical notes (woody-aromatic, citrus freshness, moderate projection)
+- **Personal Stylist Analysis**: Personality insights (balanced authority + creativity signals)
+- **Final Recommendations**: 3-4 specific fragrances with detailed reasoning
 
 ---
 
@@ -376,7 +416,7 @@ Total: ~8,000+ lines of production code
 ---
 
 ### `POST /chat`
-**Purpose**: Handles Curator chatbot queries with web search
+**Purpose**: Handles Curator queries with dual-mode AI (Enhanced or Deep Analysis)
 
 **Request Type**: `application/json`
 
@@ -387,12 +427,32 @@ Total: ~8,000+ lines of production code
   "history": [
     {"role": "user", "content": "Previous message"},
     {"role": "assistant", "content": "Previous response"}
-  ]
+  ],
+  "deepMode": false  // true = 3-agent analysis, false = enhanced single model
 }
 ```
 
-**Response**: JSON with AI response
+**Response (Enhanced Mode)**: JSON with AI response
 ```json
+{
+  "response": "AI-generated recommendation with specific perfume names",
+  "success": true,
+  "mode": "enhanced"
+}
+```
+
+**Response (Deep Mode)**: JSON with multi-agent analysis
+```json
+{
+  "response": "Final synthesized recommendations",
+  "success": true,
+  "mode": "deep",
+  "analysis": {
+    "expert": "Master Perfumer technical analysis",
+    "stylist": "Personal Stylist lifestyle assessment"
+  }
+}
+```
 {
   "response": "AI-generated answer with web-sourced data",
   "success": true
