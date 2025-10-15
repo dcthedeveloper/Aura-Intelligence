@@ -478,6 +478,17 @@
                         <button class="suggestion-chip" data-suggestion="Tell me about Creed Aventus">🔍 Learn about a fragrance</button>
                     </div>
                     
+                    <!-- Deep Analysis Toggle -->
+                    <div class="flex items-center gap-3 mb-3">
+                        <label class="flex items-center gap-2 cursor-pointer group">
+                            <input type="checkbox" id="deep-mode-toggle" class="w-4 h-4 rounded border-champagne-300 text-champagne-600 focus:ring-champagne-500 focus:ring-offset-0">
+                            <span class="text-sm text-champagne-700 group-hover:text-champagne-900 font-medium">
+                                🧠 Deep Analysis Mode
+                            </span>
+                        </label>
+                        <span class="text-xs text-champagne-500 italic">(3 AI agents for complex queries)</span>
+                    </div>
+                    
                     <form id="chat-form" class="flex gap-2">
                         <input 
                             type="text" 
@@ -1120,10 +1131,13 @@
         const chatInput = document.getElementById('chat-input');
         const chatHistory = document.getElementById('chat-history');
         const suggestionChips = document.querySelectorAll('.suggestion-chip');
+        const deepModeToggle = document.getElementById('deep-mode-toggle');
         let conversationHistory = [];
 
         async function sendChatMessage(message) {
             if (!message.trim()) return;
+
+            const isDeepMode = deepModeToggle.checked;
 
             // Add user message to UI
             const userBubble = document.createElement('div');
@@ -1135,10 +1149,12 @@
             // Add to conversation history
             conversationHistory.push({ role: 'user', content: message });
 
-            // Show typing indicator
+            // Show typing indicator with mode info
             const typingBubble = document.createElement('div');
             typingBubble.className = 'chat-bubble ai';
-            typingBubble.innerHTML = '<p class="text-gray-500 animate-pulse">Aura is thinking...</p>';
+            typingBubble.innerHTML = isDeepMode 
+                ? '<p class="text-gray-500 animate-pulse">🧠 Deep analysis in progress... (3 AI agents analyzing)</p>'
+                : '<p class="text-gray-500 animate-pulse">Aura is thinking...</p>';
             typingBubble.id = 'typing-indicator';
             chatHistory.appendChild(typingBubble);
             chatHistory.scrollTop = chatHistory.scrollHeight;
@@ -1149,7 +1165,8 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         message: message,
-                        history: conversationHistory
+                        history: conversationHistory,
+                        deepMode: isDeepMode
                     })
                 });
 
@@ -1159,6 +1176,28 @@
                 document.getElementById('typing-indicator')?.remove();
 
                 if (data.success && data.response) {
+                    // Show analysis insights for deep mode
+                    if (data.mode === 'deep' && data.analysis) {
+                        const analysisBubble = document.createElement('div');
+                        analysisBubble.className = 'chat-bubble ai bg-champagne-50 border-l-4 border-champagne-400';
+                        analysisBubble.innerHTML = `
+                            <details class="cursor-pointer">
+                                <summary class="font-semibold text-champagne-900 mb-2">🔬 Multi-Agent Analysis</summary>
+                                <div class="mt-3 space-y-3 text-sm">
+                                    <div>
+                                        <p class="font-medium text-champagne-800">👨‍🔬 Master Perfumer:</p>
+                                        <p class="text-champagne-700 mt-1">${data.analysis.expert}</p>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-champagne-800">👔 Personal Stylist:</p>
+                                        <p class="text-champagne-700 mt-1">${data.analysis.stylist}</p>
+                                    </div>
+                                </div>
+                            </details>
+                        `;
+                        chatHistory.appendChild(analysisBubble);
+                    }
+
                     // Add AI response to UI
                     const aiBubble = document.createElement('div');
                     aiBubble.className = 'chat-bubble ai';
@@ -1168,9 +1207,9 @@
                     // Add to conversation history
                     conversationHistory.push({ role: 'assistant', content: data.response });
                     
-                    // Track analytics
+                    // Track analytics with mode
                     if (window.auraAnalytics) {
-                        window.auraAnalytics.trackFeature('curator');
+                        window.auraAnalytics.trackFeature(data.mode === 'deep' ? 'curatorDeep' : 'curator');
                     }
                 } else {
                     throw new Error(data.error || 'Unknown error');

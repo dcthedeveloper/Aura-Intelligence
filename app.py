@@ -523,6 +523,7 @@ Make it sophisticated, sensory, and conversion-focused."""
 def chat():
     """
     Curator mode: conversational fragrance recommendations
+    Supports both standard and deep analysis modes
     """
     if not client:
         return jsonify({"error": "Groq client not initialized. Please check your API key."}), 500
@@ -531,48 +532,186 @@ def chat():
         data = request.get_json()
         user_message = data.get('message', '')
         chat_history = data.get('history', [])
+        deep_mode = data.get('deepMode', False)  # New: multi-agent analysis
 
         if not user_message:
             return jsonify({"error": "No message provided"}), 400
 
-        # Build conversation history
+        # OPTION 1: Multi-Agent Deep Analysis Mode
+        if deep_mode:
+            return _deep_analysis_chat(user_message, chat_history)
+        
+        # OPTION 2: Enhanced Single Model (Default Mode)
+        # Build conversation history with upgraded system prompt
         messages = [
             {
                 "role": "system",
-                "content": """You are "Aura," a knowledgeable fragrance curator and expert. 
-You help users discover fragrances based on their preferences, occasions, and tastes.
-Provide personalized recommendations, explain fragrance families, suggest similar scents, 
-and share insights about perfumery. Be conversational, enthusiastic, and helpful.
-Keep responses concise but informative."""
+                "content": """You are "Aura," an elite fragrance curator and perfumery expert with deep knowledge of:
+
+**Fragrance Families & Classifications:**
+- Floral (Soliflore, Floral Bouquet, Soft Floral)
+- Oriental (Soft Oriental, Oriental, Woody Oriental)
+- Woody (Woods, Mossy Woods, Dry Woods)
+- Fresh (Citrus, Green, Water, Fruity)
+- Chypre (Floral, Fruity, Fresh, Green)
+- Fougère (Classic, Aromatic, Soft)
+
+**Note Structures:**
+- Top Notes: First impression (5-15 min) - citrus, herbs, light florals
+- Heart Notes: Character (20-60 min) - florals, spices, fruits
+- Base Notes: Longevity (2-8 hours) - woods, resins, musks, vanilla
+
+**Expertise Areas:**
+- Personality matching (MBTI, lifestyle, values → fragrance profiles)
+- Occasion recommendations (work, date, wedding, travel, seasons)
+- Layering techniques and fragrance wardrobes
+- Vintage vs modern compositions
+- Niche, designer, and artisan houses
+- Longevity, projection, and sillage analysis
+
+**Response Style:**
+- Ask clarifying questions to understand preferences deeply
+- Provide 2-3 specific fragrance recommendations with reasoning
+- Explain why certain notes work for their personality/occasion
+- Suggest similar alternatives at different price points
+- Share fascinating perfumery insights when relevant
+
+Be warm, conversational, and enthusiastic. Give actionable recommendations with specific fragrance examples when possible."""
             }
         ]
         
-        # Add chat history
+        # Add few-shot examples for better accuracy
+        if not chat_history:
+            messages.extend([
+                {
+                    "role": "user",
+                    "content": "I need a confidence-boosting fragrance for important business meetings"
+                },
+                {
+                    "role": "assistant",
+                    "content": "For commanding presence in business settings, I'd recommend:\n\n1. **Tom Ford Oud Wood** - Woody oriental with oud, sandalwood, and tonka. Projects quiet authority without overwhelming. Perfect for boardrooms.\n\n2. **Creed Aventus** - Fresh fruity with pineapple, birch, and musk. Universally respected, confidence in a bottle.\n\n3. **Dior Sauvage** - Fresh spicy with bergamot and pepper. Clean, powerful, memorable.\n\nAll three have excellent longevity (6-8 hours) and moderate projection - noticed but not invasive. Which style resonates with you: the mysterious depth of oud, the fresh success energy of Aventus, or the clean power of Sauvage?"
+                }
+            ])
+        
+        # Add actual chat history
         for msg in chat_history:
             messages.append({"role": msg.get("role"), "content": msg.get("content")})
         
         # Add current user message
         messages.append({"role": "user", "content": user_message})
 
-        # Get AI response using groq/compound for web-search capabilities
+        # Upgraded: llama-3.3-70b (same as Story Builder) + increased tokens
         chat_completion = client.chat.completions.create(
-            model="groq/compound",
+            model="llama-3.3-70b-versatile",
             messages=messages,
             temperature=0.7,
-            max_tokens=512,
+            max_tokens=1024,  # Doubled for better explanations
         )
 
         ai_response = chat_completion.choices[0].message.content.strip()
         
         return jsonify({
             "response": ai_response,
-            "success": True
+            "success": True,
+            "mode": "enhanced"
         })
 
     except Exception as e:
         print(f"Error in chat endpoint: {e}")
         print(traceback.format_exc())
         return jsonify({"error": "An error occurred during chat. Please try again."}), 500
+
+
+def _deep_analysis_chat(user_message, chat_history):
+    """
+    Multi-agent deep analysis for complex fragrance recommendations
+    Uses 3 specialized agents similar to AI Lab architecture
+    """
+    try:
+        # Agent 1: Fragrance Expert - Technical knowledge
+        expert_prompt = f"""You are a Master Perfumer with 30 years of experience in fragrance composition.
+
+USER QUERY: {user_message}
+
+CHAT CONTEXT: {chat_history[-3:] if len(chat_history) > 0 else 'New conversation'}
+
+Analyze this query from a technical perfumery perspective:
+1. What fragrance families and note structures would work best?
+2. What specific raw materials/accords should be featured?
+3. What longevity and projection characteristics are needed?
+4. Any technical considerations (skin chemistry, season, layering)?
+
+Provide expert analysis in 3-4 sentences."""
+
+        expert_response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[{"role": "user", "content": expert_prompt}],
+            temperature=0.6,
+            max_tokens=400,
+        )
+        expert_analysis = expert_response.choices[0].message.content.strip()
+
+        # Agent 2: Personal Stylist - Lifestyle & personality matching
+        stylist_prompt = f"""You are an elite Personal Fragrance Stylist who matches scents to personalities and lifestyles.
+
+USER QUERY: {user_message}
+
+CHAT CONTEXT: {chat_history[-3:] if len(chat_history) > 0 else 'New conversation'}
+
+Analyze this query from a personality and lifestyle perspective:
+1. What does their request reveal about their personality/values?
+2. What occasions or contexts will they wear this?
+3. What impression do they want to project?
+4. What should be avoided based on their needs?
+
+Provide lifestyle analysis in 3-4 sentences."""
+
+        stylist_response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[{"role": "user", "content": stylist_prompt}],
+            temperature=0.7,
+            max_tokens=400,
+        )
+        stylist_analysis = stylist_response.choices[0].message.content.strip()
+
+        # Agent 3: Curator - Synthesize and recommend
+        curator_prompt = f"""You are "Aura," the ultimate fragrance curator synthesizing expert insights into perfect recommendations.
+
+USER QUERY: {user_message}
+
+PERFUMER ANALYSIS: {expert_analysis}
+
+STYLIST ANALYSIS: {stylist_analysis}
+
+Based on these expert insights, provide:
+1. 3-4 specific fragrance recommendations (name the actual perfumes)
+2. Why each one works (connect to both technical and lifestyle factors)
+3. A final thought or tip
+
+Be warm, enthusiastic, and actionable. Format beautifully with clear sections."""
+
+        curator_response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[{"role": "user", "content": curator_prompt}],
+            temperature=0.8,
+            max_tokens=800,
+        )
+        final_recommendation = curator_response.choices[0].message.content.strip()
+
+        return jsonify({
+            "response": final_recommendation,
+            "success": True,
+            "mode": "deep",
+            "analysis": {
+                "expert": expert_analysis,
+                "stylist": stylist_analysis
+            }
+        })
+
+    except Exception as e:
+        print(f"Error in deep analysis: {e}")
+        print(traceback.format_exc())
+        return jsonify({"error": "Deep analysis failed. Please try standard mode."}), 500
 
 
 @app.route('/export-pdf', methods=['POST'])
