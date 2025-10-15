@@ -2,18 +2,7 @@
 ### The Olfactory Storyteller & Curator  
 
 [![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://www.python.org/)
-[![Flask](https://img.shields.io/badge| Component | Technology | Purpose |
-|-----------|------------|---------|
-| **Backend** | Python 3.7+ with Flask | Lightweight web framework |
-| **AI Engine** | Groq API | Ultra-fast LLM inference |
-| **Storyteller Model** | `llama-3.3-70b-versatile` | Creative writing |
-| **Curator Model (Enhanced)** | `llama-3.3-70b-versatile` | Expert recommendations |
-| **Curator Model (Deep)** | `llama-3.3-70b-versatile` × 3 | Multi-agent analysis |
-| **Multi-Agent Lab** | `llama-3.3-70b-versatile` × 5 | Customer persona analysis |
-| **Frontend** | HTML5, TailwindCSS, Vanilla JS | Responsive, luxury UI |
-| **Markdown Rendering** | Marked.js | Beautiful formatted output |
-| **Analytics** | Chart.js + LocalStorage | Privacy-first tracking |
-| **Environment Management** | python-dotenv | Secure API key handling |0+-green.svg)](https://flask.palletsprojects.com/)
+[![Flask](https://img.shields.io/badge/Flask-3.0+-green.svg)](https://flask.palletsprojects.com/)
 [![Groq](https://img.shields.io/badge/Groq-API-orange.svg)](https://console.groq.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
